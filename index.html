@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STR7XB1 — Test 2 Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --mid: #13131a;
+  --card: #1a1a24;
+  --border: #2a2a38;
+  --text: #e8e8f0;
+  --muted: #777790;
+  --blue: #5b8dee;
+  --orange: #f07f3a;
+  --green: #4ec994;
+  --red: #e05a5a;
+  --yellow: #f5c842;
+  --purple: #9b6dff;
+  --accent: #7ab3ff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(10,10,15,0.96); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:54px; padding:0 16px;
+  display:flex; align-items:center; gap:6px; overflow-x:auto;
+}
+nav::-webkit-scrollbar { display:none; }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; color:var(--blue); letter-spacing:2px; margin-right:12px; white-space:nowrap; flex-shrink:0; }
+.nav-btn { background:none; border:none; color:var(--muted); font-family:'DM Sans',sans-serif; font-size:0.75rem; font-weight:600; padding:6px 11px; border-radius:6px; cursor:pointer; transition:all 0.2s; white-space:nowrap; flex-shrink:0; text-transform:uppercase; letter-spacing:0.5px; }
+.nav-btn:hover,.nav-btn.active { background:var(--blue); color:#fff; }
+.nav-badge { margin-left:auto; flex-shrink:0; background:var(--red); color:#fff; font-size:0.68rem; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap; }
+
+main { padding-top:54px; }
+.section { display:none; min-height:calc(100vh - 54px); }
+.section.active { display:block; }
+.wrap { max-width:900px; margin:0 auto; padding:36px 20px; }
+
+/* HERO */
+.hero { padding:56px 20px 40px; max-width:900px; margin:0 auto; }
+.hero-tag { font-size:0.7rem; font-weight:700; letter-spacing:3px; color:var(--blue); text-transform:uppercase; margin-bottom:10px; }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,9vw,6.5rem); line-height:0.92; margin-bottom:18px; }
+.hero-title .ch { color:var(--blue); }
+.hero-sub { font-size:0.9rem; color:var(--muted); line-height:1.6; max-width:500px; margin-bottom:32px; }
+.scope-banner { background:rgba(91,141,238,0.1); border:1px solid rgba(91,141,238,0.3); border-radius:12px; padding:16px 20px; font-size:0.85rem; line-height:1.6; margin-bottom:28px; }
+.scope-banner strong { color:var(--blue); }
+
+/* CHAPTER GRID */
+.ch-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:32px; }
+.ch-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; cursor:pointer; transition:all 0.2s; }
+.ch-card:hover { transform:translateY(-3px); }
+.ch-card.c4:hover { border-color:var(--blue); }
+.ch-card.c5:hover { border-color:var(--green); }
+.ch-card.c6:hover { border-color:var(--orange); }
+.ch-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; line-height:1; margin-bottom:4px; }
+.ch-card.c4 .ch-num { color:var(--blue); }
+.ch-card.c5 .ch-num { color:var(--green); }
+.ch-card.c6 .ch-num { color:var(--orange); }
+.ch-title { font-weight:700; font-size:0.88rem; margin-bottom:6px; }
+.ch-desc { font-size:0.75rem; color:var(--muted); line-height:1.4; }
+
+/* PAGE HEADINGS */
+.pg-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,3rem); letter-spacing:2px; margin-bottom:4px; }
+.pg-sub { font-size:0.8rem; color:var(--muted); margin-bottom:28px; padding-bottom:18px; border-bottom:1px solid var(--border); }
+
+/* ACCORDION */
+.acc { margin-bottom:8px; }
+.acc-h { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 18px; cursor:pointer; display:flex; align-items:center; gap:10px; transition:all 0.2s; }
+.acc-h:hover { border-color:var(--blue); }
+.acc-h.open { border-color:var(--blue); border-bottom-left-radius:0; border-bottom-right-radius:0; background:rgba(91,141,238,0.08); }
+.acc-arrow { margin-left:auto; color:var(--muted); font-size:0.75rem; transition:transform 0.25s; }
+.acc-h.open .acc-arrow { transform:rotate(180deg); color:var(--blue); }
+.acc-title { font-weight:700; font-size:0.9rem; flex:1; }
+.acc-tag { font-family:'JetBrains Mono',monospace; font-size:0.65rem; padding:2px 7px; border-radius:4px; white-space:nowrap; }
+.acc-body { background:rgba(26,26,36,0.8); border:1px solid var(--blue); border-top:none; border-bottom-left-radius:10px; border-bottom-right-radius:10px; padding:18px; display:none; }
+.acc-body.open { display:block; }
+
+/* CONTENT */
+p { font-size:0.85rem; line-height:1.65; margin-bottom:8px; }
+h4 { font-size:0.88rem; font-weight:700; color:var(--accent); margin:14px 0 6px; }
+h5 { font-size:0.75rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:10px 0 4px; }
+.callout { background:rgba(91,141,238,0.08); border-left:3px solid var(--blue); border-radius:0 8px 8px 0; padding:11px 15px; margin:10px 0; font-size:0.83rem; line-height:1.55; }
+.callout.green { background:rgba(78,201,148,0.08); border-color:var(--green); }
+.callout.orange { background:rgba(240,127,58,0.08); border-color:var(--orange); }
+.callout.yellow { background:rgba(245,200,66,0.08); border-color:var(--yellow); }
+.callout.purple { background:rgba(155,109,255,0.08); border-color:var(--purple); }
+.nl { list-style:none; padding:0; }
+.nl li { display:flex; gap:10px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.83rem; line-height:1.5; }
+.nl li:last-child { border:none; }
+.n { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--blue); min-width:20px; padding-top:2px; font-weight:700; flex-shrink:0; }
+.n.g { color:var(--green); }
+.n.o { color:var(--orange); }
+.n.p { color:var(--purple); }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin:10px 0; }
+.box { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
+.box-label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; font-weight:700; }
+.box-val { font-size:0.82rem; line-height:1.4; }
+.tbl { width:100%; border-collapse:collapse; font-size:0.8rem; margin:10px 0; }
+.tbl th { background:rgba(91,141,238,0.15); color:var(--blue); padding:9px 11px; text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; }
+.tbl td { padding:9px 11px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.4; }
+.tbl tr:last-child td { border:none; }
+.tbl tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.tag { display:inline-block; font-size:0.68rem; font-weight:700; padding:2px 7px; border-radius:4px; margin:2px; letter-spacing:0.4px; }
+.tag.b { background:rgba(91,141,238,0.15); color:var(--accent); }
+.tag.g { background:rgba(78,201,148,0.15); color:var(--green); }
+.tag.o { background:rgba(240,127,58,0.15); color:var(--orange); }
+.tag.r { background:rgba(224,90,90,0.15); color:var(--red); }
+.tag.p { background:rgba(155,109,255,0.15); color:var(--purple); }
+
+/* VISUAL DIAGRAMS */
+.diagram-wrap { margin:16px 0; }
+.force-grid { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,auto); gap:8px; margin:12px 0; }
+.force-box { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 12px; text-align:center; font-size:0.75rem; }
+.force-box.center { border-color:var(--blue); background:rgba(91,141,238,0.1); grid-column:2; grid-row:2; }
+.force-box .f-icon { font-size:1.4rem; margin-bottom:6px; }
+.force-box .f-label { font-weight:700; font-size:0.75rem; margin-bottom:4px; color:var(--accent); }
+.force-box .f-sub { font-size:0.68rem; color:var(--muted); line-height:1.3; }
+.porter-wrap { position:relative; }
+.strategy-matrix { display:grid; grid-template-columns:auto 1fr 1fr; gap:2px; margin:12px 0; font-size:0.78rem; }
+.sm-header { background:rgba(91,141,238,0.15); color:var(--blue); padding:8px 10px; text-align:center; font-weight:700; font-size:0.7rem; border-radius:4px; }
+.sm-side { background:rgba(91,141,238,0.08); color:var(--accent); padding:8px 10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.7rem; border-radius:4px; writing-mode:horizontal-tb; }
+.sm-cell { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:12px 10px; }
+.sm-cell .sm-name { font-weight:700; font-size:0.8rem; margin-bottom:4px; }
+.sm-cell .sm-eg { font-size:0.68rem; color:var(--muted); }
+.chain-wrap { margin:12px 0; }
+.chain-primary { display:flex; gap:4px; margin-bottom:6px; flex-wrap:wrap; }
+.chain-support { display:flex; gap:4px; flex-wrap:wrap; }
+.chain-item { flex:1; min-width:100px; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:10px 8px; text-align:center; font-size:0.72rem; }
+.chain-item.primary { border-color:rgba(78,201,148,0.4); }
+.chain-item.support { border-color:rgba(155,109,255,0.4); }
+.chain-item .ci-icon { font-size:1.1rem; margin-bottom:4px; }
+.chain-item .ci-label { font-weight:700; font-size:0.7rem; color:var(--green); }
+.chain-item.support .ci-label { color:var(--purple); }
+.chain-item .ci-sub { font-size:0.62rem; color:var(--muted); margin-top:2px; }
+.vrin-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:12px 0; }
+.vrin-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.vrin-letter { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--purple); line-height:1; }
+.vrin-word { font-weight:700; font-size:0.82rem; margin-bottom:4px; }
+.vrin-desc { font-size:0.75rem; color:var(--muted); line-height:1.4; }
+.swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; }
+.swot-box { border-radius:10px; padding:14px; }
+.swot-box.s { background:rgba(78,201,148,0.08); border:1px solid rgba(78,201,148,0.3); }
+.swot-box.w { background:rgba(224,90,90,0.08); border:1px solid rgba(224,90,90,0.3); }
+.swot-box.o { background:rgba(91,141,238,0.08); border:1px solid rgba(91,141,238,0.3); }
+.swot-box.t { background:rgba(245,200,66,0.08); border:1px solid rgba(245,200,66,0.3); }
+.swot-head { font-weight:700; font-size:0.82rem; margin-bottom:6px; }
+.swot-box.s .swot-head { color:var(--green); }
+.swot-box.w .swot-head { color:var(--red); }
+.swot-box.o .swot-head { color:var(--blue); }
+.swot-box.t .swot-head { color:var(--yellow); }
+.swot-body { font-size:0.75rem; color:var(--muted); line-height:1.4; }
+.macro-ring { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:12px 0; }
+.macro-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
+.macro-icon { font-size:1.6rem; margin-bottom:6px; }
+.macro-label { font-size:0.72rem; font-weight:700; color:var(--blue); margin-bottom:4px; }
+.macro-desc { font-size:0.65rem; color:var(--muted); line-height:1.3; }
+
+/* FLASHCARDS */
+.fc-controls { display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.fc-btn { background:var(--card); border:1px solid var(--border); color:var(--text); font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:500; padding:7px 14px; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.fc-btn:hover { border-color:var(--blue); color:var(--blue); }
+.fc-btn.primary { background:var(--blue); border-color:var(--blue); color:#fff; }
+.fc-prog { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); margin-left:auto; }
+.fc-stage { perspective:1000px; min-height:260px; cursor:pointer; margin-bottom:18px; }
+.fc-inner { position:relative; width:100%; min-height:260px; transform-style:preserve-3d; transition:transform 0.45s ease; }
+.fc-inner.flipped { transform:rotateY(180deg); }
+.fc-face { position:absolute; width:100%; min-height:260px; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:14px; padding:28px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+.fc-front { background:var(--card); border:2px solid var(--border); }
+.fc-back { background:rgba(91,141,238,0.07); border:2px solid var(--blue); transform:rotateY(180deg); }
+.fc-lbl { font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--muted); margin-bottom:14px; }
+.fc-cat { font-family:'JetBrains Mono',monospace; font-size:0.65rem; background:rgba(91,141,238,0.12); color:var(--accent); padding:2px 8px; border-radius:4px; margin-bottom:10px; }
+.fc-q { font-size:1rem; font-weight:600; line-height:1.45; }
+.fc-a { font-size:0.82rem; line-height:1.6; text-align:left; max-width:100%; }
+.fc-nav { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+.filter-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px; }
+.pill { background:var(--card); border:1px solid var(--border); color:var(--muted); font-size:0.72rem; font-weight:600; padding:5px 12px; border-radius:20px; cursor:pointer; transition:all 0.2s; }
+.pill.active,.pill:hover { background:var(--blue); border-color:var(--blue); color:#fff; }
+
+/* QUIZ */
+.quiz-wrap { max-width:680px; }
+.qz-bar-wrap { height:4px; background:var(--border); border-radius:2px; margin-bottom:20px; }
+.qz-bar { height:100%; background:var(--blue); border-radius:2px; transition:width 0.3s; }
+.qz-num { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--muted); margin-bottom:8px; }
+.qz-q { font-size:1rem; font-weight:600; line-height:1.5; margin-bottom:18px; }
+.qz-opts { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.qz-opt { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:13px 16px; cursor:pointer; font-size:0.84rem; line-height:1.4; transition:all 0.15s; text-align:left; color:var(--text); font-family:'DM Sans',sans-serif; }
+.qz-opt:hover:not(:disabled) { border-color:var(--blue); background:rgba(91,141,238,0.06); }
+.qz-opt.correct { border-color:var(--green); background:rgba(78,201,148,0.12); color:#a3dfc2; }
+.qz-opt.wrong { border-color:var(--red); background:rgba(224,90,90,0.12); color:#eeaaaa; }
+.qz-opt:disabled { cursor:default; }
+.qz-fb { font-size:0.82rem; line-height:1.6; color:var(--muted); background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; padding:12px 15px; display:none; }
+.qz-fb.show { display:block; }
+.qz-score { text-align:center; padding:48px 20px; }
+.qz-score-n { font-family:'Bebas Neue',sans-serif; font-size:5.5rem; color:var(--blue); line-height:1; }
+.qz-score-l { font-size:0.9rem; color:var(--muted); margin-bottom:20px; }
+.qz-score-m { font-size:1.05rem; font-weight:600; margin-bottom:22px; }
+
+/* TELEPROMPTER */
+.tp-controls { position:sticky; top:54px; z-index:50; background:rgba(10,10,15,0.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:9px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.tp-mode-btn { background:none; border:none; color:var(--muted); font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:700; padding:5px 10px; border-radius:6px; cursor:pointer; transition:all 0.15s; }
+.tp-mode-btn.active { background:var(--green); color:#0a0a0f; }
+.tp-ctrl { background:var(--card); border:1px solid var(--border); color:var(--text); font-family:'DM Sans',sans-serif; font-size:0.72rem; padding:5px 10px; border-radius:6px; cursor:pointer; transition:all 0.15s; }
+.tp-ctrl:hover { border-color:var(--green); color:var(--green); }
+.tp-play { background:var(--green); border:none; color:#0a0a0f; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:700; padding:7px 16px; border-radius:8px; cursor:pointer; }
+.tp-line { line-height:1.8; margin-bottom:3px; font-family:'DM Sans',sans-serif; transition:opacity 0.3s,color 0.3s; }
+.tp-line.tp-sect { font-family:'Bebas Neue',sans-serif; letter-spacing:3px; font-size:0.8em !important; margin-top:32px; margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid var(--border); }
+.tp-line.tp-c4 { color:var(--blue); }
+.tp-line.tp-c5 { color:var(--green); }
+.tp-line.tp-c6 { color:var(--orange); }
+.tp-line.tp-item { color:var(--text); padding-left:18px; }
+.tp-line.tp-note { color:var(--muted); font-size:0.85em !important; padding-left:18px; font-style:italic; }
+.tp-line.tp-spacer { margin-bottom:14px; }
+.tp-line.tp-active { color:#fff !important; text-shadow:0 0 18px rgba(78,201,148,0.5); }
+.tp-line.tp-past { opacity:0.25; }
+.tp-line.tp-future { opacity:0.65; }
+
+@media(max-width:600px) {
+  .nav-btn { font-size:0.68rem; padding:5px 8px; }
+  .force-grid { grid-template-columns:1fr 1fr 1fr; font-size:0.68rem; }
+  .strategy-matrix { font-size:0.72rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">STR7XB1</div>
+  <button class="nav-btn active" onclick="go('home',this)">Overview</button>
+  <button class="nav-btn" onclick="go('ch4',this)" style="color:#7ab3ff">CH4</button>
+  <button class="nav-btn" onclick="go('ch5',this)" style="color:#4ec994">CH5</button>
+  <button class="nav-btn" onclick="go('ch6',this)" style="color:#f07f3a">CH6</button>
+  <button class="nav-btn" onclick="go('flash',this)">Cards</button>
+  <button class="nav-btn" onclick="go('quiz',this)">Quiz</button>
+  <button class="nav-btn" onclick="go('tp',this)" style="background:rgba(78,201,148,0.12);color:var(--green);border:1px solid rgba(78,201,148,0.3)">📺 Cram</button>
+  <div class="nav-badge">TEST 2 · 15 SEP</div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════ HOME -->
+<section class="section active" id="home">
+  <div class="hero">
+    <div class="hero-tag">University of Johannesburg · STR7XB1 · Strategic Management 4 · 2026</div>
+    <h1 class="hero-title">TEST 2<br><span class="ch">STUDY</span><br>GUIDE</h1>
+    <p class="hero-sub">Zero to exam-ready in one sitting. Three chapters, visual breakdowns, flashcards, quiz and a teleprompter to cram with.</p>
+    <div class="scope-banner">
+      <strong>📋 Test 2 Scope:</strong> Chapters 4, 5 & 6 only &nbsp;·&nbsp; Tuesday 15 September 2026, during class time<br>
+      <strong>⚠️ Marks:</strong> Each test = 25% of final mark &nbsp;·&nbsp; Minimum 40% semester mark required for exam access &nbsp;·&nbsp; Prescribed textbook: Ehlers &amp; Lazenby (2019)
+    </div>
+    <div class="ch-grid">
+      <div class="ch-card c4" onclick="go('ch4',document.querySelectorAll('.nav-btn')[1])">
+        <div class="ch-num">04</div>
+        <div class="ch-title">External Environmental Analysis</div>
+        <div class="ch-desc">Macro environment · PESTLE · Porter's Five Forces · Key Success Factors · EFE Matrix</div>
+      </div>
+      <div class="ch-card c5" onclick="go('ch5',document.querySelectorAll('.nav-btn')[2])">
+        <div class="ch-num">05</div>
+        <div class="ch-title">Internal Environmental Analysis</div>
+        <div class="ch-desc">SWOT · Resource-Based View · VRIN · Value Chain Analysis · IFE Matrix</div>
+      </div>
+      <div class="ch-card c6" onclick="go('ch6',document.querySelectorAll('.nav-btn')[3])">
+        <div class="ch-num">06</div>
+        <div class="ch-title">Strategy Formulation: Long-term Goals &amp; Generic Strategies</div>
+        <div class="ch-desc">Long-term goals · Competitive advantage · Porter's 4 Generic Strategies · Best-cost</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ CH4 -->
+<section class="section" id="ch4">
+  <div class="wrap">
+    <div class="pg-head" style="color:var(--blue)">Chapter 4</div>
+    <div class="pg-sub">External Environmental Analysis · pp. 107–140</div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag b">4.1</span>
+        <span class="acc-title">The 3 Layers of the External Environment</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout">Key purpose: Identify <strong>opportunities</strong> (can exploit) and <strong>threats</strong> (must avoid or reduce). Includes 4 interrelated activities: scanning, monitoring, forecasting, and assessing.</div>
+        <div class="grid2">
+          <div class="box"><div class="box-label" style="color:var(--blue)">1. Global Environment</div><div class="box-val">Broad international forces — globalisation, trade agreements (AGOA/TIFA), international competition, speed, innovation, knowledge management</div></div>
+          <div class="box"><div class="box-label" style="color:var(--blue)">2. Macro Environment</div><div class="box-val">PESTLE forces — Political, Economic, Sociocultural, Technological, Ecological. Organisations CANNOT directly control these.</div></div>
+          <div class="box"><div class="box-label" style="color:var(--blue)">3. Industry/Market Environment</div><div class="box-val">Porter's Five Forces — the competitive structure of the specific industry the org operates in</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag b">4.2</span>
+        <span class="acc-title">PESTLE — The Macro Environment (Visual)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="macro-ring">
+          <div class="macro-item"><div class="macro-icon">🏛️</div><div class="macro-label">Political</div><div class="macro-desc">Taxes, labour laws, regulations, lockdowns, AGOA, trade agreements, government stability</div></div>
+          <div class="macro-item"><div class="macro-icon">💰</div><div class="macro-label">Economic</div><div class="macro-desc">Interest rates, inflation, GDP, unemployment, exchange rates, VAT (15%), recession, consumer expenditure</div></div>
+          <div class="macro-item"><div class="macro-icon">👥</div><div class="macro-label">Sociocultural</div><div class="macro-desc">Cultural values, demographics, consumer trends (e.g. healthy food), social media influence, SA subcultures</div></div>
+          <div class="macro-item"><div class="macro-icon">💻</div><div class="macro-label">Technological</div><div class="macro-desc">New products, processes, digital disruption, 4IR, innovation — no company is insulated from tech change</div></div>
+          <div class="macro-item"><div class="macro-icon">🌿</div><div class="macro-label">Ecological</div><div class="macro-desc">Human-environment relationship, limited natural resources, sustainability obligations, ESG considerations</div></div>
+          <div class="macro-item"><div class="macro-icon">⚖️</div><div class="macro-label">Legal</div><div class="macro-desc">Legislation, compliance, regulatory risks, policy shifts — Labour Relations Act, Consumer Protection Act, etc.</div></div>
+        </div>
+        <div class="callout">In the slides this is called <strong>PESTE</strong> (no separate L) but your textbook uses PESTEL/PESTLE — know both names refer to the same framework.</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag b">4.3</span>
+        <span class="acc-title">Porter's Five Forces Model (Visual)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout">Used to analyse the <strong>industry/competitive environment</strong>. The stronger the forces = the more intense competition = lower profitability for firms in the industry.</div>
+        <div class="force-grid">
+          <div style="grid-column:2;grid-row:1" class="force-box">
+            <div class="f-icon">🆕</div>
+            <div class="f-label">Threat of New Entrants</div>
+            <div class="f-sub">Economies of scale · Brand loyalty · Capital req · Access to distribution · Government regulations</div>
+          </div>
+          <div style="grid-column:1;grid-row:2" class="force-box">
+            <div class="f-icon">🏭</div>
+            <div class="f-label">Bargaining Power of Suppliers</div>
+            <div class="f-sub">No. of suppliers · Uniqueness · Switching costs · Supplier concentration · Forward integration threat</div>
+          </div>
+          <div style="grid-column:2;grid-row:2" class="force-box center">
+            <div class="f-icon">⚔️</div>
+            <div class="f-label">Competitive Rivalry</div>
+            <div class="f-sub">No. of competitors · Market growth · Differentiation · Switching costs · Exit barriers</div>
+          </div>
+          <div style="grid-column:3;grid-row:2" class="force-box">
+            <div class="f-icon">🛒</div>
+            <div class="f-label">Bargaining Power of Buyers</div>
+            <div class="f-sub">Buyer concentration · Price sensitivity · Standardisation · Availability of substitutes · Switching costs</div>
+          </div>
+          <div style="grid-column:2;grid-row:3" class="force-box">
+            <div class="f-icon">🔄</div>
+            <div class="f-label">Threat of Substitutes</div>
+            <div class="f-sub">Availability · Relative price-performance · Switching costs · Buyer willingness · Innovation enabling substitutes</div>
+          </div>
+        </div>
+        <h4>Common Mistakes When Identifying Competitors</h4>
+        <ul class="nl">
+          <li><span class="n">1</span><span>Over-emphasising current known competitors, ignoring potential new entrants or international competitors</span></li>
+          <li><span class="n">2</span><span>Focusing only on large competitors, overlooking threat of small competitors</span></li>
+          <li><span class="n">3</span><span>Assuming competitors will continue to behave the same way as in the past</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag b">4.4</span>
+        <span class="acc-title">Key Success Factors (KSFs) for an Industry</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout">KSFs = the strategy elements, product attributes, competitive capabilities, or intangible assets with the <strong>greatest impact on future success</strong> in a specific marketplace.</div>
+        <ul class="nl">
+          <li><span class="n">1</span><span><strong>Strong customer relationships</strong></span></li>
+          <li><span class="n">2</span><span><strong>Efficient cost management</strong></span></li>
+          <li><span class="n">3</span><span><strong>Product/service quality and innovation</strong></span></li>
+          <li><span class="n">4</span><span><strong>Skilled and motivated workforce</strong></span></li>
+          <li><span class="n">5</span><span><strong>Effective distribution and supply chain</strong></span></li>
+          <li><span class="n">6</span><span><strong>Brand reputation and market position</strong></span></li>
+        </ul>
+        <div class="callout">Case study: Spur Restaurant KSFs (see textbook pp. 138–140).</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag b">4.5</span>
+        <span class="acc-title">EFE Matrix — External Factor Evaluation</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout">The EFE Matrix is a tool to summarise and evaluate how well an organisation is responding to <strong>opportunities and threats</strong> in the external environment.</div>
+        <h4>How to Build an EFE Matrix</h4>
+        <ul class="nl">
+          <li><span class="n">1</span><span>List key <strong>Opportunities</strong> (positive external factors)</span></li>
+          <li><span class="n">2</span><span>List key <strong>Threats</strong> (negative external factors)</span></li>
+          <li><span class="n">3</span><span>Assign a <strong>Weight</strong> (0.0–1.0) based on importance — all weights must total 1.0</span></li>
+          <li><span class="n">4</span><span>Assign a <strong>Rating</strong> (1–4) for how well the org responds: 4=superior, 3=above avg, 2=average, 1=poor</span></li>
+          <li><span class="n">5</span><span>Calculate <strong>Weighted Score</strong> = Weight × Rating for each factor</span></li>
+          <li><span class="n">6</span><span>Sum all weighted scores = <strong>Total Weighted Score</strong></span></li>
+        </ul>
+        <div class="tbl" style="overflow-x:auto"><table class="tbl">
+          <tr><th>Factor</th><th>Weight</th><th>Rating</th><th>Score</th></tr>
+          <tr><td>More kids in town (Opportunity)</td><td>0.3</td><td>4</td><td>1.2</td></tr>
+          <tr><td>New competitor opening (Threat)</td><td>0.2</td><td>2</td><td>0.4</td></tr>
+          <tr><td>School banning sugar (Threat)</td><td>0.3</td><td>1</td><td>0.3</td></tr>
+          <tr><td>Holiday season (Opportunity)</td><td>0.2</td><td>3</td><td>0.6</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>1.0</strong></td><td></td><td><strong>2.5/4</strong></td></tr>
+        </table></div>
+        <div class="callout">Score of <strong>2.5/4</strong> = moderately good external response. Above 2.5 = strong response; below 2.5 = weak response to external factors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ CH5 -->
+<section class="section" id="ch5">
+  <div class="wrap">
+    <div class="pg-head" style="color:var(--green)">Chapter 5</div>
+    <div class="pg-sub">Internal Environmental Analysis · pp. 141–161</div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag g">5.1</span>
+        <span class="acc-title">Why Internal Analysis? Internal vs External</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="grid2">
+          <div class="box" style="border-color:rgba(78,201,148,0.3)">
+            <div class="box-label" style="color:var(--green)">Internal Analysis tells you:</div>
+            <div class="box-val">What the organisation <strong>CAN do</strong> — identifies strengths and weaknesses in resources, capabilities, processes and culture</div>
+          </div>
+          <div class="box" style="border-color:rgba(91,141,238,0.3)">
+            <div class="box-label" style="color:var(--blue)">External Analysis tells you:</div>
+            <div class="box-val">What the organisation <strong>MAY CHOOSE to do</strong> — identifies opportunities and threats in the environment</div>
+          </div>
+        </div>
+        <div class="callout green">An organisation is a <strong>bundle of resources, capabilities and core competencies</strong> that must be used to create an exclusive competitive position in the market.</div>
+        <h4>Areas Examined in Internal Analysis</h4>
+        <ul class="nl">
+          <li><span class="n g">1</span><span><strong>Resource Analysis</strong> — financial, physical, human, technological resources</span></li>
+          <li><span class="n g">2</span><span><strong>Capability Assessment</strong> — skills, processes, competencies that enable resource use</span></li>
+          <li><span class="n g">3</span><span><strong>Value Chain Analysis</strong> — primary and support activities that add value</span></li>
+          <li><span class="n g">4</span><span><strong>Core Competency Identification</strong> — unique strengths that create competitive advantage</span></li>
+          <li><span class="n g">5</span><span><strong>Org Culture &amp; Structure</strong> — how leadership style &amp; design affect performance &amp; strategy execution</span></li>
+          <li><span class="n g">6</span><span><strong>Financial Performance Review</strong> — profitability, liquidity, efficiency ratios</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag g">5.2</span>
+        <span class="acc-title">SWOT Analysis (Visual)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="swot-grid">
+          <div class="swot-box s">
+            <div class="swot-head">💪 Strengths (Internal +)</div>
+            <div class="swot-body">Resources or capabilities that give a <em>relative advantage</em> over competitors. What the org does well.</div>
+          </div>
+          <div class="swot-box w">
+            <div class="swot-head">⚠️ Weaknesses (Internal -)</div>
+            <div class="swot-body">Lack of or deficiency in a resource — creates a <em>relative disadvantage</em> vs competitors.</div>
+          </div>
+          <div class="swot-box o">
+            <div class="swot-head">🌟 Opportunities (External +)</div>
+            <div class="swot-body">Favourable situations in the organisation's <em>external</em> (macro + market) environment to exploit.</div>
+          </div>
+          <div class="swot-box t">
+            <div class="swot-head">⚡ Threats (External -)</div>
+            <div class="swot-body">Unfavourable situations in the organisation's <em>external</em> environment that must be managed.</div>
+          </div>
+        </div>
+        <div class="callout">⚠️ <strong>Limitations of SWOT:</strong> Subjectivity, oversimplification, static snapshot — does not prioritise factors or suggest strategies automatically.</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag g">5.3</span>
+        <span class="acc-title">Resource-Based View (RBV) — Resources, Capabilities &amp; VRIN</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout green">The RBV holds that an organisation's <strong>internal resources are more important than industry structure</strong> in gaining competitive advantage. Resources determine efficiency and effectiveness.</div>
+        <h4>3 Categories of Resources</h4>
+        <div class="grid2">
+          <div class="box"><div class="box-label" style="color:var(--green)">1. Tangible Assets</div><div class="box-val">Easiest to identify — visible: location, buildings, equipment, financial assets, physical resources</div></div>
+          <div class="box"><div class="box-label" style="color:var(--green)">2. Intangible Assets</div><div class="box-val">Cannot touch — most powerful competitive advantage: reputation, brand name (Coca-Cola), patents, knowledge, culture</div></div>
+          <div class="box"><div class="box-label" style="color:var(--green)">3. Organisational Capabilities</div><div class="box-val">Complex network of processes &amp; skills determining how inputs are transformed into outputs — often lies in employees' knowledge &amp; functional expertise</div></div>
+        </div>
+        <h4>VRIN Test — What Makes a Resource Valuable?</h4>
+        <div class="vrin-grid">
+          <div class="vrin-item"><div class="vrin-letter">V</div><div class="vrin-word">Valuable</div><div class="vrin-desc">Does it enable the org to exploit opportunities or neutralise threats? Must create real value for customers.</div></div>
+          <div class="vrin-item"><div class="vrin-letter">R</div><div class="vrin-word">Rare</div><div class="vrin-desc">Is it unique or scarce? If all competitors have it, it cannot provide competitive advantage.</div></div>
+          <div class="vrin-item"><div class="vrin-letter">I</div><div class="vrin-word">Inimitable</div><div class="vrin-desc">Is it difficult to copy or imitate? Must be hard to replicate through history, culture, social complexity.</div></div>
+          <div class="vrin-item"><div class="vrin-letter">N</div><div class="vrin-word">Non-substitutable</div><div class="vrin-desc">Is there no strategic equivalent? Competitors must not be able to achieve similar outcomes another way.</div></div>
+        </div>
+        <div class="callout green">Resources and capabilities must be <strong>unique and capable of leading to a sustainable competitive advantage</strong> to pass the VRIN test.</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag g">5.4</span>
+        <span class="acc-title">Value Chain Analysis (VCA) — Visual</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout green">The value chain looks at all activities of an org to determine <strong>where value is actually added</strong>. Value = the amount customers are willing to pay for what the org provides. Activities are grouped into Primary and Support.</div>
+        <h4>Primary Activities (direct value creation → the product/service)</h4>
+        <div class="chain-primary">
+          <div class="chain-item primary"><div class="ci-icon">📥</div><div class="ci-label">Input Logistics</div><div class="ci-sub">Receiving, storing, distributing inputs</div></div>
+          <div class="chain-item primary"><div class="ci-icon">⚙️</div><div class="ci-label">Operations</div><div class="ci-sub">Transforming inputs into final product</div></div>
+          <div class="chain-item primary"><div class="ci-icon">📤</div><div class="ci-label">Output Logistics</div><div class="ci-sub">Distribution of product/service to customers</div></div>
+          <div class="chain-item primary"><div class="ci-icon">📣</div><div class="ci-label">Marketing</div><div class="ci-sub">Inducements to get customers to buy</div></div>
+          <div class="chain-item primary"><div class="ci-icon">🛎️</div><div class="ci-label">Customer Service</div><div class="ci-sub">Maintain value of product after sale</div></div>
+        </div>
+        <h4>Support Activities (enable primary activities)</h4>
+        <div class="chain-support">
+          <div class="chain-item support"><div class="ci-icon">🛒</div><div class="ci-label">Procurement</div><div class="ci-sub">Quality &amp; speed of inputs</div></div>
+          <div class="chain-item support"><div class="ci-icon">💡</div><div class="ci-label">Tech Development</div><div class="ci-sub">Processes &amp; equipment across chain</div></div>
+          <div class="chain-item support"><div class="ci-icon">👥</div><div class="ci-label">HR Management</div><div class="ci-sub">Recruit, select, train, compensate — affects ALL levels</div></div>
+          <div class="chain-item support"><div class="ci-icon">🏢</div><div class="ci-label">Administration</div><div class="ci-sub">Infrastructure for overall org goals</div></div>
+          <div class="chain-item support"><div class="ci-icon">💵</div><div class="ci-label">Financial Mgmt</div><div class="ci-sub">Effective financial recording &amp; control</div></div>
+        </div>
+        <div class="callout green" style="margin-top:12px">3 ways value is delivered to customer: (1) Product is <strong>unique/different</strong>, (2) Product is <strong>cheaper</strong> than competitors, (3) Org can <strong>respond quickly</strong> to customer needs.</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag g">5.5</span>
+        <span class="acc-title">IFE Matrix — Internal Factor Evaluation</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout green">The IFE Matrix summarises and evaluates an org's <strong>internal strengths and weaknesses</strong>. Mirror image of the EFE Matrix but focuses internally.</div>
+        <h4>How to Build an IFE Matrix (same structure as EFE)</h4>
+        <ul class="nl">
+          <li><span class="n g">1</span><span>List key <strong>Strengths</strong> and <strong>Weaknesses</strong></span></li>
+          <li><span class="n g">2</span><span>Assign a <strong>Weight</strong> (0.0–1.0) — total must = 1.0</span></li>
+          <li><span class="n g">3</span><span>Assign a <strong>Rating</strong>: Strengths = 4 (major) or 3 (minor); Weaknesses = 2 (minor) or 1 (major)</span></li>
+          <li><span class="n g">4</span><span>Calculate <strong>Weighted Score</strong> = Weight × Rating</span></li>
+          <li><span class="n g">5</span><span><strong>Total above 2.5</strong> = internally strong; <strong>below 2.5</strong> = internally weak</span></li>
+        </ul>
+        <div class="callout">Case studies: <strong>Cashbuild</strong> (internal analysis) &amp; <strong>Shoprite Checkers</strong> cohesion case study.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ CH6 -->
+<section class="section" id="ch6">
+  <div class="wrap">
+    <div class="pg-head" style="color:var(--orange)">Chapter 6</div>
+    <div class="pg-sub">Strategy Formulation: Long-term Goals &amp; Generic Strategies · pp. 166–184</div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.1</span>
+        <span class="acc-title">Long-term Goals — SMART Requirements</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Long-term goals are determined in line with the org's <strong>vision</strong>. They direct the strategy and must position the org differently from competitors.</div>
+        <div class="grid2">
+          <div class="box"><div class="box-label" style="color:var(--orange)">S — Specific</div><div class="box-val">Clearly understood, decisive and attainable overall objectives</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">M — Measurable</div><div class="box-val">Must indicate a time frame and be quantifiable</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">A — Attainable</div><div class="box-val">Ensures continued viability — must be realistic</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">R — Relevant</div><div class="box-val">Consistent and congruent across all organisational units</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">T — Time-bound</div><div class="box-val">Must specify a time frame within which they are to be achieved</div></div>
+        </div>
+        <p>To position itself differently from competitors, an org must decide whether to <strong>perform activities differently</strong> OR <strong>perform different activities</strong>.</p>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.2</span>
+        <span class="acc-title">Competitive Advantage</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Competitive advantage = what <strong>distinguishes an org from competitors</strong>. Achieved through distinctive competencies (special capabilities, technologies or resources) that competitors cannot readily copy.</div>
+        <h4>For a competitive advantage to be valid, it must:</h4>
+        <ul class="nl">
+          <li><span class="n o">1</span><span>Relate to an attribute that has <strong>value and relevance for customers</strong></span></li>
+          <li><span class="n o">2</span><span>Be <strong>perceived by the customer</strong> as a competitive advantage</span></li>
+          <li><span class="n o">3</span><span>Be <strong>sustainable</strong> — competitors cannot easily imitate it</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.3–6.5</span>
+        <span class="acc-title">Porter's 4 Generic Strategies — Visual Matrix</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Generic strategies combine <strong>scope of operations</strong> (broad vs narrow target) with <strong>competitive advantage</strong> (low cost vs differentiation). Pick one — "stuck in the middle" = disadvantaged.</div>
+        <div style="overflow-x:auto"><div class="strategy-matrix">
+          <div></div>
+          <div class="sm-header">Low Cost Advantage</div>
+          <div class="sm-header">Differentiation Advantage</div>
+          <div class="sm-side">Broad Target (Industry-wide)</div>
+          <div class="sm-cell" style="border-color:rgba(78,201,148,0.4)"><div class="sm-name" style="color:var(--green)">💰 Cost Leadership</div><div class="sm-eg">Shoprite, PEP, Checkers</div></div>
+          <div class="sm-cell" style="border-color:rgba(91,141,238,0.4)"><div class="sm-name" style="color:var(--blue)">✨ Differentiation</div><div class="sm-eg">BMW, Apple, Investec, Nando's</div></div>
+          <div class="sm-side">Narrow Target (Niche)</div>
+          <div class="sm-cell" style="border-color:rgba(245,200,66,0.4)"><div class="sm-name" style="color:var(--yellow)">🎯 Cost Focus</div><div class="sm-eg">Budget airlines, store-brand goods</div></div>
+          <div class="sm-cell" style="border-color:rgba(240,127,58,0.4)"><div class="sm-name" style="color:var(--orange)">🏆 Differentiation Focus</div><div class="sm-eg">Porsche, eBay, Treehouse</div></div>
+        </div></div>
+        <div class="callout" style="margin-top:12px">+ <strong>Best-Cost Strategy</strong> (hybrid): combines cost leadership + differentiation — "more value for money". Middle of the road. e.g. Toyota, H&amp;M</div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.3</span>
+        <span class="acc-title">Cost Leadership Strategy — Full Detail</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Sell to a <strong>broad market</strong> at the lowest possible cost. Products are <strong>standardised, not customised</strong>. Goal: out-manage rivals in efficiency.</div>
+        <h4>How to achieve cost advantage:</h4>
+        <ul class="nl">
+          <li><span class="n o">→</span><span>Out-manage rivals with efficient value chain activities</span></li>
+          <li><span class="n o">→</span><span>Revamp value chain to eliminate/bypass cost-producing activities</span></li>
+        </ul>
+        <h4>Cost drivers to manage:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
+          <span class="tag o">Economies of scale</span>
+          <span class="tag o">Learning curve effects</span>
+          <span class="tag o">Capacity utilisation</span>
+          <span class="tag o">Technological advances</span>
+          <span class="tag o">Supply chain management</span>
+        </div>
+        <h4>Best when:</h4>
+        <ul class="nl">
+          <li><span class="n o">✓</span><span>Price competition is vigorous among rivals</span></li>
+          <li><span class="n o">✓</span><span>Target customer is <strong>price sensitive</strong></span></li>
+          <li><span class="n o">✓</span><span>Products are similar (standardised) with little differentiation</span></li>
+          <li><span class="n o">✓</span><span>Market is large enough to provide economies-of-scale</span></li>
+          <li><span class="n o">✓</span><span>Buyers have high bargaining power</span></li>
+        </ul>
+        <h4>Advantages:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">
+          <span class="tag g">Increase market share</span><span class="tag g">Customer loyalty</span><span class="tag g">Keeps new entrants out</span>
+        </div>
+        <h4>Pitfalls:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">
+          <span class="tag r">Overly aggressive price-cutting → low profit</span><span class="tag r">Easy to imitate</span><span class="tag r">Still needs some differentiation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.4</span>
+        <span class="acc-title">Differentiation Strategy — Full Detail</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Create something <strong>perceived as unique and valued</strong> by a broad market. Charge a premium price. Compete on uniqueness, not cost.</div>
+        <h4>Forms of differentiation:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
+          <span class="tag b">Prestige/Brand (BMW)</span>
+          <span class="tag b">Technology (LG)</span>
+          <span class="tag b">Innovation (Apple)</span>
+          <span class="tag b">Features (Microsoft)</span>
+          <span class="tag b">Customer service (Investec)</span>
+          <span class="tag b">Reliability (J&amp;J)</span>
+          <span class="tag b">Unique taste (Nando's)</span>
+          <span class="tag b">Speed (Outsurance)</span>
+        </div>
+        <h4>Best when:</h4>
+        <ul class="nl">
+          <li><span class="n">✓</span><span>Buyers' preferences are <strong>diverse and varied</strong></span></li>
+          <li><span class="n">✓</span><span>Fewer competitors follow the same differentiation approach</span></li>
+          <li><span class="n">✓</span><span>Many ways to differentiate and buyers value those differences</span></li>
+          <li><span class="n">✓</span><span>Technology changes frequently, competition centres on product features</span></li>
+          <li><span class="n">✓</span><span>Brand loyalty exists and durable uniqueness cannot be quickly imitated</span></li>
+        </ul>
+        <h4>Key to sustaining:</h4>
+        <p><strong>Constant innovation</strong> to stay ahead of imitative competitors.</p>
+        <h4>Pitfalls:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">
+          <span class="tag r">Uniqueness not valuable</span>
+          <span class="tag r">Too much differentiation</span>
+          <span class="tag r">Premium too high</span>
+          <span class="tag r">Easily imitated</span>
+          <span class="tag r">Brand dilution</span>
+          <span class="tag r">Innovation costs outweigh price premium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.5</span>
+        <span class="acc-title">Focus Strategy — Full Detail</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange">Concentrate on a <strong>narrow market niche</strong>. Within that niche, compete either on cost (cost focus) or on differentiation (differentiation focus).</div>
+        <div class="grid2">
+          <div class="box"><div class="box-label" style="color:var(--yellow)">Cost Focus</div><div class="box-val">Serve a niche at lower cost than rivals serve it. Example: budget travel insurance for backpackers only.</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">Differentiation Focus</div><div class="box-val">Serve a niche with something unique that broad competitors cannot match. Example: Porsche (sports cars only), eBay (online auctions), Treehouse.</div></div>
+        </div>
+        <h4>Best when:</h4>
+        <ul class="nl">
+          <li><span class="n o">✓</span><span>Target niche is <strong>large enough to be profitable</strong> and offers good growth</span></li>
+          <li><span class="n o">✓</span><span>Allows smaller org to avoid direct competition with large players</span></li>
+          <li><span class="n o">✓</span><span>Customers willing to pay <strong>high premium</strong> for specialised product/service</span></li>
+          <li><span class="n o">✓</span><span>Customers are <strong>brand loyal</strong> and unlikely to switch regardless of price</span></li>
+        </ul>
+        <h4>Pitfalls:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">
+          <span class="tag r">Niche preferences shift to mainstream</span>
+          <span class="tag r">Competitors redefine the niche with new tech</span>
+          <span class="tag r">Niche becomes flooded with rivals</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <div class="acc-h" onclick="acc(this)">
+        <span class="acc-tag tag o">6.6</span>
+        <span class="acc-title">Best-Cost Strategy (Hybrid)</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="callout orange"><strong>Best-Cost</strong> = simultaneous cost leadership + differentiation. Target: <strong>value-conscious buyers</strong> who want quality features at a reasonable price. Competitive advantage is most difficult for competitors to imitate.</div>
+        <div class="grid2">
+          <div class="box"><div class="box-label" style="color:var(--orange)">Strategic target</div><div class="box-val">Value-conscious buyers</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">Basis of advantage</div><div class="box-val">Ability to give customers MORE VALUE FOR MONEY</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">Product line</div><div class="box-val">Appealing attributes + upscale features</div></div>
+          <div class="box"><div class="box-label" style="color:var(--orange)">Key to sustaining</div><div class="box-val">Unique expertise managing costs DOWN while incorporating upscale features simultaneously</div></div>
+        </div>
+        <h4>Best when:</h4>
+        <ul class="nl">
+          <li><span class="n o">✓</span><span>Customers are <strong>simultaneously price AND quality sensitive</strong></span></li>
+          <li><span class="n o">✓</span><span>Economies of scale and learning exist in the market</span></li>
+          <li><span class="n o">✓</span><span>Competition is fierce and barriers to entry low</span></li>
+          <li><span class="n o">✓</span><span>Mass customisation becomes possible through advanced tech</span></li>
+        </ul>
+        <h4>Pitfalls:</h4>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">
+          <span class="tag r">Fail both cost AND quality → "stuck in middle"</span>
+          <span class="tag r">Underestimate combined challenge</span>
+          <span class="tag r">Miscalculate revenue sources</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ FLASHCARDS -->
+<section class="section" id="flash">
+  <div class="wrap">
+    <div class="pg-head">Flashcards</div>
+    <div class="pg-sub">Click card to flip. Use filter to drill by chapter.</div>
+    <div class="filter-row">
+      <button class="pill active" onclick="fcFilter('ALL',this)">All</button>
+      <button class="pill" onclick="fcFilter('CH4',this)" style="color:var(--accent)">CH4</button>
+      <button class="pill" onclick="fcFilter('CH5',this)" style="color:var(--green)">CH5</button>
+      <button class="pill" onclick="fcFilter('CH6',this)" style="color:var(--orange)">CH6</button>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-btn" onclick="fcPrev()">← Prev</button>
+      <button class="fc-btn primary" onclick="fcShuffle()">🔀 Shuffle</button>
+      <button class="fc-btn" onclick="fcNext()">Next →</button>
+      <div class="fc-prog" id="fcProg">1 / 30</div>
+    </div>
+    <div class="fc-stage" onclick="fcFlip()">
+      <div class="fc-inner" id="fcInner">
+        <div class="fc-face fc-front">
+          <div class="fc-lbl">Question — tap to flip</div>
+          <div class="fc-cat" id="fcCat">CH4</div>
+          <div class="fc-q" id="fcQ"></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-lbl">Answer</div>
+          <div class="fc-a" id="fcA"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="fc-btn" onclick="fcPrev()">← Prev</button>
+      <button class="fc-btn" onclick="fcNext()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ QUIZ -->
+<section class="section" id="quiz">
+  <div class="wrap">
+    <div class="pg-head">Practice Quiz</div>
+    <div class="pg-sub">25 questions · Multiple choice · Instant feedback</div>
+    <div id="quizContainer" class="quiz-wrap">
+      <div class="qz-bar-wrap"><div class="qz-bar" id="qzBar" style="width:0%"></div></div>
+      <div class="qz-num" id="qzNum">Question 1 of 25</div>
+      <div class="qz-q" id="qzQ"></div>
+      <div class="qz-opts" id="qzOpts"></div>
+      <div class="qz-fb" id="qzFb"></div>
+      <div id="qzNextWrap" style="margin-top:14px;display:none"><button class="fc-btn primary" onclick="qzNext()">Next →</button></div>
+    </div>
+    <div id="quizScore" class="qz-score" style="display:none">
+      <div class="qz-score-n" id="qzScoreN"></div>
+      <div class="qz-score-l">out of 25 correct</div>
+      <div class="qz-score-m" id="qzScoreM"></div>
+      <button class="fc-btn primary" onclick="qzRestart()" style="margin-top:10px">Try Again</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ TELEPROMPTER -->
+<section class="section" id="tp">
+  <div class="tp-controls">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--green);letter-spacing:2px;flex-shrink:0">📺 CRAM</div>
+    <div style="display:flex;gap:3px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:3px;flex-shrink:0">
+      <button class="tp-mode-btn active" id="tpMA" onclick="tpMode('auto')">⏩ Auto</button>
+      <button class="tp-mode-btn" id="tpMM" onclick="tpMode('manual')">👆 Manual</button>
+    </div>
+    <div id="tpSpeedRow" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+      <span style="font-size:0.68rem;color:var(--muted)">Speed</span>
+      <input type="range" id="tpSpd" min="20" max="180" value="70" style="width:70px;accent-color:var(--green)" oninput="tpUpdateSpeed()">
+      <span id="tpSpdL" style="font-size:0.68rem;color:var(--muted);min-width:25px">70</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+      <button class="tp-ctrl" onclick="tpFont(-2)">A-</button>
+      <span id="tpFontL" style="font-size:0.68rem;color:var(--muted);min-width:24px;text-align:center">22</span>
+      <button class="tp-ctrl" onclick="tpFont(2)">A+</button>
+    </div>
+    <button class="tp-play" id="tpPlayBtn" onclick="tpToggle()">▶ Play</button>
+    <button class="tp-ctrl" onclick="tpReset()" style="margin-left:auto">↩ Reset</button>
+    <span id="tpPct" style="font-size:0.68rem;color:var(--muted);flex-shrink:0">0%</span>
+  </div>
+  <div style="height:3px;background:var(--border)"><div id="tpProg" style="height:100%;background:var(--green);width:0%;transition:width 0.3s"></div></div>
+  <div id="tpStage" style="max-width:780px;margin:0 auto;padding:50px 20px 120px;cursor:pointer;user-select:none" onclick="tpManualAdv()">
+    <div id="tpContent"></div>
+  </div>
+  <div id="tpManNav" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,0.97);border-top:1px solid var(--border);padding:10px 24px;align-items:center;justify-content:center;gap:14px">
+    <button class="tp-play" onclick="tpManPrev()" style="background:var(--card)">← Prev</button>
+    <span id="tpManPos" style="font-size:0.72rem;color:var(--muted)">Line 1</span>
+    <button class="tp-play" onclick="tpManNext()">Next →</button>
+  </div>
+</section>
+
+</main>
+
+<script>
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function go(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+  if (id === 'flash') initFC();
+  if (id === 'quiz') initQuiz();
+  if (id === 'tp') initTP();
+}
+
+// ── ACCORDION ─────────────────────────────────────────────────────────────────
+function acc(h) {
+  const b = h.nextElementSibling;
+  const wasOpen = h.classList.contains('open');
+  h.closest('.wrap').querySelectorAll('.acc-h.open').forEach(x => { x.classList.remove('open'); x.nextElementSibling.classList.remove('open'); });
+  if (!wasOpen) { h.classList.add('open'); b.classList.add('open'); }
+}
+
+// ── FLASHCARD DATA ────────────────────────────────────────────────────────────
+const CARDS = [
+  {c:'CH4',q:'What are the 3 layers of the external environment?',a:'1. Global environment — international forces, globalisation, speed, innovation\n2. Macro environment — PESTLE factors organisations cannot control\n3. Industry/Market environment — Porter\'s Five Forces, competitive structure of the specific industry'},
+  {c:'CH4',q:'What does PESTLE stand for and what does each letter cover?',a:'P — Political: taxes, labour laws, regulations, government stability\nE — Economic: interest rates, inflation, GDP, unemployment, exchange rates, recession\nS — Sociocultural: cultural values, demographics, consumer trends, social media\nT — Technological: new products, processes, digital disruption, 4IR\nL — Legal: legislation, compliance, regulatory risks\nE — Ecological: human-environment relationship, natural resources, sustainability'},
+  {c:'CH4',q:'What is the main purpose of external environmental analysis?',a:'To identify and evaluate trends/events BEYOND the control of a single organisation, thereby revealing:\n• Opportunities the org can exploit\n• Threats the org must avoid or reduce\n\nIt is a CONTINUOUS process involving scanning, monitoring, forecasting and assessing.'},
+  {c:'CH4',q:'Name Porter\'s Five Forces and the key factors for each',a:'1. Threat of New Entrants: economies of scale, brand loyalty, capital req, distribution access, regulations\n2. Bargaining Power of Suppliers: no. of suppliers, uniqueness, switching costs, supplier concentration, forward integration\n3. Bargaining Power of Buyers: buyer concentration, price sensitivity, standardisation, availability of substitutes, switching costs\n4. Threat of Substitutes: availability, price-performance ratio, switching costs, buyer willingness\n5. Competitive Rivalry: no. of competitors, market growth, differentiation, switching costs, exit barriers'},
+  {c:'CH4',q:'What are 3 common mistakes when identifying competitors?',a:'1. Over-emphasising current/known competitors; ignoring potential new entrants or international ones\n2. Focusing only on LARGE competitors; overlooking the threat of small competitors\n3. Assuming competitors will continue to behave the same way as in the past'},
+  {c:'CH4',q:'What are Key Success Factors (KSFs)?',a:'KSFs are strategy elements, product attributes, competitive capabilities, or intangible assets with the GREATEST IMPACT on future success in a specific marketplace.\n\n6 general KSFs:\n1. Strong customer relationships\n2. Efficient cost management\n3. Product/service quality and innovation\n4. Skilled and motivated workforce\n5. Effective distribution and supply chain\n6. Brand reputation and market position'},
+  {c:'CH4',q:'How do you build an EFE Matrix and interpret the score?',a:'1. List key Opportunities and Threats\n2. Assign Weight (0.0–1.0); total must = 1.0\n3. Rate each factor (1–4): 4=superior response, 1=poor response\n4. Weighted Score = Weight × Rating\n5. Sum all weighted scores\n\nInterpretation:\n• Above 2.5 = strong external response\n• Below 2.5 = weak external response to the environment'},
+  {c:'CH5',q:'What is the key difference between internal and external analysis?',a:'Internal analysis → determines what the organisation CAN DO (strengths & weaknesses — controllable)\n\nExternal analysis → determines what the organisation MAY CHOOSE TO DO (opportunities & threats — uncontrollable)\n\nAn org is a bundle of resources, capabilities and core competencies used to create an exclusive market position.'},
+  {c:'CH5',q:'Explain SWOT analysis and its limitations',a:'S = Strengths: internal resources/capabilities giving advantage over competitors\nW = Weaknesses: deficiencies in resources causing relative disadvantage\nO = Opportunities: favourable external situations to exploit\nT = Threats: unfavourable external situations to manage\n\nLimitations:\n• Subjectivity\n• Oversimplification\n• Static snapshot\n• Does not prioritise factors\n• Does not automatically suggest strategies'},
+  {c:'CH5',q:'What is the Resource-Based View (RBV)?',a:'The RBV holds that an org\'s INTERNAL RESOURCES are MORE IMPORTANT than industry structure in gaining competitive advantage.\n\nResources determine efficiency and effectiveness. The 3 categories:\n1. Tangible assets — visible: location, buildings, equipment, financials\n2. Intangible assets — invisible but powerful: brand, reputation, patents (e.g. Coca-Cola)\n3. Organisational capabilities — complex network of processes and skills transforming inputs into outputs'},
+  {c:'CH5',q:'Explain the VRIN test for sustainable competitive advantage',a:'A resource/capability must be:\nV — Valuable: enables exploitation of opportunities or neutralisation of threats; creates customer value\nR — Rare/Scarce: unique; if all competitors have it, no competitive advantage\nI — Inimitable: difficult to copy; hard to replicate through history, culture, complexity\nN — Non-substitutable: no strategic equivalent; competitors cannot achieve same outcome another way\n\nResources meeting all 4 = sustainable competitive advantage'},
+  {c:'CH5',q:'Explain Value Chain Analysis — primary and support activities',a:'VCA identifies where VALUE is added in the org. Value = what customers are willing to pay.\n\nPRIMARY activities (direct value creation):\n1. Input logistics — receiving, storing, distributing inputs\n2. Operations — transforming inputs into final product\n3. Output logistics — distributing product to customers\n4. Marketing — inducements to buy\n5. Customer service — maintain value after sale\n\nSUPPORT activities (enable primary):\n1. Procurement\n2. Technological development\n3. Human resource management\n4. General administration & infrastructure\n5. Financial management'},
+  {c:'CH5',q:'How is the IFE Matrix different from the EFE Matrix?',a:'IFE Matrix = Internal Factor Evaluation → analyses STRENGTHS and WEAKNESSES (internal)\nEFE Matrix = External Factor Evaluation → analyses OPPORTUNITIES and THREATS (external)\n\nBoth use same structure: List factors → Assign weights (total = 1.0) → Rate → Weighted Score\n\nIFE ratings: Strengths = 3 or 4; Weaknesses = 1 or 2\nScore above 2.5 = internally strong; below 2.5 = internally weak'},
+  {c:'CH6',q:'What are long-term goals and what must they comply with? (SMART)',a:'Long-term goals are determined in line with the org\'s VISION. They position the org differently from competitors by either performing activities differently OR performing different activities.\n\nSMART requirements:\nS — Specific: clearly understood, decisive, attainable objectives\nM — Measurable: indicate a time frame\nA — Attainable: ensure continued viability of the entity\nR — Relevant: consistent and congruent across all org units\nT — Time-bound: specify a time frame'},
+  {c:'CH6',q:'What is competitive advantage and what 3 criteria must it fulfil?',a:'Competitive advantage = what distinguishes an org from competitors. Achieved through DISTINCTIVE COMPETENCIES (special capabilities, technologies, resources) that competitors cannot readily copy.\n\nMust:\n1. Relate to an attribute with VALUE and RELEVANCE for customers\n2. Be PERCEIVED by the customer as a competitive advantage\n3. Be SUSTAINABLE — competitors cannot easily imitate it'},
+  {c:'CH6',q:'Name Porter\'s 4 Generic Strategies with examples',a:'The matrix combines Competitive Advantage (low cost vs differentiation) with Scope (broad vs narrow):\n\n1. COST LEADERSHIP (broad + low cost): Shoprite, PEP, Checkers\n2. DIFFERENTIATION (broad + unique): BMW, Apple, Investec, Nando\'s\n3. COST FOCUS (narrow + low cost): budget niche products\n4. DIFFERENTIATION FOCUS (narrow + unique): Porsche, eBay, Treehouse\n\n+ BEST-COST (hybrid): simultaneous cost + differentiation → Toyota, H&M'},
+  {c:'CH6',q:'When is Cost Leadership the best strategy? What are its pitfalls?',a:'BEST WHEN:\n• Price competition is vigorous\n• Target customer is price sensitive\n• Products are standardised (little differentiation)\n• Market is large enough for economies of scale\n• Buyers have high bargaining power\n• Brand loyalty does not play a big role\n\nPITFALLS:\n• Overly aggressive price-cutting → lower profitability\n• Value-creating activities easily imitated\n• Still needs some degree of differentiation'},
+  {c:'CH6',q:'When is Differentiation the best strategy? What are its pitfalls?',a:'BEST WHEN:\n• Buyers\' preferences are diverse and varied\n• Many ways to differentiate and buyers value them\n• Technology changes frequently\n• Fewer competitors follow similar differentiation\n• Brand loyalty exists; uniqueness cannot be quickly imitated\n\nPITFALLS:\n• Uniqueness not valuable to customers\n• Too much differentiation\n• Premium price too high\n• Uniqueness easily imitated\n• Brand dilution through product-line extensions\n• Innovation costs outweigh price premium'},
+  {c:'CH6',q:'When is the Focus Strategy best? What are its pitfalls?',a:'BEST WHEN:\n• Target niche is profitable and offers good growth potential\n• Allows smaller org to avoid direct competition\n• Customers willing to pay premium for specialised product\n• Customers are brand loyal\n• Industry has variety of profitable market segments\n\nPITFALLS:\n• Niche preferences shift towards the broader market\n• Competitors redefine the niche with new technologies\n• Niche becomes flooded with competitors'},
+  {c:'CH6',q:'What is the Best-Cost Strategy and when does it work best?',a:'Best-cost = HYBRID strategy combining COST LEADERSHIP + DIFFERENTIATION simultaneously.\nTarget: VALUE-CONSCIOUS buyers who want quality features at a reasonable price.\nKey expertise: managing costs DOWN while incorporating upscale features.\n\nBEST WHEN:\n• Customers simultaneously price AND quality sensitive\n• Economies of scale and learning exist\n• Competition is fierce, barriers to entry low\n• Mass customisation possible through advanced tech\n\nPITFALLS:\n• Fail at both → "stuck in the middle"\n• Underestimate combined challenge\n• Miscalculate revenue sources'},
+  {c:'CH4',q:'What is a strategic group diagram?',a:'A strategic group diagram maps competitors in an industry onto a 2D matrix using two strategic variables (e.g. price vs quality, or product range vs geographic scope).\n\nPurpose: Identify clusters of firms following similar strategies → reveals who your REAL direct competitors are and spots gaps in the market where new strategy positions could be created.\n\nExample: SA grocery retail — Woolworths vs Shoprite vs PnP vs Spar would sit in different positions based on price and quality variables.'},
+  {c:'CH5',q:'What is the difference between resources, capabilities and core competencies?',a:'Resources: Competitive assets owned/controlled by the org (tangible, intangible, organisational)\n\nCapabilities: Capacity to DEPLOY resources — complex network of processes and skills that determine how efficiently inputs are transformed into outputs. Developed in functional areas; foundation lies in employee knowledge and expertise.\n\nCore Competencies: UNIQUE capabilities that provide competitive advantage — what the org does distinctively well that others cannot easily replicate. Capabilities must be unique and lead to sustainable competitive advantage.'},
+  {c:'CH6',q:'What is the criticism of Porter\'s generic strategy framework?',a:'1. An org needs to be able to employ a successful HYBRID strategy without being "stuck in the middle"\n2. Low-cost strategy does not in itself sell products\n3. Price can sometimes be USED to differentiate (contradicts the matrix)\n4. More and more consumers want VALUE vs price → orgs need to balance appeal to the target market\n\nThe framework is seen as somewhat outdated in a world where best-cost/hybrid strategies are increasingly common.'},
+  {c:'CH4',q:'Why can\'t organisations control the external environment?',a:'The external environment consists of factors OUTSIDE the organisation\'s boundaries — political decisions, economic conditions, social trends, technological change — that affect the org but cannot be directly manipulated by it.\n\nOrganisations can only:\n• Scan and monitor it (environmental analysis)\n• Forecast changes\n• Assess strategic implications\n• Adapt their strategies to exploit opportunities or avoid threats\n\nKey principle: Growth and profitability are affected by what happens in the external environment.'},
+  {c:'CH5',q:'Why is Value Chain Analysis important strategically?',a:'VCA helps an org determine WHERE VALUE IS REALLY ADDED — identifying activities that create competitive advantage vs those that don\'t.\n\n3 ways to create customer value through VCA:\n1. Product is UNIQUE and/or different from competitors\n2. Product is CHEAPER than competitors\n3. Org can RESPOND QUICKLY to customer needs\n\nBy identifying strengths and weaknesses in value-adding activities, orgs can invest in what matters and eliminate what doesn\'t — driving competitive advantage from the inside out.'},
+];
+
+let fcDeck = [...CARDS];
+let fcIdx = 0;
+let fcFlipped = false;
+
+function initFC() {
+  fcDeck = [...CARDS];
+  fcIdx = 0;
+  renderFC();
+}
+
+function renderFC() {
+  const c = fcDeck[fcIdx];
+  document.getElementById('fcCat').textContent = c.c;
+  document.getElementById('fcCat').style.background = c.c==='CH4'?'rgba(91,141,238,0.15)':c.c==='CH5'?'rgba(78,201,148,0.15)':'rgba(240,127,58,0.15)';
+  document.getElementById('fcCat').style.color = c.c==='CH4'?'var(--accent)':c.c==='CH5'?'var(--green)':'var(--orange)';
+  document.getElementById('fcQ').textContent = c.q;
+  document.getElementById('fcA').textContent = c.a;
+  document.getElementById('fcProg').textContent = `${fcIdx+1} / ${fcDeck.length}`;
+  fcFlipped = false;
+  document.getElementById('fcInner').classList.remove('flipped');
+}
+
+function fcFlip() { fcFlipped = !fcFlipped; document.getElementById('fcInner').classList.toggle('flipped', fcFlipped); }
+function fcNext() { fcIdx = (fcIdx+1)%fcDeck.length; renderFC(); }
+function fcPrev() { fcIdx = (fcIdx-1+fcDeck.length)%fcDeck.length; renderFC(); }
+function fcShuffle() { for(let i=fcDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcDeck[i],fcDeck[j]]=[fcDeck[j],fcDeck[i]];} fcIdx=0; renderFC(); }
+function fcFilter(cat, btn) {
+  document.querySelectorAll('.filter-row .pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  fcDeck = cat==='ALL' ? [...CARDS] : CARDS.filter(c=>c.c===cat);
+  fcIdx = 0; renderFC();
+}
+
+// ── QUIZ ──────────────────────────────────────────────────────────────────────
+const QUIZ = [
+  {q:'The primary purpose of external environmental analysis is to:',o:['Identify internal strengths and weaknesses','Identify opportunities and threats beyond the org\'s control','Evaluate employee performance','Set long-term goals'],a:1,e:'External environmental analysis focuses on identifying and evaluating trends/events BEYOND the org\'s control — revealing opportunities to exploit and threats to avoid.'},
+  {q:'Which of the following is NOT part of the macro (PESTLE) environment?',o:['Interest rates and inflation','Porter\'s Five Forces competitive analysis','Changing consumer preferences','Government regulations and taxes'],a:1,e:'Porter\'s Five Forces is an INDUSTRY/MARKET analysis tool, not a macro-environment factor. The macro environment = PESTLE (Political, Economic, Sociocultural, Technological, Legal, Ecological).'},
+  {q:'In Porter\'s Five Forces, "economies of scale" is a factor that affects:',o:['Bargaining power of suppliers','Bargaining power of buyers','Threat of new entrants','Competitive rivalry'],a:2,e:'Economies of scale are a BARRIER TO ENTRY — the larger the required scale, the harder it is for new firms to enter the market. This factor directly affects the Threat of New Entrants.'},
+  {q:'What does a total EFE Matrix score of 3.5 out of 4 indicate?',o:['Moderate response to external factors','Weak response — the org is under threat','Strong response — org is effectively managing opportunities and threats','The matrix was incorrectly calculated'],a:2,e:'EFE total above 2.5 = strong external response. 3.5 is well above average, indicating the org is responding very well to its external environment. Below 2.5 would indicate a weak response.'},
+  {q:'A common mistake organisations make when identifying competitors is:',o:['Doing too much environmental scanning','Assuming competitors will change their behaviour','Focusing only on current known competitors and ignoring potential new entrants','Overusing Porter\'s Five Forces model'],a:2,e:'One of the 3 common mistakes is over-emphasising current/known competitors and IGNORING the threat of potential new entrants or international competitors.'},
+  {q:'The Resource-Based View (RBV) argues that:',o:['Industry structure is more important than internal resources','External threats are the primary driver of strategy','Internal resources are more important than industry structure in gaining competitive advantage','Competitive advantage comes only from low costs'],a:2,e:'The RBV holds that an organisation\'s INTERNAL RESOURCES are more important than industry structure when attempting to gain and sustain competitive advantage. Resources determine efficiency and effectiveness.'},
+  {q:'Which of the following is an INTANGIBLE asset?',o:['Factory buildings and equipment','Fleet of delivery vehicles','Brand reputation and patents','Financial capital'],a:2,e:'Intangible assets are those you CANNOT TOUCH — brand name, reputation, patents, knowledge, culture. They are often the most critical assets creating real competitive advantage (e.g. Coca-Cola\'s brand).'},
+  {q:'In the VRIN test, what does "Inimitable" mean?',o:['The resource is unique and owned by the org only','The resource cannot easily be copied or replicated by competitors','The resource creates customer value','The resource has no substitute'],a:1,e:'Inimitable (I in VRIN) means the resource is DIFFICULT TO COPY. Competitors should not be able to replicate it through history, social complexity, or other barriers. Non-substitutable (N) means no strategic equivalent exists.'},
+  {q:'Which is a PRIMARY activity in the Value Chain?',o:['Human resource management','Technological development','Output logistics (distribution to customers)','General administration'],a:2,e:'Output logistics (distributing the finished product to customers) is a PRIMARY activity — it directly creates value in the product/service. HRM, Tech development, and Administration are SUPPORT activities.'},
+  {q:'The IFE Matrix measures:',o:['External opportunities and threats','Internal strengths and weaknesses','Competitive rivalry intensity','Porter\'s Five Forces'],a:1,e:'IFE = Internal Factor Evaluation Matrix. It evaluates INTERNAL factors (strengths and weaknesses). Strengths are rated 3 or 4; weaknesses are rated 1 or 2. Above 2.5 total = internally strong.'},
+  {q:'A company pursuing SWOT analysis discovers it has a strong distribution network. This is classified as a:',o:['Threat','Opportunity','Strength','Weakness'],a:2,e:'A strong distribution network is an INTERNAL resource giving the org a relative advantage over competitors — this is a STRENGTH. Opportunities and Threats are external factors.'},
+  {q:'Long-term goals in strategic management must comply with SMART criteria. What does SMART stand for?',o:['Strategic, Meaningful, Actionable, Reliable, Transparent','Specific, Measurable, Attainable, Relevant, Time-bound','Systematic, Manageable, Achievable, Rational, Trackable','Simple, Measurable, Accurate, Realistic, Timed'],a:1,e:'SMART = Specific, Measurable, Attainable, Relevant, Time-bound. Long-term goals must be clearly understood, indicate a time frame, be realistic, and be consistent across organisational units.'},
+  {q:'According to Porter\'s generic strategies, cost leadership targets:',o:['A narrow niche market at the lowest cost','A broad market with highly standardised products','A niche market with unique/customised products','Value-conscious buyers wanting premium features at low prices'],a:1,e:'Cost leadership targets a BROAD MARKET with highly standardised, non-customised products at the lowest possible cost. It aims to out-manage rivals in efficiency and cost management.'},
+  {q:'Which of these is an example of a Differentiation strategy?',o:['Shoprite offering everyday low prices','PEP selling affordable clothing to the mass market','Apple charging a premium for innovative, unique design','Budget airlines serving cost-sensitive niche travellers'],a:2,e:'Apple uses DIFFERENTIATION — creating products perceived as unique and valued by a broad market, charging a premium price. Shoprite and PEP use cost leadership; budget airlines use focus strategies.'},
+  {q:'A company that "focuses on a narrow competitive scope and serves a specialised niche market with unique, customised products" is following:',o:['Cost leadership','Best-cost strategy','Differentiation focus','Cost focus'],a:2,e:'DIFFERENTIATION FOCUS = narrow target market (niche) + differentiation advantage. Examples: Porsche (sports cars), eBay (online auctions). The niche is served with something uniquely valuable.'},
+  {q:'The "Best-Cost" strategy is best described as:',o:['The lowest-cost producer in the industry','A niche differentiation approach','A hybrid combining cost leadership and differentiation to offer value for money','Focusing on the highest quality possible regardless of cost'],a:2,e:'Best-cost = HYBRID strategy. It simultaneously combines cost leadership and differentiation to offer value-conscious buyers better features than low-cost rivals AND lower prices than full differentiators.'},
+  {q:'What is the main risk of a "best-cost" strategy?',o:['Charging prices that are too low','Targeting too narrow a market','Failing at both cost leadership and differentiation simultaneously — getting "stuck in the middle"','Over-differentiating products'],a:2,e:'The primary pitfall of best-cost is failing to achieve BOTH advantages simultaneously, resulting in being "stuck in the middle" — neither the cost leader nor a meaningful differentiator — losing competitive advantage.'},
+  {q:'Competitive advantage must fulfil which 3 criteria?',o:['Be expensive to develop, patented, and global','Relate to customer value, be perceived by customers, and be sustainable','Be based on technology, brand, and geography','Be measurable, auditable, and documented'],a:1,e:'For competitive advantage to be valid: (1) relate to an attribute with value/relevance for customers, (2) be perceived by the CUSTOMER as a competitive advantage, (3) be SUSTAINABLE — competitors cannot easily imitate it.'},
+  {q:'The bargaining power of BUYERS is HIGH when:',o:['There are many small buyers each purchasing small amounts','Buyers are price-insensitive and brand-loyal','Products are highly differentiated with no substitutes','Buyers are concentrated, price-sensitive, and switching costs are low'],a:3,e:'Buyers have HIGH bargaining power when: they are concentrated (few large buyers), are price sensitive, products are standardised (easy to switch), substitutes are available, and switching costs are low. This pressures firms to lower prices.'},
+  {q:'Which of these companies would most likely use a FOCUS strategy?',o:['Shoprite (affordable groceries to all South Africans)','Porsche (premium sports cars only)','Nando\'s (distinctive flame-grilled chicken to broad market)','Pick n Pay (broad range for all customers)'],a:1,e:'Porsche uses a FOCUS strategy — specifically differentiation focus. It targets a narrow niche (sports car enthusiasts) with a unique, premium, high-differentiation product rather than competing across the whole automotive market.'},
+  {q:'In the EFE Matrix, a Rating of "1" means:',o:['The org responds very well (superior) to this factor','The factor is very important (high weight)','The org responds poorly to this factor','The factor is an opportunity, not a threat'],a:2,e:'Rating scale: 4 = superior response, 3 = above average, 2 = average, 1 = POOR response. Ratings reflect HOW WELL the org is responding to each opportunity or threat, not its importance (which is captured by the weight).'},
+  {q:'What is the role of HRM in the Value Chain?',o:['It is not part of the value chain','It is a primary activity responsible for output logistics','It is a support activity — recruitment, selection, training and compensation — affecting ALL levels of the org','It is a primary activity for transforming inputs into outputs'],a:2,e:'HRM is a SUPPORT activity in the value chain — it involves recruitment, selection, training and compensation of employees. It is critically important because it affects all levels of the organisation.'},
+  {q:'Porter\'s Five Forces model is used to analyse:',o:['The macro (PESTLE) environment','The specific industry/competitive structure the org operates in','The internal resources of the organisation','The SMART criteria for setting long-term goals'],a:1,e:'Porter\'s Five Forces analyses the INDUSTRY/MARKET environment — the competitive structure of the specific industry. PESTLE analyses the macro environment. RBV and value chain analyse internal factors.'},
+  {q:'When formulating a cost leadership strategy, what is the main goal regarding the value chain?',o:['Add as many unique features to each activity as possible','Eliminate or bypass cost-producing activities to achieve a cost advantage','Focus on marketing and customer service exclusively','Outsource all primary activities to reduce involvement'],a:1,e:'Cost leadership requires either out-managing rivals with EFFICIENT VALUE CHAIN ACTIVITIES or revamping the value chain to ELIMINATE OR BYPASS cost-producing activities. The goal is to achieve a cost advantage over all competitors.'},
+  {q:'Which statement about the SWOT analysis is CORRECT?',o:['Strengths and Opportunities are both internal factors','Weaknesses and Threats are both external factors','Strengths and Weaknesses are internal; Opportunities and Threats are external','All four SWOT factors are external to the organisation'],a:2,e:'CORRECT: S (Strengths) and W (Weaknesses) = INTERNAL factors. O (Opportunities) and T (Threats) = EXTERNAL factors. This is fundamental — confusing internal/external in SWOT is a common exam error.'},
+];
+
+let qzIdx = 0, qzScore = 0, qzAnswered = false, qzShuffled = [];
+
+function initQuiz() {
+  qzShuffled = [...QUIZ].sort(()=>Math.random()-0.5);
+  qzIdx=0; qzScore=0;
+  document.getElementById('quizContainer').style.display='block';
+  document.getElementById('quizScore').style.display='none';
+  renderQ();
+}
+
+function renderQ() {
+  qzAnswered=false;
+  const q = qzShuffled[qzIdx];
+  document.getElementById('qzNum').textContent=`Question ${qzIdx+1} of ${qzShuffled.length}`;
+  document.getElementById('qzBar').style.width=`${(qzIdx/qzShuffled.length)*100}%`;
+  document.getElementById('qzQ').textContent=q.q;
+  document.getElementById('qzNextWrap').style.display='none';
+  const fb=document.getElementById('qzFb'); fb.classList.remove('show'); fb.textContent='';
+  const opts=document.getElementById('qzOpts'); opts.innerHTML='';
+  q.o.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='qz-opt'; b.textContent=o;
+    b.onclick=()=>selectQ(i,q.a,q.e);
+    opts.appendChild(b);
+  });
+}
+
+function selectQ(chosen,correct,exp) {
+  if(qzAnswered)return; qzAnswered=true;
+  document.querySelectorAll('.qz-opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  if(chosen===correct)qzScore++;
+  const fb=document.getElementById('qzFb');
+  fb.textContent=(chosen===correct?'✅ Correct! ':'❌ Incorrect. ')+exp;
+  fb.classList.add('show');
+  document.getElementById('qzNextWrap').style.display='block';
+}
+
+function qzNext() {
+  qzIdx++;
+  if(qzIdx>=qzShuffled.length){showScore();}else{renderQ();}
+}
+
+function showScore() {
+  document.getElementById('quizContainer').style.display='none';
+  const pct=Math.round((qzScore/qzShuffled.length)*100);
+  document.getElementById('qzScoreN').textContent=`${qzScore}/${qzShuffled.length}`;
+  document.getElementById('qzScoreM').textContent=pct>=80?'🎉 Excellent! You\'re ready for tomorrow.':pct>=60?'📘 Good work. Review the chapters you missed.':'💪 Keep going — work through CH4, CH5, CH6 again.';
+  document.getElementById('quizScore').style.display='block';
+}
+
+function qzRestart(){initQuiz();}
+
+// ── TELEPROMPTER ──────────────────────────────────────────────────────────────
+const TP_SCRIPT = [
+  {t:'sect',cat:'c4',txt:'CHAPTER 4 — EXTERNAL ENVIRONMENTAL ANALYSIS'},
+  {t:'sp'},
+  {t:'sect',cat:'c4',txt:'THE 3 LAYERS OF THE EXTERNAL ENVIRONMENT'},
+  {t:'item',txt:'1. Global environment — globalisation, speed, innovation, knowledge management, international competition'},
+  {t:'item',txt:'2. Macro environment — PESTLE factors that organisations CANNOT directly control'},
+  {t:'item',txt:'3. Industry/Market environment — Porter\'s Five Forces competitive structure'},
+  {t:'note',txt:'Purpose: identify Opportunities to exploit and Threats to avoid'},
+  {t:'sp'},
+  {t:'sect',cat:'c4',txt:'PESTLE — THE MACRO ENVIRONMENT'},
+  {t:'item',txt:'P — Political: taxes, labour laws, regulations, government stability, AGOA trade agreements, lockdowns'},
+  {t:'item',txt:'E — Economic: interest rates, inflation, GDP, unemployment, exchange rates, 15% VAT, recession, consumer spending'},
+  {t:'item',txt:'S — Sociocultural: cultural values, demographics, consumer trends (healthy food), social media influence, SA subcultures'},
+  {t:'item',txt:'T — Technological: new products/processes, digital disruption, 4IR — no company is insulated from tech change'},
+  {t:'item',txt:'L — Legal: legislation, compliance, regulatory risks, policy shifts, labour laws'},
+  {t:'item',txt:'E — Ecological: human-environment relationship, limited natural resources, sustainability obligations, ESG'},
+  {t:'sp'},
+  {t:'sect',cat:'c4',txt:"PORTER'S FIVE FORCES"},
+  {t:'item',txt:'1. Threat of New Entrants: economies of scale · brand loyalty · capital requirements · access to distribution · government regulations'},
+  {t:'item',txt:'2. Bargaining Power of Suppliers: number of suppliers · uniqueness of products · switching costs · supplier concentration · forward integration threat'},
+  {t:'item',txt:'3. Bargaining Power of Buyers: buyer concentration · price sensitivity · product standardisation · substitutes available · switching costs'},
+  {t:'item',txt:'4. Threat of Substitutes: availability · relative price-performance · switching costs · buyer willingness · innovation enabling substitutes'},
+  {t:'item',txt:'5. Competitive Rivalry: number of competitors · market growth rate · product differentiation · switching costs · exit barriers'},
+  {t:'note',txt:'3 common competitor mistakes: ignoring new entrants · ignoring small competitors · assuming past behaviour continues'},
+  {t:'sp'},
+  {t:'sect',cat:'c4',txt:'KEY SUCCESS FACTORS (KSFs)'},
+  {t:'item',txt:'1. Strong customer relationships'},
+  {t:'item',txt:'2. Efficient cost management'},
+  {t:'item',txt:'3. Product/service quality and innovation'},
+  {t:'item',txt:'4. Skilled and motivated workforce'},
+  {t:'item',txt:'5. Effective distribution and supply chain'},
+  {t:'item',txt:'6. Brand reputation and market position'},
+  {t:'sp'},
+  {t:'sect',cat:'c4',txt:'EFE MATRIX — EXTERNAL FACTOR EVALUATION'},
+  {t:'item',txt:'Step 1: List all key Opportunities and Threats'},
+  {t:'item',txt:'Step 2: Assign Weight to each factor (0.0–1.0) — all weights must total 1.0'},
+  {t:'item',txt:'Step 3: Rate how well the org responds (1=poor, 2=average, 3=above avg, 4=superior)'},
+  {t:'item',txt:'Step 4: Weighted Score = Weight × Rating for each factor'},
+  {t:'item',txt:'Step 5: Sum all weighted scores to get Total Weighted Score'},
+  {t:'note',txt:'Score above 2.5 = strong external response · below 2.5 = weak external response'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'CHAPTER 5 — INTERNAL ENVIRONMENTAL ANALYSIS'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'INTERNAL vs EXTERNAL ANALYSIS'},
+  {t:'item',txt:'Internal analysis → determines what the org CAN DO (strengths & weaknesses — controllable)'},
+  {t:'item',txt:'External analysis → determines what the org MAY CHOOSE TO DO (opportunities & threats — uncontrollable)'},
+  {t:'item',txt:'An org is a bundle of resources, capabilities and core competencies used to create an exclusive market position'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'SWOT ANALYSIS'},
+  {t:'item',txt:'S — Strengths: INTERNAL resources/capabilities giving advantage relative to competitors'},
+  {t:'item',txt:'W — Weaknesses: INTERNAL deficiencies in resources creating relative disadvantage'},
+  {t:'item',txt:'O — Opportunities: EXTERNAL favourable situations to exploit'},
+  {t:'item',txt:'T — Threats: EXTERNAL unfavourable situations to manage'},
+  {t:'note',txt:'Limitations: subjectivity · oversimplification · static snapshot · does not prioritise or suggest strategies automatically'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'RESOURCE-BASED VIEW (RBV)'},
+  {t:'item',txt:'RBV: internal resources MORE IMPORTANT than industry structure in gaining competitive advantage'},
+  {t:'item',txt:'3 categories: Tangible assets (visible: buildings, equipment) · Intangible assets (brand, reputation, patents) · Organisational capabilities (processes and skills)'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'VRIN TEST FOR SUSTAINABLE COMPETITIVE ADVANTAGE'},
+  {t:'item',txt:'V — Valuable: enables exploitation of opportunities or neutralisation of threats; creates customer value'},
+  {t:'item',txt:'R — Rare/Scarce: unique — if all competitors have it, there is no competitive advantage'},
+  {t:'item',txt:'I — Inimitable: difficult to copy or replicate — protected by history, culture, social complexity'},
+  {t:'item',txt:'N — Non-substitutable: no strategic equivalent — competitors cannot achieve same outcome another way'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'VALUE CHAIN ANALYSIS (VCA)'},
+  {t:'item',txt:'PRIMARY activities (direct value creation): Input logistics · Operations · Output logistics · Marketing · Customer service'},
+  {t:'item',txt:'SUPPORT activities (enable primary): Procurement · Technological development · HR Management · General administration · Financial management'},
+  {t:'item',txt:'3 ways value is delivered: Product is unique · Product is cheaper · Org can respond quickly to customer needs'},
+  {t:'sp'},
+  {t:'sect',cat:'c5',txt:'IFE MATRIX — INTERNAL FACTOR EVALUATION'},
+  {t:'item',txt:'Same structure as EFE but analyses STRENGTHS and WEAKNESSES (internal)'},
+  {t:'item',txt:'Strengths rated 3 (minor) or 4 (major) · Weaknesses rated 2 (minor) or 1 (major)'},
+  {t:'item',txt:'Total above 2.5 = internally strong · below 2.5 = internally weak'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'CHAPTER 6 — STRATEGY FORMULATION: LONG-TERM GOALS & GENERIC STRATEGIES'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'LONG-TERM GOALS — SMART CRITERIA'},
+  {t:'item',txt:'Determined in line with the organisation\'s VISION'},
+  {t:'item',txt:'S — Specific: clearly understood, decisive, attainable overall objectives'},
+  {t:'item',txt:'M — Measurable: must indicate a time frame'},
+  {t:'item',txt:'A — Attainable: must ensure continued viability of the entity'},
+  {t:'item',txt:'R — Relevant: consistent and congruent across all organisational units'},
+  {t:'item',txt:'T — Time-bound: specify a time frame for achievement'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'COMPETITIVE ADVANTAGE — 3 CRITERIA'},
+  {t:'item',txt:'1. Relate to an attribute with VALUE and RELEVANCE for customers'},
+  {t:'item',txt:'2. Be PERCEIVED by the customer as a competitive advantage'},
+  {t:'item',txt:'3. Be SUSTAINABLE — competitors cannot easily imitate it'},
+  {t:'note',txt:'Achieved through distinctive competencies (special capabilities, technologies, resources) competitors cannot readily copy'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:"PORTER'S 4 GENERIC STRATEGIES"},
+  {t:'item',txt:'1. COST LEADERSHIP (broad market + low cost): standardised products, efficient value chain, out-manage rivals on cost · Examples: Shoprite, PEP, Checkers'},
+  {t:'item',txt:'2. DIFFERENTIATION (broad market + unique): something perceived as unique and valued, charge premium price · Examples: BMW, Apple, Investec, Nando\'s'},
+  {t:'item',txt:'3. COST FOCUS (narrow niche + low cost): serve niche at lower cost than rivals · Example: budget niche brands'},
+  {t:'item',txt:'4. DIFFERENTIATION FOCUS (narrow niche + unique): serve niche with something uniquely valuable · Examples: Porsche, eBay, Treehouse'},
+  {t:'item',txt:'BEST-COST STRATEGY (hybrid): combines cost + differentiation · Value-conscious buyers · More value for money · Examples: Toyota, H&M'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'COST LEADERSHIP — WHEN IT WORKS & PITFALLS'},
+  {t:'item',txt:'Best when: price competition is vigorous · customers are price sensitive · products are standardised · market large enough for economies of scale · buyers have high bargaining power'},
+  {t:'item',txt:'Pitfalls: overly aggressive price cutting = lower profit · activities easily imitated · still needs some differentiation'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'DIFFERENTIATION — WHEN IT WORKS & PITFALLS'},
+  {t:'item',txt:'Best when: buyers\' preferences are diverse · many ways to differentiate · technology changes frequently · brand loyalty exists · uniqueness hard to imitate'},
+  {t:'item',txt:'Pitfalls: uniqueness not valuable · too much differentiation · premium too high · easily imitated · brand dilution · innovation costs outweigh price premium'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'FOCUS — WHEN IT WORKS & PITFALLS'},
+  {t:'item',txt:'Best when: niche is profitable with good growth · allows smaller org to avoid direct competition · customers willing to pay premium · customers are brand loyal'},
+  {t:'item',txt:'Pitfalls: niche preferences shift to mainstream · competitors redefine the niche with new tech · niche becomes flooded with rivals'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'BEST-COST — WHEN IT WORKS & PITFALLS'},
+  {t:'item',txt:'Best when: customers are simultaneously price AND quality sensitive · economies of scale exist · competition is fierce · mass customisation is possible'},
+  {t:'item',txt:'Pitfalls: fail at both = stuck in the middle · underestimate combined challenge · miscalculate revenue sources'},
+  {t:'sp'},
+  {t:'sect',cat:'c6',txt:'END OF CONTENT — GO WRITE THAT TEST. 💪'},
+  {t:'sp'},
+];
+
+let tpCurrentMode='auto', tpRunning=false, tpManIdx=0, tpFontSz=22, tpInterval=null, tpLines=[];
+
+function initTP() {
+  if(document.getElementById('tpContent').children.length>0)return;
+  const c=document.getElementById('tpContent');
+  tpLines=[];
+  TP_SCRIPT.forEach((l,i)=>{
+    const el=document.createElement('div');
+    el.className='tp-line';
+    if(l.t==='sect'){el.classList.add('tp-sect',`tp-${l.cat}`);el.textContent=l.txt;}
+    else if(l.t==='item'){el.classList.add('tp-item');el.textContent=l.txt;}
+    else if(l.t==='note'){el.classList.add('tp-note');el.textContent='↳ '+l.txt;}
+    else{el.classList.add('tp-spacer');el.innerHTML='&nbsp;';}
+    el.style.fontSize=tpFontSz+'px';
+    c.appendChild(el); tpLines.push(el);
+  });
+  applyTpStyles();
+}
+
+function applyTpStyles(){
+  tpLines.forEach((el,i)=>{
+    el.classList.remove('tp-active','tp-past','tp-future');
+    if(i<tpManIdx)el.classList.add('tp-past');
+    else if(i===tpManIdx)el.classList.add('tp-active');
+    else el.classList.add('tp-future');
+  });
+  updateTpProg();
+}
+
+function tpMode(m){
+  tpCurrentMode=m; stopTP();
+  document.getElementById('tpMA').classList.toggle('active',m==='auto');
+  document.getElementById('tpMM').classList.toggle('active',m==='manual');
+  document.getElementById('tpSpeedRow').style.visibility=m==='auto'?'visible':'hidden';
+  const mn=document.getElementById('tpManNav');
+  mn.style.display=m==='manual'?'flex':'none';
+  document.getElementById('tpPlayBtn').textContent=m==='auto'?'▶ Play':'↑ Top';
+  if(m==='manual'){tpManIdx=0;applyTpStyles();scrollToActive();}
+}
+
+function tpToggle(){tpCurrentMode==='manual'?tpReset():(tpRunning?stopTP():startTP());}
+
+function startTP(){
+  tpRunning=true;
+  document.getElementById('tpPlayBtn').textContent='⏸ Pause';
+  const spd=parseInt(document.getElementById('tpSpd').value);
+  const ppf=spd/60;
+  tpInterval=setInterval(()=>{
+    window.scrollBy(0,ppf);
+    const dH=document.documentElement.scrollHeight-window.innerHeight;
+    if(window.scrollY>=dH-2)stopTP();
+    updateTpProg();
+  },16);
+}
+
+function stopTP(){
+  tpRunning=false; clearInterval(tpInterval);
+  document.getElementById('tpPlayBtn').textContent=tpCurrentMode==='auto'?'▶ Play':'↑ Top';
+}
+
+function tpReset(){
+  stopTP(); tpManIdx=0; applyTpStyles();
+  window.scrollTo({top:54,behavior:'smooth'}); updateTpProg();
+}
+
+function tpUpdateSpeed(){
+  const v=document.getElementById('tpSpd').value;
+  document.getElementById('tpSpdL').textContent=v;
+  if(tpRunning){stopTP();startTP();}
+}
+
+function updateTpProg(){
+  const dH=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=tpCurrentMode==='auto'?Math.round((window.scrollY/Math.max(dH,1))*100):Math.round((tpManIdx/Math.max(tpLines.length-1,1))*100);
+  document.getElementById('tpProg').style.width=pct+'%';
+  document.getElementById('tpPct').textContent=pct+'%';
+}
+
+function tpManualAdv(){if(tpCurrentMode==='manual')tpManNext();}
+function tpManNext(){if(tpManIdx<tpLines.length-1){tpManIdx++;applyTpStyles();scrollToActive();document.getElementById('tpManPos').textContent=`Line ${tpManIdx+1} of ${tpLines.length}`;}}
+function tpManPrev(){if(tpManIdx>0){tpManIdx--;applyTpStyles();scrollToActive();document.getElementById('tpManPos').textContent=`Line ${tpManIdx+1} of ${tpLines.length}`;}}
+function scrollToActive(){const el=tpLines[tpManIdx];if(!el)return;const r=el.getBoundingClientRect();window.scrollBy({top:r.top-window.innerHeight/2,behavior:'smooth'});}
+function tpFont(d){tpFontSz=Math.max(14,Math.min(48,tpFontSz+d));document.getElementById('tpFontL').textContent=tpFontSz;tpLines.forEach(el=>el.style.fontSize=tpFontSz+'px');}
+
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('tp').classList.contains('active'))return;
+  if(e.key===' '){e.preventDefault();tpToggle();}
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')tpManNext();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')tpManPrev();
+});
+
+// patch go() to init tp
+const _go=go;
+window.go=function(id,btn){_go(id,btn);if(id==='tp')initTP();};
+</script>
+</body>
+</html>
