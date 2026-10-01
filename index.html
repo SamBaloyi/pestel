@@ -1,753 +1,830 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MNE7XB1 — Assessment 2 Revision</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>FIM — Deep Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink-950:#101215; --ink-900:#171a1f; --ink-800:#1d2127; --line:#2a2f37;
-    --text-hi:#eceef1; --text-mid:#a9b0ba; --text-low:#6c7480;
-    --amber:#e0a341; --amber-dim:#3d301a; --green:#5cb87f; --green-dim:#1e3327;
-    --red:#e0685a; --red-dim:#3a2220; --blue:#6f9bd1; --blue-dim:#1e2d40;
-    --purple:#a487d9; --purple-dim:#2c2440;
-    --font-ui:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-    --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
-    --bg:var(--ink-950); --surface:var(--ink-900); --surface-raised:var(--ink-800);
-    --border:var(--line); --fg:var(--text-hi); --fg-muted:var(--text-mid); --fg-faint:var(--text-low);
-  }
-  @media (prefers-color-scheme: light){
-    :root:not([data-theme="dark"]){
-      --bg:#f4f3ee; --surface:#ffffff; --surface-raised:#faf9f5; --border:#ddd9cf;
-      --fg:#1d1f22; --fg-muted:#5b6470; --fg-faint:#8a919c;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:var(--ink-950); --surface:var(--ink-900); --surface-raised:var(--ink-800);
-    --border:var(--line); --fg:var(--text-hi); --fg-muted:var(--text-mid); --fg-faint:var(--text-low);
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:14.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
-  ::selection{background:var(--amber-dim);color:var(--fg);}
-  :focus-visible{outline:2px solid var(--amber); outline-offset:1px;}
-  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+:root{--bg:#f6f5f1;--paper:#ffffff;--cream:#eeeae2;--rule:#ddd9d0;--ink:#1a1820;--muted:#6b6760;--u5:#1e4db7;--u6:#0a7a5e;--u7:#b85c0a;--acc:#2563c4;--green:#0a7a5e;--orange:#b85c0a;--red:#b91c1c;--hi:#fff3cd;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.65;}
 
-  .app{display:grid; grid-template-columns:230px 1fr; min-height:100vh;}
-  .sidebar{background:var(--surface); border-right:1px solid var(--border); padding:20px 12px; display:flex; flex-direction:column; gap:18px; position:sticky; top:0; height:100vh; overflow-y:auto;}
-  .brand-name{font-weight:700; font-size:14.5px;}
-  .brand-sub{font-size:11px; color:var(--fg-faint); font-family:var(--font-mono); margin-top:2px;}
-  .countdown{background:var(--amber-dim); border:1px solid var(--amber); border-radius:6px; padding:10px 12px;}
-  .countdown .cd-label{font-size:10.5px; color:var(--amber); text-transform:uppercase; letter-spacing:.04em;}
-  .countdown .cd-time{font-family:var(--font-mono); font-size:17px; font-weight:600; color:var(--fg); margin-top:2px;}
-  nav{display:flex; flex-direction:column; gap:2px;}
-  .nav-group-label{font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--fg-faint); padding:10px 10px 3px;}
-  .nav-item{display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:5px; color:var(--fg-muted); cursor:pointer; font-size:13px; border:1px solid transparent;}
-  .nav-item:hover{color:var(--fg); background:var(--surface-raised);}
-  .nav-item.active{color:var(--fg); background:var(--surface-raised); border-color:var(--border);}
-  .nav-item .tag{font-family:var(--font-mono); font-size:9.5px; color:var(--fg-faint); margin-left:auto; background:var(--surface-raised); border:1px solid var(--border); border-radius:3px; padding:0 5px;}
-  .progress-mini{margin-top:auto; padding-top:14px; border-top:1px solid var(--border);}
-  .progress-mini .pm-label{font-size:11px; color:var(--fg-faint); margin-bottom:6px;}
-  .progress-bar{height:6px; background:var(--surface-raised); border-radius:3px; overflow:hidden;}
-  .progress-fill{height:100%; background:var(--amber); transition:width .2s;}
-  .progress-pct{font-family:var(--font-mono); font-size:11px; color:var(--fg-muted); margin-top:5px;}
+nav{position:sticky;top:0;z-index:50;background:var(--ink);height:52px;padding:0 20px;display:flex;align-items:center;gap:4px;overflow-x:auto;}
+nav::-webkit-scrollbar{display:none;}
+.brand{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;font-style:italic;margin-right:20px;flex-shrink:0;}
+.nb{background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:600;padding:0 12px;height:52px;cursor:pointer;transition:all 0.15s;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;text-transform:uppercase;letter-spacing:0.5px;}
+.nb:hover{color:rgba(255,255,255,0.85);}
+.nb.active{color:#fff;border-bottom-color:#7eb3ff;}
+.sec{display:none;}.sec.active{display:block;}
+.wrap{max-width:840px;margin:0 auto;padding:40px 22px 80px;}
+.pg-title{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,2.8rem);line-height:1.15;margin-bottom:6px;}
+.pg-title em{font-style:italic;color:var(--u5);}
+.pg-meta{font-size:0.75rem;color:var(--muted);margin-bottom:32px;padding-bottom:18px;border-bottom:1px solid var(--rule);}
+h3{font-family:'Instrument Serif',serif;font-size:1.3rem;margin:32px 0 10px;}
+h4{font-size:0.9rem;font-weight:700;margin:16px 0 6px;color:var(--ink);}
+h5{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin:12px 0 4px;}
+p{font-size:0.88rem;line-height:1.7;margin-bottom:8px;color:var(--ink);}
+strong{font-weight:700;}
 
-  main{padding:30px 40px 80px; max-width:860px;}
-  .page{display:none; animation:fadeIn .18s ease;}
-  .page.active{display:block;}
-  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
+/* ACCORDION */
+.acc{margin-bottom:8px;}
+.acc-h{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;}
+.acc-h:hover{border-color:var(--acc);}
+.acc-h.open{border-color:var(--acc);border-bottom-left-radius:0;border-bottom-right-radius:0;background:#eff6ff;}
+.acc-arrow{margin-left:auto;color:var(--muted);font-size:0.72rem;transition:transform 0.22s;}
+.acc-h.open .acc-arrow{transform:rotate(180deg);color:var(--acc);}
+.acc-title{font-weight:600;font-size:0.9rem;flex:1;}
+.acc-tag{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:2px 7px;border-radius:3px;white-space:nowrap;font-weight:700;}
+.acc-tag.u5{background:#dbeafe;color:var(--u5);}
+.acc-tag.u6{background:#d1fae5;color:var(--u6);}
+.acc-tag.u7{background:#ffedd5;color:var(--u7);}
+.acc-body{background:var(--paper);border:1px solid var(--acc);border-top:none;border-bottom-left-radius:8px;border-bottom-right-radius:8px;padding:20px;display:none;}
+.acc-body.open{display:block;}
 
-  h1{font-size:22px; font-weight:700; margin:0 0 6px;}
-  .marks-badge{font-family:var(--font-mono); font-size:12px; color:var(--amber); background:var(--amber-dim); border:1px solid var(--amber); padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle;}
-  .subtitle{color:var(--fg-muted); font-size:13.5px; margin:0 0 24px;}
-  h2{font-size:16.5px; font-weight:600; margin:30px 0 10px; padding-bottom:8px; border-bottom:1px solid var(--border);}
-  h2:first-of-type{margin-top:0;}
-  h3{font-size:14px; font-weight:600; margin:18px 0 8px; color:var(--fg);}
-  p{margin:0 0 12px;}
-  ul, ol{margin:0 0 14px; padding-left:20px;}
-  li{margin-bottom:5px;}
-  strong{color:var(--fg); font-weight:600;}
-  code{font-family:var(--font-mono); background:var(--surface-raised); padding:1px 5px; border-radius:3px; font-size:13px;}
+/* CONTENT */
+.callout{border-radius:7px;padding:12px 16px;font-size:0.84rem;line-height:1.6;margin:12px 0;}
+.callout.blue{background:#eff6ff;border-left:3px solid var(--u5);}
+.callout.green{background:#f0fdf9;border-left:3px solid var(--u6);}
+.callout.orange{background:#fff7ed;border-left:3px solid var(--u7);}
+.callout.yellow{background:var(--hi);border-left:3px solid #d97706;}
+.callout.red{background:#fff1f2;border-left:3px solid var(--red);}
 
-  .callout{border:1px solid var(--border); border-radius:7px; padding:14px 16px; margin:16px 0; background:var(--surface);}
-  .callout-title{font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; margin-bottom:6px; display:flex; align-items:center; gap:6px;}
-  .callout.focus{border-color:var(--amber); background:var(--amber-dim);}
-  .callout.focus .callout-title{color:var(--amber);}
-  .callout.example{border-color:var(--blue); background:var(--blue-dim);}
-  .callout.example .callout-title{color:var(--blue);}
-  .callout.warn{border-color:var(--red); background:var(--red-dim);}
-  .callout.warn .callout-title{color:var(--red);}
-  .callout.formula{background:var(--surface-raised);}
-  .callout.formula .callout-title{color:var(--fg-muted);}
-  .callout p:last-child{margin-bottom:0;}
+.ledger{width:100%;border-collapse:collapse;font-size:0.83rem;margin:12px 0;}
+.ledger th{background:var(--cream);color:var(--muted);padding:8px 10px;text-align:left;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--rule);}
+.ledger td{padding:8px 10px;border-bottom:1px solid #f0ede6;vertical-align:top;line-height:1.45;}
+.ledger tr:last-child td{border:none;}
+.ledger .num{font-family:'JetBrains Mono',monospace;text-align:right;font-size:0.8rem;}
+.ledger .ind{padding-left:22px;color:var(--muted);}
+.ledger .sub td{font-weight:600;border-top:1px solid var(--rule);background:#fafaf8;}
+.ledger .tot td{font-weight:700;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--cream);}
+.ledger .tot .num{color:var(--u5);}
+.ledger .neg{color:var(--red);}
+.ledger .hi-row td{background:var(--hi);}
 
-  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px;}
-  th{background:var(--surface-raised); text-align:left; padding:8px 12px; font-size:12px; color:var(--fg-muted); font-weight:600; border-bottom:1px solid var(--border);}
-  td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
-  tr:last-child td{border-bottom:none;}
+.step{display:flex;gap:12px;margin:10px 0;align-items:flex-start;}
+.step-n{font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;background:var(--u5);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-n.g{background:var(--u6);}
+.step-n.o{background:var(--u7);}
+.step-body{font-size:0.85rem;line-height:1.6;}
 
-  .diagram-box{background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:16px; margin:16px 0; text-align:center;}
-  .diagram-caption{font-size:12px; color:var(--fg-faint); margin-top:8px;}
+.formula-box{background:var(--ink);color:#fff;border-radius:8px;padding:14px 18px;margin:12px 0;}
+.fb-label{font-size:0.62rem;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:8px;}
+.fb-f{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#7effd8;line-height:2;}
+.fb-f .dim{color:rgba(255,255,255,0.45);}
 
-  .phase-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:7px; overflow:hidden; margin:16px 0;}
-  .phase-cell{background:var(--surface); padding:11px 10px;}
-  .phase-cell .ph-name{font-weight:600; font-size:12px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid var(--border);}
-  .phase-cell.expansion .ph-name{color:var(--green);}
-  .phase-cell.peak .ph-name{color:var(--amber);}
-  .phase-cell.contraction .ph-name{color:#e0865a;}
-  .phase-cell.trough .ph-name{color:var(--red);}
-  .phase-cell.recovery .ph-name{color:var(--blue);}
-  .phase-cell p{font-size:11.5px; color:var(--fg-muted); margin:0;}
-  @media (max-width: 760px){ .phase-grid{grid-template-columns:1fr 1fr;} }
+.ans-box{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border-radius:6px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:700;margin:8px 0;}
+.ans-box .lbl{color:rgba(255,255,255,0.45);font-weight:400;font-size:0.72rem;}
+.ans-box .val{color:#7effd8;}
 
-  .checklist-item{display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--border);}
-  .checklist-item:last-child{border-bottom:none;}
-  .ci-check{width:17px; height:17px; border-radius:4px; border:1.5px solid var(--fg-faint); flex-shrink:0; margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center;}
-  .ci-check.checked{background:var(--green); border-color:var(--green);}
-  .ci-check.checked::after{content:"✓"; font-size:10px; color:#0f1216; font-weight:700;}
-  .ci-text{font-size:13.5px;}
-  .ci-text.done{color:var(--fg-faint); text-decoration:line-through;}
-  .ci-chap{font-size:10.5px; font-family:var(--font-mono); color:var(--fg-faint); background:var(--surface-raised); border:1px solid var(--border); border-radius:4px; padding:1px 6px; margin-left:auto; flex-shrink:0; white-space:nowrap;}
+.nl{list-style:none;padding:0;}
+.nl li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #f0ede6;font-size:0.84rem;line-height:1.5;}
+.nl li:last-child{border:none;}
+.nl .n{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--u5);min-width:18px;padding-top:2px;flex-shrink:0;}
+.nl .n.g{color:var(--u6);}
+.nl .n.o{color:var(--u7);}
+.nl .n.r{color:var(--red);}
 
-  .quiz-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; padding:14px 16px; background:var(--surface); border:1px solid var(--border); border-radius:7px; flex-wrap:wrap; gap:10px;}
-  .quiz-score{font-family:var(--font-mono); font-size:20px; font-weight:700;}
-  .quiz-score-label{font-size:11.5px; color:var(--fg-muted);}
-  .quiz-filters{display:flex; gap:6px; flex-wrap:wrap;}
-  .filter-chip{font-size:11.5px; padding:5px 10px; border-radius:5px; border:1px solid var(--border); color:var(--fg-muted); cursor:pointer; background:var(--surface);}
-  .filter-chip.active{background:var(--surface-raised); color:var(--fg); border-color:var(--fg-faint);}
-  .q-card{background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:16px 18px; margin-bottom:14px;}
-  .q-tag{font-size:10.5px; font-family:var(--font-mono); color:var(--fg-faint); background:var(--surface-raised); border:1px solid var(--border); border-radius:4px; padding:1px 7px; margin-bottom:8px; display:inline-block;}
-  .q-prompt{font-size:14.5px; font-weight:500; margin-bottom:12px;}
-  .q-option{display:flex; align-items:center; gap:10px; padding:9px 11px; border:1px solid var(--border); border-radius:6px; margin-bottom:6px; cursor:pointer; font-size:13.5px;}
-  .q-option:hover{border-color:var(--fg-faint);}
-  .q-option.correct{background:var(--green-dim); border-color:var(--green); color:var(--green);}
-  .q-option.incorrect{background:var(--red-dim); border-color:var(--red); color:var(--red);}
-  .q-option.disabled{cursor:default; pointer-events:none;}
-  .q-option .opt-letter{font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); width:16px; flex-shrink:0;}
-  .q-explain{margin-top:10px; padding:10px 12px; background:var(--surface-raised); border-radius:6px; font-size:13px; color:var(--fg-muted); display:none;}
-  .q-explain.show{display:block;}
-  .btn{background:var(--surface-raised); border:1px solid var(--border); color:var(--fg); padding:9px 16px; border-radius:6px; font-size:13.5px; cursor:pointer;}
-  .btn:hover{border-color:var(--fg-faint);}
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0;}
+.concept-card{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:14px;}
+.concept-card h4{font-size:0.85rem;margin-bottom:6px;}
+.concept-card p{font-size:0.8rem;color:var(--muted);margin-bottom:6px;}
+.cf{font-family:'JetBrains Mono',monospace;font-size:0.73rem;background:var(--cream);border-radius:5px;padding:7px 10px;color:var(--u5);line-height:1.8;}
+.cf.g{color:var(--u6);}
+.cf.o{color:var(--u7);}
 
-  .gloss-item{border-bottom:1px solid var(--border); padding:12px 0;}
-  .gloss-item:last-child{border-bottom:none;}
-  .gloss-term{font-weight:600; font-size:14px; display:flex; align-items:center; gap:8px;}
-  .gloss-chap{font-size:10px; font-family:var(--font-mono); color:var(--fg-faint); background:var(--surface-raised); border:1px solid var(--border); border-radius:4px; padding:1px 6px; white-space:nowrap;}
-  .gloss-def{font-size:13.5px; color:var(--fg-muted); margin-top:4px;}
-  .gloss-search{width:100%; background:var(--surface-raised); border:1px solid var(--border); color:var(--fg); padding:9px 12px; border-radius:6px; font-size:13.5px; margin-bottom:16px;}
+/* TIMELINE FLOW */
+.flow{display:flex;flex-direction:column;gap:0;margin:14px 0;}
+.flow-step{display:flex;gap:14px;align-items:stretch;}
+.flow-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:32px;}
+.flow-dot{width:12px;height:12px;border-radius:50%;background:var(--u5);flex-shrink:0;margin-top:4px;}
+.flow-dot.g{background:var(--u6);}
+.flow-dot.o{background:var(--u7);}
+.flow-connector{width:2px;background:var(--rule);flex:1;margin:4px 0;}
+.flow-content{padding:0 0 18px 0;flex:1;}
+.flow-content h5{font-size:0.78rem;font-weight:700;margin:0 0 4px;color:var(--ink);}
+.flow-content p{font-size:0.8rem;color:var(--muted);margin:0;line-height:1.5;}
 
-  .keyword-map{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
-  .kw-item{background:var(--surface-raised); border:1px solid var(--border); border-radius:6px; padding:10px 12px;}
-  .kw-item .kw-phrase{font-family:var(--font-mono); font-size:11.5px; color:var(--amber);}
-  .kw-item .kw-concept{font-weight:600; font-size:13px; margin-top:3px;}
-  @media (max-width: 700px){ .keyword-map{grid-template-columns:1fr;} }
+/* COMPARISON */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.comp-card{border-radius:8px;padding:14px;}
+.comp-card.left{background:#eff6ff;border:1px solid #bfdbfe;}
+.comp-card.right{background:#f0fdf9;border:1px solid #a7f3d0;}
+.comp-head{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.comp-card.left .comp-head{color:var(--u5);}
+.comp-card.right .comp-head{color:var(--u6);}
+.comp-body{font-size:0.8rem;line-height:1.55;color:var(--ink);}
+@media(max-width:580px){.compare{grid-template-columns:1fr;}}
 
-  ::-webkit-scrollbar{width:10px; height:10px;}
-  ::-webkit-scrollbar-thumb{background:var(--border); border-radius:6px;}
-  ::-webkit-scrollbar-track{background:transparent;}
+/* HOME GRID */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:20px 0;}
+.home-card{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:18px;cursor:pointer;transition:all 0.2s;}
+.home-card:hover{border-color:var(--acc);transform:translateY(-2px);}
+.home-num{font-family:'Instrument Serif',serif;font-size:2.4rem;line-height:1;margin-bottom:4px;}
+.home-card:nth-child(1) .home-num{color:var(--u5);}
+.home-card:nth-child(2) .home-num{color:var(--u6);}
+.home-card:nth-child(3) .home-num{color:var(--u7);}
+.home-title{font-weight:700;font-size:0.88rem;margin-bottom:4px;}
+.home-desc{font-size:0.76rem;color:var(--muted);line-height:1.45;}
 
-  @media (max-width: 860px){
-    .app{grid-template-columns:1fr;}
-    .sidebar{position:static; height:auto;}
-    main{padding:20px;}
-    .phase-grid{grid-template-columns:1fr 1fr;}
-  }
+.tag{display:inline-block;font-size:0.67rem;font-weight:700;padding:2px 7px;border-radius:3px;margin:2px;}
+.tag.b{background:#dbeafe;color:var(--u5);}
+.tag.g{background:#d1fae5;color:var(--u6);}
+.tag.o{background:#ffedd5;color:var(--u7);}
+.tag.r{background:#fee2e2;color:var(--red);}
+.tag.y{background:#fef3c7;color:#92400e;}
+
+.warn-box{background:#fff1f2;border:1px solid #fecaca;border-radius:7px;padding:11px 15px;font-size:0.82rem;margin:10px 0;line-height:1.5;}
+.warn-box strong{color:var(--red);}
 </style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <div>
-      <div class="brand-name">MNE7XB1 — Assessment 2</div>
-      <div class="brand-sub">70 marks (per breakdown) · 90 min</div>
+
+<nav>
+  <div class="brand">FIM Deep Study</div>
+  <button class="nb active" onclick="go('home',this)">Home</button>
+  <button class="nb" onclick="go('u5',this)">Unit 5</button>
+  <button class="nb" onclick="go('u6',this)">Unit 6</button>
+  <button class="nb" onclick="go('u7',this)">Unit 7</button>
+  <button class="nb" onclick="go('worked',this)">Worked Questions</button>
+  <button class="nb" onclick="go('practice',this)">GreenGlow</button>
+</nav>
+
+<!-- HOME -->
+<section class="sec active" id="home">
+<div class="wrap">
+  <div class="pg-title">Financial Management<br><em>Deep Study Guide</em></div>
+  <div class="pg-meta">FIM7XA1 · Units 5, 6 & 7 · JBS PGDip BA · Full explanations, worked examples and exam technique</div>
+  <p>This site is for understanding — not just formulas. Each section explains the <em>why</em> behind each concept, not just the how. Use the Cram Sheet (separate file) when you need speed.</p>
+  <div class="home-grid">
+    <div class="home-card" onclick="go('u5',document.querySelectorAll('.nb')[1])">
+      <div class="home-num">05</div>
+      <div class="home-title">Cost Determination</div>
+      <div class="home-desc">Manufacturing cost statements · Prime costs · Direct materials, labour, overheads · WIP · Cost flow through inventory</div>
     </div>
-    <div class="countdown">
-      <div class="cd-label">Time until test</div>
-      <div class="cd-time" id="countdown-display">—</div>
+    <div class="home-card" onclick="go('u6',document.querySelectorAll('.nb')[2])">
+      <div class="home-num">06</div>
+      <div class="home-title">CVP Analysis</div>
+      <div class="home-desc">Contribution margin · Break-even · CM ratio · Target profit · Margin of safety · Sensitivity analysis</div>
     </div>
-    <nav id="nav">
-      <div class="nav-item active" data-page="overview">Overview & checklist</div>
-      <div class="nav-group-label">Section B</div>
-      <div class="nav-item" data-page="q1">Q1 — Business Cycles<span class="tag">23m</span></div>
-      <div class="nav-item" data-page="q2">Q2 — Money & Credit<span class="tag">19m</span></div>
-      <div class="nav-item" data-page="q3">Q3 — Government<span class="tag">18m</span></div>
-      <div class="nav-group-label">Section A only</div>
-      <div class="nav-item" data-page="trade">International Trade<span class="tag">MCQ</span></div>
-      <div class="nav-group-label">Practice</div>
-      <div class="nav-item" data-page="quiz">Practice Quiz<span class="tag" id="nav-quiz-count"></span></div>
-      <div class="nav-item" data-page="glossary">Glossary</div>
-    </nav>
-    <div class="progress-mini">
-      <div class="pm-label">Checklist progress</div>
-      <div class="progress-bar"><div class="progress-fill" id="checklist-fill" style="width:0%"></div></div>
-      <div class="progress-pct" id="checklist-pct">0 / 0 topics</div>
+    <div class="home-card" onclick="go('u7',document.querySelectorAll('.nb')[3])">
+      <div class="home-num">07</div>
+      <div class="home-title">Cash Budgets</div>
+      <div class="home-desc">Cash vs non-cash · Receivables schedules · Creditor payments · 13th cheque · Liquidity vs solvency · Full budget layout</div>
     </div>
-  </aside>
-
-  <main>
-    <!-- OVERVIEW -->
-    <section class="page active" id="page-overview">
-      <h1>Assessment 2 — Detailed Revision</h1>
-      <p class="subtitle">Rebuilt from your revision guide, which was generated directly from the actual assessment paper — this takes priority over general chapter notes wherever they differ.</p>
-
-      <div class="callout warn">
-        <div class="callout-title">⚠️ Mark total doesn't add up — check your paper</div>
-        <p>The revision guide's cover says <strong>52 marks</strong> total, but Section A (10) + Section B (23+19+18) = <strong>70 marks</strong>. That's an inconsistency in the source document, not something I can resolve without your actual paper. Don't let it change your time budgeting blindly — if you still have the real paper or portal, glance at the actual total and marks-per-question before you start.</p>
-      </div>
-
-      <h2>Exam structure</h2>
-      <table>
-        <thead><tr><th>Section</th><th>Format</th><th>Marks</th></tr></thead>
-        <tbody>
-          <tr><td>Section A</td><td>10 multiple-choice questions — broad knowledge</td><td>10</td></tr>
-          <tr><td>Q1</td><td>Recession & business-cycle analysis (4 sub-parts)</td><td>23</td></tr>
-          <tr><td>Q2</td><td>Money, credit & monetary policy (3 sub-parts)</td><td>19</td></tr>
-          <tr><td>Q3</td><td>Government intervention (3 sub-parts)</td><td>18</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px; color:var(--fg-faint);">Instructions: answer all questions. Noiseless calculators are permitted.</p>
-
-      <div class="callout focus">
-        <div class="callout-title">⚡ What actually earns marks</div>
-        <ul style="margin-bottom:0;">
-          <li>Memorise exact definitions and conceptual relationships — Section A and the matching parts of Q2/Q3 live and die on precise terminology</li>
-          <li>Practice matching theoretical concepts to specific terms (look for the exact clue phrase in the question)</li>
-          <li>Interpret economic scenarios and give a direction + a reason, not just a direction</li>
-          <li>Master drawing and correctly labelling every graph: business cycle, credit market, yield curve</li>
-        </ul>
-      </div>
-
-      <h2>Study checklist</h2>
-      <p style="color:var(--fg-faint); font-size:12.5px; margin-top:-6px;">Tick things off as you go — saved on this device.</p>
-      <div id="checklist-container"></div>
-    </section>
-
-    <!-- Q1: BUSINESS CYCLES -->
-    <section class="page" id="page-q1">
-      <h1>Q1 — Business Cycles & Recession<span class="marks-badge">23 marks</span></h1>
-      <p class="subtitle">4 sub-parts: recession effects (8), macro-indicator matching (5), True/False on a cycle diagram (5), yield curve (5).</p>
-
-      <div class="callout warn">
-        <div class="callout-title">Two labels for the same cycle — know both</div>
-        <p>Your Chapter 5 slides use <strong>Recovery → Boom → Slump → Recession</strong>. This revision guide (closer to the actual paper) uses <strong>Expansion → Peak → Contraction → Trough → Recovery</strong>. They describe the same fluctuation — go with the guide's wording for definitions and diagram labelling since it's built from the paper, but recognise either if it shows up.</p>
-      </div>
-
-      <h2>The five phases (paper's terminology)</h2>
-      <div class="phase-grid">
-        <div class="phase-cell expansion"><div class="ph-name">Expansion</div><p>Economic activity increasing across the board.</p></div>
-        <div class="phase-cell peak"><div class="ph-name">Peak</div><p>High point before turning downward. Capacity pressure & inflation can be very high here.</p></div>
-        <div class="phase-cell contraction"><div class="ph-name">Contraction</div><p>Overall economic activity visibly decreasing.</p></div>
-        <div class="phase-cell trough"><div class="ph-name">Trough</div><p>Absolute low point before activity begins to recover.</p></div>
-        <div class="phase-cell recovery"><div class="ph-name">Recovery</div><p>Economic activity rises again after the trough.</p></div>
-      </div>
-
-      <h3>Reading a labelled cycle diagram</h3>
-      <div class="diagram-box">
-        <svg viewBox="0 0 480 170" width="100%" height="170" style="max-width:480px;">
-          <line x1="20" y1="90" x2="460" y2="90" stroke="var(--fg-faint)" stroke-width="1" stroke-dasharray="4,4"/>
-          <path d="M 20 110 Q 70 40, 110 40 Q 150 40, 190 130 Q 220 160, 260 130 Q 300 60, 340 40 Q 380 30, 420 130 Q 440 150, 460 140"
-                fill="none" stroke="var(--amber)" stroke-width="2.5"/>
-          <circle cx="110" cy="40" r="3.5" fill="var(--green)"/><text x="110" y="28" font-size="11" fill="var(--green)" text-anchor="middle" font-family="IBM Plex Mono">B (peak)</text>
-          <circle cx="220" cy="160" r="3.5" fill="var(--red)"/><text x="220" y="17" font-size="0"></text><text x="220" y="176" font-size="11" fill="var(--red)" text-anchor="middle" font-family="IBM Plex Mono">D (trough)</text>
-          <circle cx="340" cy="35" r="3.5" fill="var(--green)"/><text x="340" y="23" font-size="11" fill="var(--green)" text-anchor="middle" font-family="IBM Plex Mono">F (peak)</text>
-          <circle cx="430" cy="140" r="3.5" fill="var(--red)"/><text x="430" y="156" font-size="11" fill="var(--red)" text-anchor="middle" font-family="IBM Plex Mono">H (trough)</text>
-          <text x="20" y="18" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">economic activity</text>
-          <text x="440" y="165" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">time</text>
-        </svg>
-        <div class="diagram-caption">The paper's own example: points B and F are peaks; D and H are troughs. A rising section = expansion/recovery; a falling section = contraction.</div>
-      </div>
-      <div class="callout example">
-        <div class="callout-title">📌 True/False technique</div>
-        <p>Before answering, <strong>check the exact location of the named point</strong> — don't confuse a trough with a point partway up the following upswing. Statements will test whether you can tell a labelled point/section apart from a similar-looking neighbour.</p>
-      </div>
-
-      <h2>Business-cycle indicators</h2>
-      <table>
-        <thead><tr><th>Type</th><th>Timing</th><th>Example (from the guide)</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Leading</strong></td><td>Changes before overall activity — predicts the future</td><td>JSE All Share Index</td></tr>
-          <tr><td><strong>Coincident</strong></td><td>Moves at roughly the same time as activity — real-time read</td><td>Real GDP growth</td></tr>
-          <tr><td><strong>Lagging</strong></td><td>Responds after activity has changed — confirms the trend</td><td>(not given a named example in the guide)</td></tr>
-        </tbody>
-      </table>
-      <p>Imports move closely with domestic activity; vehicle & retail sales directly reflect consumer spending. The guide's own rule: <strong>don't classify an indicator by whether it rises or falls — classify it by WHEN it changes relative to activity.</strong></p>
-
-      <h2>Effects of a recession (8 marks — direction + reason, every time)</h2>
-      <table>
-        <thead><tr><th>Area</th><th>Direction</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td>Unemployment</td><td>↑ Increases</td><td>Firms cut production as activity slows → weaker demand for labour</td></tr>
-          <tr><td>Inflation</td><td>↓ Decreases</td><td>Weaker aggregate demand → less pressure/ability for firms to raise prices</td></tr>
-          <tr><td>Current account</td><td>Tends to improve</td><td>Weaker domestic demand reduces imports (qualify: exports/income flows can also shift)</td></tr>
-          <tr><td>Interest rates</td><td>Scope to fall</td><td>Monetary policy eases to encourage borrowing & investment</td></tr>
-          <tr><td>Pricing strategy</td><td>Downward pressure</td><td>Weak demand forces discounting to stimulate stagnant sales</td></tr>
-          <tr><td>HR</td><td>Contracts</td><td>Recruitment freezes, overtime cut, retrenchments</td></tr>
-          <tr><td>Advertising</td><td>Budgets reviewed/cut</td><td>Spend redirected to highly targeted promotions to protect market share</td></tr>
-          <tr><td>Corporate financing</td><td>Harder & costlier</td><td>Lower profitability + higher risk restricts access to external finance</td></tr>
-        </tbody>
-      </table>
-      <div class="callout focus">
-        <div class="callout-title">Exam framing</div>
-        <p>Questions ask for the <strong>"likely effect"</strong> — answer strictly in the context of a significant slowdown, and always give the direction <em>and</em> a short accurate reason. A direction alone won't get full marks.</p>
-      </div>
-
-      <h2>Yield curve (5 marks)</h2>
-      <div class="diagram-box">
-        <svg viewBox="0 0 300 150" width="100%" height="150" style="max-width:320px;">
-          <line x1="35" y1="10" x2="35" y2="120" stroke="var(--fg-faint)" stroke-width="1"/>
-          <line x1="35" y1="120" x2="270" y2="120" stroke="var(--fg-faint)" stroke-width="1"/>
-          <polyline points="50,105 100,90 150,68 200,45 250,25" fill="none" stroke="var(--amber)" stroke-width="2.5"/>
-          <text x="0" y="8" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">yield %</text>
-          <text x="220" y="138" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">maturity</text>
-          <text x="50" y="134" font-size="9" text-anchor="middle" fill="var(--fg-muted)">3m</text>
-          <text x="100" y="134" font-size="9" text-anchor="middle" fill="var(--fg-muted)">1yr</text>
-          <text x="150" y="134" font-size="9" text-anchor="middle" fill="var(--fg-muted)">2yr</text>
-          <text x="200" y="134" font-size="9" text-anchor="middle" fill="var(--fg-muted)">5yr</text>
-          <text x="250" y="134" font-size="9" text-anchor="middle" fill="var(--fg-muted)">10yr</text>
-        </svg>
-        <div class="diagram-caption">Positively sloped: yield rises as maturity increases. Longer maturities command higher yields.</div>
-      </div>
-      <p>A yield curve plots bond yields against maturity. To compare borrowing costs: a <strong>lower yield = a lower stated cost of borrowing</strong> at that maturity. On a positively sloped curve, short-term borrowing is cheaper than long-term borrowing.</p>
-    </section>
-
-    <!-- Q2: MONEY & CREDIT -->
-    <section class="page" id="page-q2">
-      <h1>Q2 — Money, Credit & Monetary Policy<span class="marks-badge">19 marks</span></h1>
-      <p class="subtitle">3 sub-parts: matching concepts to descriptions (7), a 75bps repo-hike scenario + credit-market graph (9), naming 3 functions of money (3).</p>
-
-      <h2>Money multiplier</h2>
-      <div class="callout formula">
-        <div class="callout-title">Formula</div>
-        <p><code>Maximum multiplier = 1 ÷ Reserve Ratio (as a decimal)</code></p>
-      </div>
-      <div class="callout example">
-        <div class="callout-title">📌 Worked example (guide's own numbers)</div>
-        <p>Reserve ratio = 5% → decimal = 0.05 → multiplier = 1 ÷ 0.05 = <strong>20</strong>. Key assumption: banks hold <strong>no excess reserves</strong> (the maximum-potential case).</p>
-      </div>
-      <p style="font-size:12.5px; color:var(--fg-faint);">Your Chapter 6 slides use a different example (20% reserve ratio → multiplier of 5, R100 → R500 total money creation). Same formula, different numbers — practice plugging in whatever ratio the paper gives you rather than memorising one answer.</p>
-
-      <h2>Contractionary vs expansionary policy</h2>
-      <table>
-        <thead><tr><th>Contractionary (reduces liquidity)</th><th>Expansionary (increases liquidity)</th></tr></thead>
-        <tbody>
-          <tr><td>Selling government securities</td><td>Buying government securities</td></tr>
-          <tr><td>Raising the repo/policy rate</td><td>Lowering the repo/policy rate or reserve requirement</td></tr>
-        </tbody>
-      </table>
-      <div class="callout focus">
-        <div class="callout-title">MCQ strategy</div>
-        <p>For any policy-action MCQ: ask "does this increase or decrease liquidity and borrowing costs?" That single question resolves almost every option.</p>
-      </div>
-
-      <h2>Money demand & the equilibrium interest rate</h2>
-      <p>Equilibrium is where money demanded = money supplied (vertical axis: interest rate; horizontal axis: quantity of money). <strong>A shift in money demand is different from a movement along the curve</strong> — know the distinction.</p>
-      <table>
-        <thead><tr><th>Change (money supply unchanged)</th><th>Effect on equilibrium interest rate</th></tr></thead>
-        <tbody>
-          <tr><td>Money demand increases</td><td>Rises</td></tr>
-          <tr><td>Money demand decreases</td><td>Falls</td></tr>
-        </tbody>
-      </table>
-
-      <h2>75-basis-point repo hike scenario</h2>
-      <p>Scenario: inflationary pressure rises sharply, SARB raises the repo rate 75bps. This is <strong>restrictive/contractionary</strong> policy aimed at reducing excessive demand and anchoring inflation expectations.</p>
-      <ol>
-        <li><strong>Higher repo rate</strong> — immediately raises the cost of short-term funds</li>
-        <li><strong>Increased market rates</strong> — banks pass this through to lending rates for consumers & businesses</li>
-        <li><strong>Economic contraction</strong> — higher borrowing costs reduce credit demand, consumption, and investment</li>
-      </ol>
-
-      <div class="callout warn">
-        <div class="callout-title">⚠️ Draw the SHIFT correctly — this is a supply-side model</div>
-        <p>In this guide's version of the credit-market graph, a tighter monetary stance shifts the <strong>supply curve</strong> (S₁ → S₂, leftward/up) — not demand. Result: equilibrium moves from E₁ (r₁, q₁) to E₂ (r₂, q₂), where <strong>the interest rate rises (r₂ > r₁) and quantity of credit falls (q₂ < q₁)</strong>.</p>
-      </div>
-      <div class="diagram-box">
-        <svg viewBox="0 0 300 200" width="100%" height="200" style="max-width:320px;">
-          <line x1="40" y1="20" x2="40" y2="170" stroke="var(--fg-faint)" stroke-width="1"/>
-          <line x1="40" y1="170" x2="280" y2="170" stroke="var(--fg-faint)" stroke-width="1"/>
-          <text x="8" y="15" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">interest rate</text>
-          <text x="220" y="188" font-size="10" fill="var(--fg-faint)" font-family="IBM Plex Mono">quantity</text>
-          <line x1="60" y1="160" x2="220" y2="30" stroke="var(--blue)" stroke-width="2.5"/>
-          <text x="215" y="26" font-size="10" fill="var(--blue)">S₁</text>
-          <line x1="100" y1="165" x2="255" y2="30" stroke="var(--purple)" stroke-width="2.5"/>
-          <text x="248" y="26" font-size="10" fill="var(--purple)">S₂</text>
-          <line x1="260" y1="45" x2="70" y2="150" stroke="var(--amber)" stroke-width="2.5"/>
-          <text x="65" y="160" font-size="10" fill="var(--amber)">D</text>
-          <circle cx="150" cy="100" r="3.5" fill="var(--fg)"/><text x="158" y="96" font-size="9" fill="var(--fg-muted)">E₁ (r₁,q₁)</text>
-          <circle cx="120" cy="76" r="3.5" fill="var(--fg)"/><text x="60" y="72" font-size="9" fill="var(--fg-muted)">E₂ (r₂,q₂)</text>
-        </svg>
-        <div class="diagram-caption">Supply shifts left (S₁→S₂) under restrictive policy: equilibrium moves up and left — rate up, quantity down.</div>
-      </div>
-
-      <h2>What shifts credit demand vs credit supply</h2>
-      <table>
-        <thead><tr><th>Credit demand</th><th>Credit supply</th></tr></thead>
-        <tbody>
-          <tr><td>The interest rate</td><td>Bank liquidity & available funds</td></tr>
-          <tr><td>Household & business income</td><td>Risk assessment procedures</td></tr>
-          <tr><td>Expectations of the economy</td><td>Institutional capital</td></tr>
-          <tr><td>Willingness & ability to borrow</td><td>Expected returns</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px; color:var(--fg-faint);">For 1-mark questions: state the factor directly, skip the long explanation.</p>
-
-      <h2>Key definitions (7-mark matching part)</h2>
-      <table>
-        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Quantitative easing (QE)</strong></td><td>Central-bank purchases of financial assets to increase liquidity and support financial conditions</td></tr>
-          <tr><td><strong>Liquidity shortage</strong></td><td>Banks/financial institutions face insufficient short-term liquid funds</td></tr>
-          <tr><td><strong>Seigniorage</strong></td><td>The difference between the face value of money and the cost of producing it</td></tr>
-          <tr><td><strong>Prime rate</strong></td><td>Lending rate generally given to a bank's most creditworthy customers</td></tr>
-          <tr><td><strong>Inflation target</strong></td><td>The inflation range the central bank uses as its primary target</td></tr>
-          <tr><td><strong>Gold standard</strong></td><td>Currency is directly linked/convertible to a specified quantity of gold</td></tr>
-          <tr><td><strong>Fiat money</strong></td><td>Money whose value rests on government authority and public confidence, not a physical commodity</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Three functions of money (3 marks)</h2>
-      <ul>
-        <li><strong>Medium of exchange</strong> — accepted in payment for goods and services</li>
-        <li><strong>Unit of account</strong> — a common measure for expressing prices and values</li>
-        <li><strong>Store of value</strong> — allows purchasing power to be carried into the future</li>
-      </ul>
-      <div class="callout warn">
-        <div class="callout-title">Don't lose easy marks here</div>
-        <p>Name <strong>three distinct functions</strong> clearly — don't accidentally give three examples of the same function.</p>
-      </div>
-    </section>
-
-    <!-- TRADE -->
-    <section class="page" id="page-trade">
-      <h1>International Trade<span class="marks-badge">Section A only</span></h1>
-      <p class="subtitle">Not covered in your Chapter 5/6/8 slides at all — this is new content from the revision guide. MCQ-only, but don't skip it: it's worth marks in Section A.</p>
-
-      <h2>Comparative advantage</h2>
-      <ul>
-        <li>Based fundamentally on the <strong>lowest opportunity cost</strong> — not on who is more productive overall</li>
-        <li><strong>Opportunity cost</strong> = the quantity of one product you must give up to produce more of another</li>
-        <li>A country can hold a comparative advantage even if another country is more productive <strong>in absolute terms</strong></li>
-        <li>Trade lets countries specialise in their advantage and exchange efficiently</li>
-      </ul>
-      <div class="callout example">
-        <div class="callout-title">📌 MCQ clue</div>
-        <p>If a question says a country <strong>"gives up fewer units of another product"</strong> to produce something — that's pointing you to comparative advantage.</p>
-      </div>
-
-      <h2>Trade protection</h2>
-      <table>
-        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Import quota</strong></td><td>A maximum quantity of a good that may be imported</td></tr>
-          <tr><td><strong>Tariff</strong></td><td>A tax imposed on imports</td></tr>
-          <tr><td><strong>Infant-industry argument</strong></td><td>New industries may need temporary protection while they develop competitiveness</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px; color:var(--fg-faint);">Distinguish protection (quotas/tariffs) from export restrictions and subsidies — the guide flags this as a common confusion point.</p>
-
-      <h2>SACU & regional trade</h2>
-      <div class="callout focus">
-        <div class="callout-title">SACU membership — memorise exactly</div>
-        <p><strong>Botswana, Eswatini, Lesotho, Namibia, South Africa</strong> (the "BLNS" countries + South Africa).</p>
-      </div>
-      <p><strong>Customs union</strong> = common external trade arrangements established among member nations. The paper's focus is primarily on accurately <strong>recognising SACU membership</strong> and distinguishing SACU from other regional groupings.</p>
-    </section>
-
-    <!-- Q3: GOVERNMENT -->
-    <section class="page" id="page-q3">
-      <h1>Q3 — Government Intervention<span class="marks-badge">18 marks</span></h1>
-      <p class="subtitle">3 sub-parts: efficiency/effectiveness/equity/sustainability (5), fiscal-instrument matching (6), externalities/public goods/developmental state matching (7).</p>
-
-      <h2>Four criteria for evaluating intervention (5 marks)</h2>
-      <div class="keyword-map">
-        <div class="kw-item"><div class="kw-phrase">"resource allocation / cost"</div><div class="kw-concept">Efficiency — minimum unnecessary cost or waste</div></div>
-        <div class="kw-item"><div class="kw-phrase">"achieves objective"</div><div class="kw-concept">Effectiveness — whether it actually works</div></div>
-        <div class="kw-item"><div class="kw-phrase">"fair distribution"</div><div class="kw-concept">Equity — costs/benefits shared fairly</div></div>
-        <div class="kw-item"><div class="kw-phrase">"future generations"</div><div class="kw-concept">Sustainability — can it be maintained long-term</div></div>
-      </div>
-
-      <h2>Fiscal-policy instruments (6 marks — match situation to instrument)</h2>
-      <table>
-        <thead><tr><th>Instrument</th><th>What it does</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Tax relief</strong></td><td>Reduces overall tax burden to encourage economic activity & investment</td></tr>
-          <tr><td><strong>Indirect taxes</strong></td><td>Applied to goods/services/transactions — used to discourage demerit goods</td></tr>
-          <tr><td><strong>Subsidies</strong></td><td>Support production/consumption of goods with positive externalities</td></tr>
-          <tr><td><strong>Welfare payments</strong></td><td>Transfers (e.g. social grants) that support & stabilise household income</td></tr>
-          <tr><td><strong>Change to taxation</strong></td><td>Adjusting personal income-tax rates — affects disposable income & spending</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12.5px; color:var(--fg-faint);">Read the scenario first, then match the instrument — most marks come from precise wording, not general understanding.</p>
-
-      <h2>Externalities, public goods & the developmental state (7 marks)</h2>
-      <table>
-        <thead><tr><th>Type</th><th>What happens</th><th>Government response</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Negative externality</strong></td><td>Third party bears an unexpected <em>cost</em> from a transaction</td><td>Indirect taxes discourage the harmful activity</td></tr>
-          <tr><td><strong>Positive externality</strong></td><td>Third party receives a collateral <em>benefit</em></td><td>Subsidies encourage the beneficial activity</td></tr>
-        </tbody>
-      </table>
-      <p><strong>Public good</strong> — traditionally has two properties: <strong>non-rivalry</strong> and <strong>non-excludability</strong>. Non-exclusion means it's difficult/impossible to stop people benefiting once it's provided.</p>
-      <div class="callout example">
-        <div class="callout-title">📌 Exact matching clue</div>
-        <p>The phrase <strong>"good if provided to one is provided to all"</strong> points straight to the <strong>exclusion principle</strong>.</p>
-      </div>
-      <p><strong>Developmental state</strong> — an active government role specifically guiding, supporting, and driving economic development through broad development planning. Clue phrase: <strong>"development planning is essential for government."</strong></p>
-
-      <div class="callout warn">
-        <div class="callout-title">Not explicitly flagged in this guide — lower priority, don't skip entirely</div>
-        <p>Your Chapter 8 slides also cover <strong>tax classification (progressive/proportional/regressive)</strong>, the <strong>Laffer curve</strong>, and <strong>budget deficit financing</strong>. "Fiscal Policy" is listed as an assessed theme in Section A, so these could still show up as an MCQ — but this revision guide's Q3 breakdown doesn't mention them at all. Give them a quick pass, not deep revision time.</p>
-      </div>
-    </section>
-
-    <!-- QUIZ -->
-    <section class="page" id="page-quiz">
-      <h1>Practice Quiz</h1>
-      <p class="subtitle">Click an answer to see if you're right. Filter by topic if you want to drill one area.</p>
-      <div class="quiz-header">
-        <div><div class="quiz-score" id="quiz-score">0 / 0</div><div class="quiz-score-label">correct so far</div></div>
-        <div class="quiz-filters" id="quiz-filters"></div>
-        <button class="btn" id="quiz-reset">Reset quiz</button>
-      </div>
-      <div id="quiz-list"></div>
-    </section>
-
-    <!-- GLOSSARY -->
-    <section class="page" id="page-glossary">
-      <h1>Glossary</h1>
-      <p class="subtitle">Every key term across the revision guide — search or scroll.</p>
-      <input class="gloss-search" id="gloss-search" placeholder="Search terms…">
-      <div id="gloss-list"></div>
-    </section>
-  </main>
+  </div>
+  <div class="callout blue">
+    <strong>How to use this site:</strong> Read each unit section to understand the concepts. Then do all the Worked Questions to apply them. Then test yourself with the Cram Sheet's quiz. This is the deep site — take your time here.
+  </div>
 </div>
+</section>
+
+<!-- UNIT 5 -->
+<section class="sec" id="u5">
+<div class="wrap">
+  <div class="pg-title">Unit 5 — <em>Cost Determination</em></div>
+  <div class="pg-meta">Chapters on manufacturing cost flow · Learning outcomes: prepare manufacturing cost statement and income statement</div>
+
+  <h3>The Big Picture — Why Does This Exist?</h3>
+  <p>A manufacturing company doesn't just buy and sell — it transforms raw materials into finished goods. We need a way to track exactly how much it costs to produce those goods, because that cost becomes the "cost of sales" on the income statement. The manufacturing cost statement gives us that number.</p>
+  <p>Think of it as a funnel: raw materials go in, get worked on (adding labour and overhead costs), and finished goods come out. At each stage there may be partially-finished units (WIP) that we need to account for.</p>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">5.1</span><span class="acc-title">Prime Costs — The Direct Core of Manufacturing</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p><strong>Prime costs are the costs you can directly trace to the product</strong> — materials used in making it, and labour that worked directly on it. Everything else is overhead.</p>
+      <div class="formula-box">
+        <div class="fb-label">Definition</div>
+        <div class="fb-f">Prime Costs <span class="dim">=</span> Direct Materials Used <span class="dim">+</span> Direct Labour</div>
+      </div>
+      <h4>Part 1: Direct Materials Used</h4>
+      <p>You need to distinguish between materials <em>purchased</em> and materials <em>used</em>. If you bought R920 000 of materials but have R165 000 left at year-end, you only used R755 000... wait, also account for what you had at the start.</p>
+      <div class="formula-box">
+        <div class="fb-label">Direct Materials Used</div>
+        <div class="fb-f">Opening RM <span class="dim">+</span> Purchases <span class="dim">−</span> Closing RM <span class="dim">=</span> Materials Used</div>
+      </div>
+      <p><strong>Worked example (Tia Ltd):</strong></p>
+      <table class="ledger">
+        <tr><td>Opening raw materials (1 Jan)</td><td class="num">120 000</td></tr>
+        <tr><td>Add: Purchases during year</td><td class="num">890 000</td></tr>
+        <tr><td>Less: Closing raw materials (30 Jun)</td><td class="num neg">(165 000)</td></tr>
+        <tr class="tot"><td>Direct Materials Used</td><td class="num">845 000</td></tr>
+      </table>
+
+      <h4>Part 2: Direct Labour</h4>
+      <p>This is the wages of workers who <em>physically make</em> the product. When you're given a production rate, you calculate hours first.</p>
+      <div class="formula-box">
+        <div class="fb-label">When production rate given</div>
+        <div class="fb-f">Hours <span class="dim">=</span> Units produced <span class="dim">÷</span> Units per hour<br>DL Cost <span class="dim">=</span> Hours <span class="dim">×</span> Rate per worker (calculate separately for each worker)</div>
+      </div>
+      <p><strong>Worked example (Sweet Sweets Ltd — 10 000 bars, 2 000/hr, mixer R100/hr, QC R140/hr):</strong></p>
+      <table class="ledger">
+        <tr><td>Hours = 10 000 ÷ 2 000</td><td class="num">5 hours</td></tr>
+        <tr><td>Mixer: 5 hrs × R100</td><td class="num">500</td></tr>
+        <tr><td>Quality controller: 5 hrs × R140</td><td class="num">700</td></tr>
+        <tr class="tot"><td>Total Direct Labour</td><td class="num">1 200</td></tr>
+      </table>
+      <div class="callout yellow"><strong>Exam technique:</strong> Always show the hours calculation as a separate step. Examiners want to see the working, not just the final number.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">5.2</span><span class="acc-title">Manufacturing Overheads — What's In, What's Out</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>Manufacturing overheads are <strong>indirect factory costs</strong> — they support production but can't be traced to a specific unit. The key word is <strong>factory</strong> — only factory-related costs qualify.</p>
+      <div class="compare">
+        <div class="comp-card left">
+          <div class="comp-head">✅ Manufacturing Overheads (include)</div>
+          <div class="comp-body">
+            Factory rent<br>Factory electricity & water<br>Indirect materials (screws, glue, nuts)<br>Indirect factory wages (supervisors, cleaners)<br>Factory equipment depreciation<br>Factory insurance
+          </div>
+        </div>
+        <div class="comp-card right" style="background:#fff1f2;border-color:#fecaca;">
+          <div class="comp-head" style="color:var(--red)">❌ NOT Manufacturing Overheads</div>
+          <div class="comp-body">
+            Admin & secretarial wages<br>CEO/management salaries<br>Office rent<br>Selling & distribution costs<br>Marketing expenses<br>Interest on loans
+          </div>
+        </div>
+      </div>
+      <div class="warn-box"><strong>Classic exam trap:</strong> Sun & Moon Ltd example includes "admin & secretarial wages R33 680" in the list. Many students include it as an overhead. It's NOT — it's a non-manufacturing cost excluded from the cost statement entirely.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">5.3</span><span class="acc-title">Work-in-Progress — Why It Matters</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>At any point in time, some units are <strong>partially complete</strong> — they've been started but not finished. We call these Work-in-Progress (WIP). The WIP adjustment ensures we only count the cost of units that were <em>actually completed</em> in the period.</p>
+      <div class="flow">
+        <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><h5>Manufacturing Costs Incurred</h5><p>All costs actually incurred this period: prime costs + overheads</p></div></div>
+        <div class="flow-step"><div class="flow-line"><div class="flow-dot g"></div><div class="flow-connector"></div></div><div class="flow-content"><h5>+ Opening WIP (costs carried forward)</h5><p>These are partly-done units from last period — their costs are already spent, now we need to finish them</p></div></div>
+        <div class="flow-step"><div class="flow-line"><div class="flow-dot" style="background:var(--red)"></div><div class="flow-connector"></div></div><div class="flow-content"><h5>− Closing WIP (costs deferred to next period)</h5><p>Units started but not finished — their costs can't count as "manufactured" yet</p></div></div>
+        <div class="flow-step"><div class="flow-line"><div class="flow-dot o"></div></div><div class="flow-content"><h5>= Cost of Goods Manufactured</h5><p>The total cost of units actually completed this period</p></div></div>
+      </div>
+      <div class="callout blue">Think of it like this: you bake 100 cakes but 10 are still in the oven at month-end. Your "manufactured" figure is for the 90 completed ones. The 10 in-progress carry their costs into next month.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">5.4</span><span class="acc-title">Full Manufacturing Cost Statement — The Complete Format</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>This is the document that ties everything together. Here's the Tia Ltd example from the slides, fully laid out:</p>
+      <table class="ledger">
+        <tr><th colspan="2">Manufacturing Cost Statement — Tia Ltd · Year ended 30 June 2026</th></tr>
+        <tr><td>Opening raw materials</td><td class="num">120 000</td></tr>
+        <tr><td>Add: Purchases</td><td class="num">890 000</td></tr>
+        <tr><td>Less: Closing raw materials</td><td class="num neg">(165 000)</td></tr>
+        <tr class="sub"><td>Direct Materials Used</td><td class="num">845 000</td></tr>
+        <tr><td>Direct Labour</td><td class="num">1 230 000</td></tr>
+        <tr class="sub"><td>Prime Costs</td><td class="num">2 075 000</td></tr>
+        <tr><td>Manufacturing Overheads</td><td class="num">890 000</td></tr>
+        <tr class="sub"><td>Manufacturing Costs Incurred</td><td class="num">2 965 000</td></tr>
+        <tr><td>Add: Opening WIP</td><td class="num">220 000</td></tr>
+        <tr><td>Less: Closing WIP</td><td class="num neg">(280 000)</td></tr>
+        <tr class="tot"><td><strong>Cost of Goods Manufactured</strong></td><td class="num">2 905 000</td></tr>
+      </table>
+      <h4>Continuing to Cost of Goods Sold</h4>
+      <table class="ledger">
+        <tr><td>Cost of Goods Manufactured (above)</td><td class="num">2 905 000</td></tr>
+        <tr><td>Add: Opening finished goods</td><td class="num">360 000</td></tr>
+        <tr><td>Less: Closing finished goods</td><td class="num neg">(330 000)</td></tr>
+        <tr class="tot"><td>Cost of Goods Sold</td><td class="num">2 935 000</td></tr>
+      </table>
+      <div class="callout yellow"><strong>Memory trick:</strong> The statement has three "opening + purchases/costs − closing" structures: one for Raw Materials → Materials Used; one for Mfg Costs + WIP → Cost of Goods Manufactured; one for Finished Goods → Cost of Goods Sold. Same pattern, three times.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">5.5</span><span class="acc-title">Total Closing Inventory — Quick Calculation</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>Sometimes the exam asks for total inventory on the balance sheet — all three types added together.</p>
+      <table class="ledger">
+        <tr><td>Closing Raw Materials</td><td class="num">XXX</td></tr>
+        <tr><td>Closing Work-in-Progress</td><td class="num">XXX</td></tr>
+        <tr><td>Closing Finished Goods</td><td class="num">XXX</td></tr>
+        <tr class="tot"><td>Total Closing Inventory</td><td class="num">XXX</td></tr>
+      </table>
+      <div class="callout blue">This is straightforward but easy to rush — make sure you're using <strong>closing</strong> balances only, not opening.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- UNIT 6 -->
+<section class="sec" id="u6">
+<div class="wrap">
+  <div class="pg-title">Unit 6 — <em>CVP Analysis</em></div>
+  <div class="pg-meta">Cost-Volume-Profit Analysis · Break-even · Contribution · Margin of Safety · Sensitivity</div>
+
+  <h3>What CVP Analysis Is Asking</h3>
+  <p>CVP analysis answers one fundamental question: <strong>how does changing volume, price, or cost affect profit?</strong> Management uses it to plan: how many units must we sell to break even? To make a target profit? How much risk buffer do we have?</p>
+  <p>The whole framework rests on one concept: <strong>contribution</strong>.</p>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">6.1</span><span class="acc-title">Contribution — The Engine of CVP</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>Contribution is what's <strong>left from the selling price after paying variable costs</strong>. It contributes first to covering fixed costs — once those are covered, every rand of contribution becomes profit.</p>
+      <div class="formula-box">
+        <div class="fb-label">Contribution</div>
+        <div class="fb-f dim">Contribution per unit = Selling Price − Variable Cost per unit<br>Total Contribution = Contribution per unit × Units sold<br>Profit = Total Contribution − Fixed Costs</div>
+      </div>
+      <div class="warn-box"><strong>Common mistake:</strong> Fixed costs are NEVER subtracted when calculating contribution per unit. Fixed costs only come in when calculating total profit or break-even.</div>
+      <h4>What counts as a variable cost?</h4>
+      <ul class="nl">
+        <li><span class="n g">✓</span><span>Purchase/supplier price per unit</span></li>
+        <li><span class="n g">✓</span><span>Packaging per unit</span></li>
+        <li><span class="n g">✓</span><span>Direct materials per unit</span></li>
+        <li><span class="n g">✓</span><span>Direct labour per unit</span></li>
+        <li><span class="n g">✓</span><span>Import duty per unit (if % of purchase price)</span></li>
+        <li><span class="n r">✗</span><span>Rent, salaries, insurance, depreciation — these are FIXED, not variable</span></li>
+      </ul>
+      <h4>MacBurgers example from slides</h4>
+      <table class="ledger">
+        <tr><td>Selling price</td><td class="num">120</td></tr>
+        <tr><td>Variable costs: ingredients R65 + labour R35</td><td class="num">(100)</td></tr>
+        <tr class="tot"><td>Contribution per unit</td><td class="num">20</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">6.2</span><span class="acc-title">Break-Even Point — Units and Rands</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>At break-even, <strong>profit = zero</strong>. Total contribution exactly equals fixed costs. Every unit beyond break-even generates pure profit (at the contribution rate).</p>
+      <div class="formula-box">
+        <div class="fb-label">Break-Even</div>
+        <div class="fb-f">BEP (units) <span class="dim">=</span> Fixed Costs ÷ Contribution per unit<br>BEP (rands) <span class="dim">=</span> Fixed Costs ÷ CM Ratio<br>CM Ratio <span class="dim">=</span> Contribution ÷ Selling Price × 100</div>
+      </div>
+      <h4>MacBurgers full example</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">BEP (units) = R550 000 ÷ R20 = <strong>27 500 units</strong></div></div>
+      <div class="step"><div class="step-n g">2</div><div class="step-body">CM Ratio = R20 ÷ R120 × 100 = <strong>16.67%</strong></div></div>
+      <div class="step"><div class="step-n g">3</div><div class="step-body">BEP (rands) = R550 000 ÷ 16.67% = <strong>R3 299 940</strong> (check: 27 500 × R120 = R3 300 000 ✓)</div></div>
+      <div class="callout yellow"><strong>Always round UP</strong> at break-even. If BEP = 74.19 units, the answer is 75. At 74 units, your contribution is R45 880 — R120 short of covering R46 000 fixed costs. You only break even at 75.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">6.3</span><span class="acc-title">Target Sales Volume — Hitting a Profit Goal</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>Management often wants to know: <strong>how many units must we sell to earn a specific profit?</strong> The formula is identical to BEP but treats target profit exactly like a fixed cost — it needs to be "covered" just like rent does.</p>
+      <div class="formula-box">
+        <div class="fb-label">Target Sales Units</div>
+        <div class="fb-f">(Fixed Costs + Target Profit) ÷ Contribution per unit</div>
+      </div>
+      <h4>MacBurgers: target profit R180 000</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">(R550 000 + R180 000) ÷ R20 = R730 000 ÷ R20 = <strong>36 500 units</strong></div></div>
+      <h4>ShoeShine: target profit R80 000</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">(R46 000 + R80 000) ÷ R620 = R126 000 ÷ R620 = 203.2 → <strong>204 units</strong> (round up)</div></div>
+      <div class="callout green">Sanity check: 204 units × R620 contribution = R126 480. Less fixed costs R46 000 = R80 480. Close to R80 000 ✓ (the extra comes from rounding up).</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">6.4</span><span class="acc-title">Margin of Safety — Your Risk Buffer</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>The margin of safety answers: <strong>how far can sales drop before we start losing money?</strong> It's the gap between actual sales and the break-even point. A high MoS% means you're safely above break-even.</p>
+      <div class="formula-box">
+        <div class="fb-label">Margin of Safety</div>
+        <div class="fb-f">MoS (units) = Actual units − BEP units<br>MoS (rands) = Actual Revenue − BEP Revenue<br>MoS % = MoS (rands) ÷ Actual Revenue × 100</div>
+      </div>
+      <h4>MacBurgers: 32 000 units actually sold, BEP 27 500</h4>
+      <table class="ledger">
+        <tr><td>Actual revenue (32 000 × R120)</td><td class="num">3 840 000</td></tr>
+        <tr><td>BEP revenue (27 500 × R120)</td><td class="num">(3 300 000)</td></tr>
+        <tr class="sub"><td>Margin of Safety (rands)</td><td class="num">540 000</td></tr>
+        <tr class="tot"><td>MoS % (R540k ÷ R3 840k × 100)</td><td class="num">14.06%</td></tr>
+      </table>
+      <h4>ShoeShine: 300 units sold, BEP 75</h4>
+      <table class="ledger">
+        <tr><td>Actual revenue (300 × R1 800)</td><td class="num">540 000</td></tr>
+        <tr><td>BEP revenue (75 × R1 800)</td><td class="num">(135 000)</td></tr>
+        <tr class="sub"><td>Margin of Safety (rands)</td><td class="num">405 000</td></tr>
+        <tr class="tot"><td>MoS %</td><td class="num">75%</td></tr>
+      </table>
+      <div class="callout green">ShoeShine's 75% MoS means sales can drop by 75% before the business loses money — they're selling 4× their break-even volume. Extremely safe.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">6.5</span><span class="acc-title">Sensitivity Analysis — Should We Change Something?</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>Sensitivity (what-if) analysis evaluates proposed changes: advertising campaigns, price changes, volume changes. The approach is always the same:</p>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">Calculate total contribution at the new volume with any new selling price</div></div>
+      <div class="step"><div class="step-n g">2</div><div class="step-body">Subtract all fixed costs including any new costs (advertising budget)</div></div>
+      <div class="step"><div class="step-n g">3</div><div class="step-body">Compare profit/loss to the original scenario</div></div>
+      <div class="step"><div class="step-n g">4</div><div class="step-body">If profit improves → implement the change. If not → don't.</div></div>
+
+      <h4>Example: MacBurgers advertising campaign (R90k cost, +8 000 units)</h4>
+      <table class="ledger">
+        <tr><th></th><th>Without ad</th><th>With ad</th></tr>
+        <tr><td>Units</td><td class="num">25 000</td><td class="num">33 000</td></tr>
+        <tr><td>Contribution (×R20)</td><td class="num">500 000</td><td class="num">660 000</td></tr>
+        <tr><td>Fixed costs</td><td class="num neg">(550 000)</td><td class="num neg">(550 000)</td></tr>
+        <tr><td>Advertising</td><td class="num">—</td><td class="num neg">(90 000)</td></tr>
+        <tr class="tot"><td>Profit / (Loss)</td><td class="num neg">(50 000)</td><td class="num">20 000</td></tr>
+      </table>
+      <div class="callout green"><strong>Decision:</strong> Yes — advertise. Changes a R50k loss into a R20k profit.</div>
+
+      <h4>Example: Price cut from R120 to R115, volume rises to 40 000</h4>
+      <table class="ledger">
+        <tr><td>New contribution: R115 − R100</td><td class="num">= R15/unit</td></tr>
+        <tr><td>Total contribution: 40 000 × R15</td><td class="num">600 000</td></tr>
+        <tr><td>Fixed costs</td><td class="num neg">(550 000)</td></tr>
+        <tr class="tot"><td>Operating Profit</td><td class="num">50 000</td></tr>
+      </table>
+      <div class="callout green"><strong>Decision:</strong> Yes — cut the price. Turns a R50k loss into a R50k profit.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- UNIT 7 -->
+<section class="sec" id="u7">
+<div class="wrap">
+  <div class="pg-title">Unit 7 — <em>Cash Budgets</em></div>
+  <div class="pg-meta">Budgetary control · Cash flow planning · Receivables schedules · Liquidity management</div>
+
+  <h3>Why Cash Budgets Matter</h3>
+  <p>A business can be profitable on paper but still run out of cash. The income statement shows profit — but profit includes credit sales not yet collected and ignores loan repayments. The cash budget shows <strong>what actually hits the bank account</strong>, and when.</p>
+  <p>Management uses cash budgets to: know when to invest surplus cash, know when to arrange borrowing before a shortfall happens, and ensure enough cash for day-to-day operations.</p>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.1</span><span class="acc-title">Cash vs Non-Cash — The Most Important Distinction</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>A cash budget only includes <strong>actual cash movements</strong>. Anything that affects profit but doesn't move cash is excluded.</p>
+      <div class="compare">
+        <div class="comp-card left">
+          <div class="comp-head">✅ Cash Items (include)</div>
+          <div class="comp-body">Cash sales<br>Debtor collections (when cash received, not when sale made)<br>Wages and salaries paid<br>Rent payments<br>Electricity payments<br>Creditor payments<br>Petty cash<br>Interest paid/received<br>Asset purchases/sales for cash</div>
+        </div>
+        <div class="comp-card right" style="background:#fff1f2;border-color:#fecaca;">
+          <div class="comp-head" style="color:var(--red)">❌ Non-Cash Items (exclude)</div>
+          <div class="comp-body">
+            <strong>Depreciation</strong> — never in cash budget<br>Credit sales (until cash received)<br>Accruals and provisions<br>Bad debt write-offs<br>Inventory movements (tracked on balance sheet)
+          </div>
+        </div>
+      </div>
+      <div class="warn-box"><strong>Depreciation is the single most-tested exclusion.</strong> It's an expense on the income statement but involves no cash movement. Many students instinctively include it — don't.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.2</span><span class="acc-title">Cash Budget Format — The Full Structure</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <table class="ledger">
+        <tr><th>Line</th><th>Amount (R)</th></tr>
+        <tr><td><strong>Opening Cash Balance</strong></td><td class="num">XXX</td></tr>
+        <tr><th colspan="2" style="font-size:0.68rem;color:var(--muted);padding-top:10px">RECEIPTS (cash inflows)</th></tr>
+        <tr><td class="ind">Cash Sales</td><td class="num">XXX</td></tr>
+        <tr><td class="ind">Receivables Collections (from debtors)</td><td class="num">XXX</td></tr>
+        <tr><td class="ind">Interest Received / Asset Sales / Other</td><td class="num">XXX</td></tr>
+        <tr class="sub"><td>Total Cash Receipts</td><td class="num">XXX</td></tr>
+        <tr class="sub"><td><strong>Total Cash Available</strong></td><td class="num">XXX</td></tr>
+        <tr><th colspan="2" style="font-size:0.68rem;color:var(--muted);padding-top:10px">PAYMENTS (cash outflows)</th></tr>
+        <tr><td class="ind">Payments to Creditors</td><td class="num">(XXX)</td></tr>
+        <tr><td class="ind">Salaries & Wages</td><td class="num">(XXX)</td></tr>
+        <tr><td class="ind">Rent</td><td class="num">(XXX)</td></tr>
+        <tr><td class="ind">Electricity</td><td class="num">(XXX)</td></tr>
+        <tr><td class="ind">Petty Cash</td><td class="num">(XXX)</td></tr>
+        <tr class="sub"><td>Total Cash Payments</td><td class="num">(XXX)</td></tr>
+        <tr class="tot"><td><strong>Closing Balance (Surplus or Shortage)</strong></td><td class="num">XXX / (XXX)</td></tr>
+      </table>
+      <div class="callout orange">The closing balance of one month is always the <strong>opening balance of the next month</strong>. If October closes at R543 200, November opens at R543 200.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.3</span><span class="acc-title">Receivables Collection Schedule — Step by Step</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>When customers buy on credit, the cash arrives in later months. You need a <strong>collection schedule</strong> to know how much arrives when.</p>
+      <p>Jabu Traders credit terms:</p>
+      <ul class="nl">
+        <li><span class="n o">20%</span><span>Pay in the month of sale — but receive a <strong>10% discount</strong>. So you get: 20% × 90% = 18% of the credit sale amount.</span></li>
+        <li><span class="n o">50%</span><span>Pay in month 1 after the sale — no discount, full amount.</span></li>
+        <li><span class="n o">30%</span><span>Pay in month 2 after the sale — no discount, full amount.</span></li>
+      </ul>
+      <div class="callout yellow">The discount applies <strong>only to current-month payers</strong>. The 50% and 30% groups pay the full credit sale amount.</div>
+      <h4>Building the October collection — working backwards:</h4>
+      <div class="step"><div class="step-n o">1</div><div class="step-body"><strong>August sales contributing to October (M2):</strong> 30% × Aug credit sales R275k = R82 500</div></div>
+      <div class="step"><div class="step-n o">2</div><div class="step-body"><strong>September sales contributing to October (M1):</strong> 50% × Sept credit sales R310k = R155 000</div></div>
+      <div class="step"><div class="step-n o">3</div><div class="step-body"><strong>October's own sales (current month):</strong> 20% × R325k × 90% = R58 500 (discount applied)</div></div>
+      <table class="ledger">
+        <tr><th>Source</th><th>Calculation</th><th>Oct collection</th><th>Nov collection</th></tr>
+        <tr><td>Aug credit R275k (M2 in Oct)</td><td>30% × 275k</td><td class="num">82 500</td><td class="num">—</td></tr>
+        <tr><td>Sept credit R310k (M1 in Oct, M2 in Nov)</td><td>50% / 30% × 310k</td><td class="num">155 000</td><td class="num">93 000</td></tr>
+        <tr><td>Oct credit R325k (current in Oct, M1 in Nov)</td><td>18% / 50% × 325k</td><td class="num">58 500</td><td class="num">162 500</td></tr>
+        <tr><td>Nov credit R330k (current in Nov)</td><td>18% × 330k</td><td class="num">—</td><td class="num">59 400</td></tr>
+        <tr class="tot"><td colspan="2">Total Receivables Collected</td><td class="num">296 000</td><td class="num">314 900</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.4</span><span class="acc-title">Creditor Payments — Timing Is Everything</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>When you buy on credit, you pay in a later month. The key question is: <strong>when does the cash actually leave?</strong></p>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <h4>Account purchases (credit)</h4>
+          <p>Paid in the month <strong>following</strong> the purchase.</p>
+          <div class="cf o">Oct creditor payment = Sept purchases<br>Sept: Wood R80k + Screws R3k = R83 000<br><br>Nov creditor payment = Oct purchases<br>Oct: Wood R90k + Screws R4k = R94 000</div>
+        </div>
+        <div class="concept-card">
+          <h4>Petty cash purchases</h4>
+          <p>Paid <strong>in the same month</strong> as purchased — no credit.</p>
+          <div class="cf o">Sept petty cash: R3 600 → paid in Sept<br>Oct petty cash: R3 600 → paid in Oct<br>Nov petty cash: R4 000 → paid in Nov</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.5</span><span class="acc-title">The 13th Cheque — November Salary Trap</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <p>This is one of the most commonly tested traps. In November, staff receive a <strong>13th cheque</strong> — an additional month's salary as a year-end bonus. This means the salary payment in November is <strong>double the normal amount</strong>.</p>
+      <div class="formula-box">
+        <div class="fb-label">November Salary Line</div>
+        <div class="fb-f">Normal salary × 2 = November cash payment<br>eg: R123 000 × 2 = R246 000</div>
+      </div>
+      <div class="warn-box"><strong>Jabu Traders trap:</strong> The slides show October salaries as R123 000 but November as R246 000. The original slide showed R244 000 — slight rounding difference. Always use the data given in your exam question.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.6</span><span class="acc-title">Complete Jabu Traders Cash Budget — October & November</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <table class="ledger">
+        <tr><th></th><th>October 2024</th><th>November 2024</th></tr>
+        <tr><td><strong>Opening Cash Balance</strong></td><td class="num">120 000</td><td class="num">543 200</td></tr>
+        <tr><th colspan="3" style="font-size:0.65rem;color:var(--muted);padding-top:8px">RECEIPTS</th></tr>
+        <tr><td class="ind">Cash Sales</td><td class="num">355 000</td><td class="num">360 000</td></tr>
+        <tr><td class="ind">Receivables Collection</td><td class="num">296 000</td><td class="num">314 900</td></tr>
+        <tr class="sub"><td>Total Receipts</td><td class="num">651 000</td><td class="num">674 900</td></tr>
+        <tr class="hi-row"><td><strong>Total Cash Available</strong></td><td class="num">771 000</td><td class="num">1 218 100</td></tr>
+        <tr><th colspan="3" style="font-size:0.65rem;color:var(--muted);padding-top:8px">PAYMENTS</th></tr>
+        <tr><td class="ind">Petty Cash</td><td class="num neg">(3 600)</td><td class="num neg">(4 000)</td></tr>
+        <tr><td class="ind">Creditors (prior month purchases)</td><td class="num neg">(83 000)</td><td class="num neg">(94 000)</td></tr>
+        <tr><td class="ind">Salaries (Nov = ×2 for 13th cheque)</td><td class="num neg">(123 000)</td><td class="num neg">(246 000)</td></tr>
+        <tr><td class="ind">Rent</td><td class="num neg">(16 000)</td><td class="num neg">(16 000)</td></tr>
+        <tr><td class="ind">Electricity</td><td class="num neg">(2 200)</td><td class="num neg">(2 200)</td></tr>
+        <tr class="sub"><td>Total Payments</td><td class="num neg">(227 800)</td><td class="num neg">(362 200)</td></tr>
+        <tr class="tot"><td><strong>Closing Balance (Surplus)</strong></td><td class="num">543 200</td><td class="num">855 900</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u7">7.7</span><span class="acc-title">Liquidity, Solvency & the Companies Act</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="compare">
+        <div class="comp-card left">
+          <div class="comp-head">Liquidity</div>
+          <div class="comp-body"><strong>Current Assets > Current Liabilities</strong><br><br>The ability to pay debts as they fall due — short-term cash health. A business can be profitable but illiquid if its cash is tied up in slow-moving debtors or stock.</div>
+        </div>
+        <div class="comp-card right">
+          <div class="comp-head">Solvency</div>
+          <div class="comp-body"><strong>Total Assets > Total Liabilities</strong><br><br>Overall financial health — not just short-term. A business could be liquid (enough cash this month) but insolvent (total debts exceed total assets).</div>
+        </div>
+      </div>
+      <div class="callout orange"><strong>Companies Act 2008:</strong> A company must be BOTH liquid AND solvent both before and after any dividend payments to shareholders. This was a key legislative update — directors must apply both tests, not just one.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WORKED QUESTIONS -->
+<section class="sec" id="worked">
+<div class="wrap">
+  <div class="pg-title">Worked <em>Questions</em></div>
+  <div class="pg-meta">Tutorial Questions · Units 5 & 6 · Step-by-step solutions with explanations</div>
+
+  <h3>Unit 5 Tutorial</h3>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">Q1</span><span class="acc-title">Choco Bliss — Prime Costs (Delightful Desserts Ltd)</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">8 000 cakes produced · Baker R120/hr · Decorator R150/hr · Production rate 1 600/hr · Direct materials R3 200</div>
+      <div class="step"><div class="step-n">1</div><div class="step-body">Hours = 8 000 ÷ 1 600 = <strong>5 hours</strong> (always calculate hours first)</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-body">Baker DL: 5 × R120 = R600 | Decorator DL: 5 × R150 = R750 → Total DL = <strong>R1 350</strong></div></div>
+      <table class="ledger">
+        <tr><td>Direct materials</td><td class="num">3 200</td></tr>
+        <tr><td>Direct labour — Baker (5 × R120)</td><td class="num">600</td></tr>
+        <tr><td>Direct labour — Decorator (5 × R150)</td><td class="num">750</td></tr>
+        <tr class="tot"><td>Prime Costs</td><td class="num">4 550</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Prime Costs</span><span class="val">R4 550</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">Q2</span><span class="acc-title">Maple Furniture — Prime Costs from Raw Materials</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">Opening RM R150k · Purchases R920k · Closing RM R130k · Direct labour R1 450 000</div>
+      <table class="ledger">
+        <tr><td>Opening raw materials</td><td class="num">150 000</td></tr>
+        <tr><td>Add: Purchases</td><td class="num">920 000</td></tr>
+        <tr><td>Less: Closing raw materials</td><td class="num neg">(130 000)</td></tr>
+        <tr class="sub"><td>Direct Materials Used</td><td class="num">940 000</td></tr>
+        <tr><td>Direct Labour</td><td class="num">1 450 000</td></tr>
+        <tr class="tot"><td>Prime Costs</td><td class="num">2 390 000</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Prime Costs</span><span class="val">R2 390 000</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">Q3</span><span class="acc-title">Maple Furniture — Cost of Goods Manufactured</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">From Q2: Prime Costs R2 390k · Overheads R940k · Opening WIP R180k · Closing WIP R240k</div>
+      <table class="ledger">
+        <tr><td>Prime costs (from Q2)</td><td class="num">2 390 000</td></tr>
+        <tr><td>Manufacturing overheads</td><td class="num">940 000</td></tr>
+        <tr class="sub"><td>Manufacturing Costs Incurred</td><td class="num">3 330 000</td></tr>
+        <tr><td>Add: Opening WIP</td><td class="num">180 000</td></tr>
+        <tr><td>Less: Closing WIP</td><td class="num neg">(240 000)</td></tr>
+        <tr class="tot"><td>Cost of Goods Manufactured</td><td class="num">3 270 000</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Cost of Goods Manufactured</span><span class="val">R3 270 000</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">Q4</span><span class="acc-title">Maple Furniture — Total Closing Inventory</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">Closing RM R130k (Q2) · Closing WIP R240k (Q3) · Opening FG R400k · Closing FG R370k</div>
+      <div class="callout yellow">This only asks for total closing inventory — the three closing balances. Opening finished goods is not used here.</div>
+      <table class="ledger">
+        <tr><td>Closing raw materials</td><td class="num">130 000</td></tr>
+        <tr><td>Closing work-in-progress</td><td class="num">240 000</td></tr>
+        <tr><td>Closing finished goods</td><td class="num">370 000</td></tr>
+        <tr class="tot"><td>Total Closing Inventory</td><td class="num">740 000</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Total Closing Inventory</span><span class="val">R740 000</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u5">Q5</span><span class="acc-title">Sunrise Shoes — Full Manufacturing Cost Statement</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">DM R720k · DL R280k · Factory rent R40k · Electricity R15k · Indirect materials R13.5k · Indirect factory wages R11k · Opening WIP R90k · Closing WIP R110k</div>
+      <div class="callout yellow"><strong>Important:</strong> All four overhead items are manufacturing overheads. Admin wages, if any, would be excluded — but there are none here.</div>
+      <table class="ledger">
+        <tr><th colspan="2">Manufacturing Cost Statement — Sunrise Shoes Ltd · Year ended 31 Dec 2025</th></tr>
+        <tr><td>Direct materials</td><td class="num">720 000</td></tr>
+        <tr><td>Direct labour</td><td class="num">280 000</td></tr>
+        <tr class="sub"><td>Prime Costs</td><td class="num">1 000 000</td></tr>
+        <tr><td class="ind">Factory rent</td><td class="num">40 000</td></tr>
+        <tr><td class="ind">Factory electricity</td><td class="num">15 000</td></tr>
+        <tr><td class="ind">Indirect materials</td><td class="num">13 500</td></tr>
+        <tr><td class="ind">Indirect factory wages</td><td class="num">11 000</td></tr>
+        <tr class="sub"><td>Total Manufacturing Overheads</td><td class="num">79 500</td></tr>
+        <tr class="sub"><td>Manufacturing Costs Incurred</td><td class="num">1 079 500</td></tr>
+        <tr><td>Add: Opening WIP</td><td class="num">90 000</td></tr>
+        <tr><td>Less: Closing WIP</td><td class="num neg">(110 000)</td></tr>
+        <tr class="tot"><td>Cost of Goods Manufactured</td><td class="num">1 059 500</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Cost of Goods Manufactured</span><span class="val">R1 059 500</span></div>
+    </div>
+  </div>
+
+  <h3>Unit 6 Tutorial</h3>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">Q1</span><span class="acc-title">Comfort Home — Cost of Goods Manufactured</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout green">400 hrs at R60/hr · Materials R18 000 · Overheads R7 800 · Opening WIP R1 000 · Closing WIP R4 600</div>
+      <table class="ledger">
+        <tr><td>Direct materials</td><td class="num">18 000</td></tr>
+        <tr><td>Direct labour (400 hrs × R60)</td><td class="num">24 000</td></tr>
+        <tr class="sub"><td>Prime Costs</td><td class="num">42 000</td></tr>
+        <tr><td>Factory overheads</td><td class="num">7 800</td></tr>
+        <tr class="sub"><td>Manufacturing Costs Incurred</td><td class="num">49 800</td></tr>
+        <tr><td>Add: Opening WIP</td><td class="num">1 000</td></tr>
+        <tr><td>Less: Closing WIP</td><td class="num neg">(4 600)</td></tr>
+        <tr class="tot"><td>Cost of Goods Manufactured</td><td class="num">46 200</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Answer</span><span class="val">R46 200</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">Q2</span><span class="acc-title">ShoeShine — Full CVP Analysis (4 parts)</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout green">300 pairs · Purchase R1 100 · Packaging R80 · SP R1 800 · Fixed costs R46 000 · All stock sold</div>
+      <h4>a) Contribution per unit</h4>
+      <table class="ledger">
+        <tr><td>Selling price</td><td class="num">1 800</td></tr>
+        <tr><td>Purchase price per pair</td><td class="num neg">(1 100)</td></tr>
+        <tr><td>Packaging per pair</td><td class="num neg">(80)</td></tr>
+        <tr class="tot"><td>Contribution per unit</td><td class="num">620</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Contribution/unit</span><span class="val">R620</span></div>
+
+      <h4>b) Break-even units</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">BEP = R46 000 ÷ R620 = 74.19 → <strong>75 units</strong> (round up)</div></div>
+      <div class="callout yellow">At 74 units: contribution = 74 × R620 = R45 880. Fixed costs = R46 000. Still R120 short. You only break even at unit 75.</div>
+      <div class="ans-box"><span class="lbl">Break-even</span><span class="val">75 units</span></div>
+
+      <h4>c) Target units for R80 000 profit</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">(R46 000 + R80 000) ÷ R620 = R126 000 ÷ R620 = 203.22 → <strong>204 units</strong></div></div>
+      <div class="ans-box"><span class="lbl">Target units</span><span class="val">204 units</span></div>
+
+      <h4>d) Margin of Safety %</h4>
+      <div class="step"><div class="step-n g">1</div><div class="step-body">Actual revenue = 300 × R1 800 = R540 000</div></div>
+      <div class="step"><div class="step-n g">2</div><div class="step-body">BEP revenue = 75 × R1 800 = R135 000</div></div>
+      <div class="step"><div class="step-n g">3</div><div class="step-body">MoS = R540 000 − R135 000 = R405 000</div></div>
+      <div class="step"><div class="step-n g">4</div><div class="step-body">MoS% = R405 000 ÷ R540 000 × 100 = <strong>75%</strong></div></div>
+      <div class="ans-box"><span class="lbl">Margin of Safety</span><span class="val">75%</span></div>
+      <div class="callout green">Interpretation: ShoeShine can lose 75% of sales before making a loss. They're selling 4× their break-even volume.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRACTICE Q -->
+<section class="sec" id="practice">
+<div class="wrap">
+  <div class="pg-title">GreenGlow <em>Beauty Supplies</em></div>
+  <div class="pg-meta">Practice Question · CVP Analysis with exchange-rate changes and volume discounts · 14 marks</div>
+
+  <div class="callout blue" style="margin-bottom:20px">
+    <strong>Setup:</strong> Smart LED facial therapy masks · Current SP: R2 400 · Expected sales: 2 100 units<br>
+    Variable costs: Supplier R950 + Import duty 10% + Shipping R110 + Local R75<br>
+    Fixed costs: Warehouse R72k + Salaries R285k + Insurance R28k + Depreciation R35k = <strong>R420 000/month</strong>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">Part A</span><span class="acc-title">After 15% exchange rate increase — Revised costs and contribution</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">Supplier price increases 15%. Import duty stays at 10% of revised supplier price. All other VCs unchanged.</div>
+
+      <h4>2.1a — Revised supplier price (2 marks)</h4>
+      <div class="step"><div class="step-n">1</div><div class="step-body">R950 × 1.15 = <strong>R1 092.50</strong></div></div>
+      <div class="ans-box"><span class="lbl">Revised supplier cost</span><span class="val">R1 092.50</span></div>
+
+      <h4>2.1b — Total variable cost per unit (3 marks)</h4>
+      <table class="ledger">
+        <tr><td>Supplier purchase price (revised)</td><td class="num">1 092.50</td></tr>
+        <tr><td>Import duty (10% × R1 092.50)</td><td class="num">109.25</td></tr>
+        <tr><td>International shipping & insurance</td><td class="num">110.00</td></tr>
+        <tr><td>Local delivery, handling & packaging</td><td class="num">75.00</td></tr>
+        <tr class="tot"><td>Total Variable Cost per unit</td><td class="num">1 386.75</td></tr>
+      </table>
+      <div class="callout yellow"><strong>Exam technique:</strong> Show all four line items individually. Combining them costs you marks.</div>
+      <div class="ans-box"><span class="lbl">Total VC/unit</span><span class="val">R1 386.75</span></div>
+
+      <h4>2.1c — Contribution margin per unit (3 marks)</h4>
+      <table class="ledger">
+        <tr><td>Selling price</td><td class="num">2 400.00</td></tr>
+        <tr><td>Total variable cost</td><td class="num neg">(1 386.75)</td></tr>
+        <tr class="tot"><td>Contribution margin per unit</td><td class="num">1 013.25</td></tr>
+      </table>
+      <div class="ans-box"><span class="lbl">Contribution/unit</span><span class="val">R1 013.25</span></div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="acc(this)"><span class="acc-tag u6">Part B</span><span class="acc-title">8% price cut + 30% volume increase — Supplier discount analysis</span><span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <div class="callout blue">Management proposes: reduce SP by 8%, expected demand increases by 30%.<br>Supplier discount tiers: 2 200–2 699 units = 6% off · 2 700+ = 9% off</div>
+
+      <h4>2.2a — New selling price (2 marks)</h4>
+      <div class="step"><div class="step-n">1</div><div class="step-body">R2 400 × (1 − 0.08) = R2 400 × 0.92 = <strong>R2 208</strong></div></div>
+      <div class="ans-box"><span class="lbl">New selling price</span><span class="val">R2 208</span></div>
+
+      <h4>2.2b — Expected sales volume (2 marks)</h4>
+      <div class="step"><div class="step-n">1</div><div class="step-body">2 100 × 1.30 = <strong>2 730 units</strong></div></div>
+      <div class="ans-box"><span class="lbl">Expected volume</span><span class="val">2 730 units</span></div>
+
+      <h4>2.2c — Does 2 730 units qualify for a supplier discount? (2 marks)</h4>
+      <table class="ledger">
+        <tr><th>Monthly purchases</th><th>Discount</th><th>Applies?</th></tr>
+        <tr><td>1 – 2 199 units</td><td class="num">No discount</td><td>—</td></tr>
+        <tr><td>2 200 – 2 699 units</td><td class="num">6%</td><td>—</td></tr>
+        <tr style="background:var(--hi)"><td><strong>2 700 units and above ✓</strong></td><td class="num"><strong>9%</strong></td><td><strong>YES</strong></td></tr>
+      </table>
+      <div class="callout green"><strong>Conclusion:</strong> 2 730 ≥ 2 700 → qualifies for the <strong>9% supplier quantity discount</strong>. This partially offsets the impact of the 15% exchange-rate-driven price increase on the supplier cost.</div>
+      <div class="ans-box"><span class="lbl">Qualifies for</span><span class="val">9% supplier discount</span></div>
+    </div>
+  </div>
+</div>
+</section>
 
 <script>
-(function(){
-  const $ = s => document.querySelector(s);
-  const $$ = s => Array.from(document.querySelectorAll(s));
-
-  function go(page){
-    $$('.page').forEach(p=>p.classList.remove('active'));
-    $$('.nav-item').forEach(n=>n.classList.remove('active'));
-    $('#page-'+page).classList.add('active');
-    document.querySelector('.nav-item[data-page="'+page+'"]').classList.add('active');
-    window.scrollTo(0,0);
-  }
-  $$('.nav-item').forEach(item=> item.addEventListener('click', ()=> go(item.dataset.page)));
-
-  const target = new Date('2026-09-19T10:00:00');
-  function updateCountdown(){
-    const now = new Date();
-    let diff = target - now;
-    const el = $('#countdown-display');
-    if(diff <= 0){ el.textContent = "It's test time!"; return; }
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    el.textContent = h + 'h ' + String(m).padStart(2,'0') + 'm ' + String(s).padStart(2,'0') + 's';
-  }
-  updateCountdown(); setInterval(updateCountdown, 1000);
-
-  const checklistItems = [
-    {id:1, chap:'Q1', text:'Know both cycle labels: Expansion/Peak/Contraction/Trough/Recovery AND Recovery/Boom/Slump/Recession'},
-    {id:2, chap:'Q1', text:'Practice identifying peaks/troughs on a labelled diagram (B/D/F/H style)'},
-    {id:3, chap:'Q1', text:'Classify indicators by TIMING (leading/coincident/lagging), not by direction'},
-    {id:4, chap:'Q1', text:'Recite all 8 recession effects with direction + reason'},
-    {id:5, chap:'Q1', text:'Draw a positively sloped yield curve and explain what it means for borrowing cost'},
-    {id:6, chap:'Q2', text:'Calculate the money multiplier from any given reserve ratio (1/RR)'},
-    {id:7, chap:'Q2', text:'List contractionary vs expansionary policy actions'},
-    {id:8, chap:'Q2', text:'Explain how a change in money demand shifts the equilibrium interest rate'},
-    {id:9, chap:'Q2', text:'Explain the 75bps repo hike scenario and draw the SUPPLY-shift credit market graph'},
-    {id:10, chap:'Q2', text:'List credit demand factors vs credit supply factors separately'},
-    {id:11, chap:'Q2', text:'Define QE, seigniorage, prime rate, inflation target, gold standard, fiat money, liquidity shortage'},
-    {id:12, chap:'Q2', text:'Name the 3 functions of money (3 distinct ones, not 3 examples of one)'},
-    {id:13, chap:'Trade', text:'Explain comparative advantage via lowest opportunity cost'},
-    {id:14, chap:'Trade', text:'Distinguish tariff vs import quota vs infant-industry argument'},
-    {id:15, chap:'Trade', text:'Memorise the 5 SACU member countries'},
-    {id:16, chap:'Q3', text:'Distinguish efficiency / effectiveness / equity / sustainability using the keyword clues'},
-    {id:17, chap:'Q3', text:'Match fiscal instruments to scenarios: tax relief, indirect tax, subsidy, welfare, tax change'},
-    {id:18, chap:'Q3', text:'Explain negative vs positive externalities and the government response to each'},
-    {id:19, chap:'Q3', text:'Define public good (non-rivalry + non-excludability) and the exclusion principle clue phrase'},
-    {id:20, chap:'Q3', text:'Explain the developmental state concept'},
-    {id:21, chap:'Bonus', text:'(Lower priority) Quick pass on tax classification, Laffer curve, budget deficit financing'},
-  ];
-  function loadChecked(){ try{ const raw = localStorage.getItem('mne_test2_checklist_v2'); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; } }
-  function saveChecked(obj){ try{ localStorage.setItem('mne_test2_checklist_v2', JSON.stringify(obj)); }catch(e){} }
-  let checked = loadChecked();
-
-  function renderChecklist(){
-    const html = checklistItems.map(item => `
-      <div class="checklist-item">
-        <div class="ci-check ${checked[item.id]?'checked':''}" data-id="${item.id}" role="checkbox" tabindex="0"></div>
-        <div class="ci-text ${checked[item.id]?'done':''}">${item.text}</div>
-        <span class="ci-chap">${item.chap}</span>
-      </div>`).join('');
-    $('#checklist-container').innerHTML = html;
-    $$('.ci-check').forEach(el => el.addEventListener('click', ()=>{
-      const id = el.dataset.id;
-      checked[id] = !checked[id];
-      saveChecked(checked);
-      renderChecklist();
-      updateProgress();
-    }));
-    updateProgress();
-  }
-  function updateProgress(){
-    const total = checklistItems.length;
-    const done = checklistItems.filter(i=>checked[i.id]).length;
-    $('#checklist-fill').style.width = (done/total*100) + '%';
-    $('#checklist-pct').textContent = done + ' / ' + total + ' topics';
-  }
-  renderChecklist();
-
-  const questions = [
-    {topic:'Q1', q:"What is the correct order of the five business-cycle phases per the revision guide?", opts:["Boom, Recovery, Slump, Recession, Peak","Expansion, Peak, Contraction, Trough, Recovery","Peak, Trough, Expansion, Recession, Boom","Recovery, Recession, Peak, Trough, Expansion"], correct:1, ex:"Expansion → Peak → Contraction → Trough → Recovery, then back to Expansion."},
-    {topic:'Q1', q:"How should you classify a business-cycle indicator as leading, coincident, or lagging?", opts:["By whether it rises or falls","By WHEN it changes relative to overall economic activity","By which sector it belongs to","By its unit of measurement"], correct:1, ex:"The guide is explicit: never classify by direction — always classify by timing relative to the cycle."},
-    {topic:'Q1', q:"The JSE All Share Index is generally treated as which type of indicator?", opts:["Lagging","Coincident","Leading","Not an indicator"], correct:2, ex:"Financial markets tend to move ahead of or around changes in real economic activity — a leading indicator."},
-    {topic:'Q1', q:"Real GDP growth is best classified as a:", opts:["Leading indicator","Coincident indicator","Lagging indicator","Fiscal indicator"], correct:1, ex:"Real GDP is a direct, real-time measure of overall activity — coincident."},
-    {topic:'Q1', q:"On a labelled business-cycle diagram with points B, D, F, H, if B and F are peaks, what are D and H?", opts:["Also peaks","Troughs","Points of recovery only","Undefined"], correct:1, ex:"In the guide's example, D and H are the troughs — the low points between the two peaks."},
-    {topic:'Q1', q:"During a recession, what typically happens to unemployment and inflation?", opts:["Both rise","Unemployment rises, inflation falls","Unemployment falls, inflation rises","Both fall"], correct:1, ex:"Weaker output cuts demand for labour (unemployment up) while weaker demand removes pricing power (inflation down)."},
-    {topic:'Q1', q:"What's the likely effect of a recession on a firm's advertising spend?", opts:["Advertising always increases sharply","Budgets are typically reviewed/cut, with spend redirected to targeted promotions","No effect at all","Firms always stop advertising completely"], correct:1, ex:"Economic uncertainty triggers budget review; capital shifts toward highly targeted promotions to protect market share."},
-    {topic:'Q1', q:"On a positively sloped yield curve, what does a lower yield at a given maturity indicate?", opts:["A higher cost of borrowing","A lower stated cost of borrowing","No relationship to borrowing cost","Higher default risk only"], correct:1, ex:"Lower yield = lower cost of borrowing at that maturity, all else equal."},
-    {topic:'Q2', q:"With a required reserve ratio of 5%, what is the maximum money multiplier?", opts:["5","10","20","50"], correct:2, ex:"Multiplier = 1 ÷ 0.05 = 20."},
-    {topic:'Q2', q:"Which of these is a contractionary monetary-policy action?", opts:["Buying government securities","Lowering the reserve requirement","Selling government securities","Cutting the repo rate"], correct:2, ex:"Selling government securities drains liquidity from the banking system — contractionary."},
-    {topic:'Q2', q:"If money demand increases while money supply stays the same, what happens to the equilibrium interest rate?", opts:["It falls","It rises","It stays exactly the same","It becomes zero"], correct:1, ex:"With Ms fixed, higher demand for money pushes the equilibrium interest rate up."},
-    {topic:'Q2', q:"In the guide's credit-market graph for a 75bps repo hike, which curve shifts?", opts:["Demand shifts right","Supply shifts left (S1 to S2)","Neither curve moves","Demand shifts left"], correct:1, ex:"This model shows a restrictive stance shifting the SUPPLY of credit left, raising the rate and cutting quantity — not a demand shift."},
-    {topic:'Q2', q:"After a 75bps repo hike, what happens to the equilibrium quantity of credit?", opts:["It rises (q1 to q2 up)","It falls (q1 to q2 down)","It's unaffected","It doubles"], correct:1, ex:"Tighter supply at every rate moves equilibrium to a higher rate and lower quantity — q2 < q1."},
-    {topic:'Q2', q:"Which of these is a credit DEMAND factor (not supply)?", opts:["Bank liquidity & available funds","Institutional capital","Household and business income","Risk assessment procedures"], correct:2, ex:"Income drives how much credit households/businesses want — a demand-side factor. The other three are supply-side."},
-    {topic:'Q2', q:"What is seigniorage?", opts:["The interest rate charged to best customers","The difference between the face value of money and its production cost","A type of import tax","The inflation target range"], correct:1, ex:"Seigniorage = face value minus the cost of producing the money."},
-    {topic:'Q2', q:"What does 'fiat money' mean?", opts:["Money backed by a fixed quantity of gold","Money whose value rests on government authority and public confidence","Money used only for foreign trade","Physical commodity money"], correct:1, ex:"Fiat money has no intrinsic commodity backing — its value rests on trust and government authority."},
-    {topic:'Q2', q:"Which THREE are the functions of money?", opts:["Medium of exchange, store of value, unit of account","Legal tender, credit facility, tax base","Store of value, credit instrument, medium of exchange","Unit of account, seigniorage, prime rate"], correct:0, ex:"Medium of exchange, store of value, and unit of account — three distinct functions."},
-    {topic:'Trade', q:"Comparative advantage is fundamentally based on:", opts:["Absolute productivity", "The lowest opportunity cost", "Currency exchange rates", "Population size"], correct:1, ex:"A country holds comparative advantage in whatever it can produce at the lowest opportunity cost — even if less productive overall."},
-    {topic:'Trade', q:"What is an import quota?", opts:["A tax imposed on imports","A maximum quantity of a good that may be imported","A subsidy paid to exporters","A ban on all imports"], correct:1, ex:"A quota restricts quantity; a tariff (different concept) is a tax on imports."},
-    {topic:'Trade', q:"The infant-industry argument justifies protection on the grounds that:", opts:["All industries need permanent protection","New industries may need temporary protection while developing competitiveness","Only exports should be protected","Tariffs always increase efficiency"], correct:1, ex:"Temporary protection allows new/developing industries time to become competitive."},
-    {topic:'Trade', q:"Which of these countries is NOT a SACU member?", opts:["Botswana","Zimbabwe","Lesotho","Eswatini"], correct:1, ex:"SACU = Botswana, Eswatini, Lesotho, Namibia, South Africa. Zimbabwe is not a member."},
-    {topic:'Trade', q:"A customs union is best defined as:", opts:["A single shared currency among members","Common external trade arrangements established among member nations","A military alliance","A ban on internal trade"], correct:1, ex:"A customs union means members share common external trade arrangements (e.g. a common external tariff)."},
-    {topic:'Q3', q:"A government policy that achieves its intended objective demonstrates:", opts:["Efficiency","Effectiveness","Equity","Sustainability"], correct:1, ex:"Effectiveness = does the intervention achieve what it set out to do — the 'achieves objective' keyword."},
-    {topic:'Q3', q:"A policy concerned with 'future generations' is being evaluated for:", opts:["Efficiency","Equity","Sustainability","Effectiveness"], correct:2, ex:"Sustainability asks whether the policy can be maintained without compromising future economic needs."},
-    {topic:'Q3', q:"Which fiscal instrument is used specifically to discourage consumption of a demerit good?", opts:["Tax relief","Welfare payment","Indirect tax","Subsidy"], correct:2, ex:"Indirect taxes are applied to discourage consumption of goods/services deemed harmful (demerit goods)."},
-    {topic:'Q3', q:"A subsidy is typically used to encourage goods that generate:", opts:["Negative externalities","Positive externalities","No externalities","Only private benefits"], correct:1, ex:"Subsidies encourage production/consumption of goods yielding wider social (positive externality) benefits."},
-    {topic:'Q3', q:"What are the two defining properties of a public good?", opts:["Scarcity and excludability","Non-rivalry and non-excludability","Rivalry and exclusion","High cost and low demand"], correct:1, ex:"Public goods are traditionally non-rival (one person's use doesn't reduce another's) and non-excludable."},
-    {topic:'Q3', q:"The phrase 'good if provided to one is provided to all' is the clue for:", opts:["The developmental state","The exclusion principle","Comparative advantage","Seigniorage"], correct:1, ex:"This exact phrasing points to the exclusion principle within public-goods theory."},
-    {topic:'Q3', q:"The 'developmental state' concept refers to:", opts:["A state with no economic role","An active government role guiding and driving development through planning","A fully privatised economy","A state that only collects taxes"], correct:1, ex:"Developmental state = active, structured government involvement in development planning."},
-    {topic:'Q3', q:"VAT is an example of which type of tax? (background — not explicitly in this guide's Q3, but a Ch8 concept)", opts:["Progressive","Proportional","Regressive","Direct"], correct:2, ex:"VAT takes a larger share of a lower income, so its burden falls as income rises — regressive."},
-    {topic:'Q3', q:"The Laffer curve shows the relationship between:", opts:["Interest rates and inflation","Tax rate and tax revenue","GDP and unemployment","Exports and imports"], correct:1, ex:"Revenue rises with the tax rate up to T*, the revenue-maximising rate, then falls beyond it."},
-  ];
-
-  let quizState = {};
-  let activeFilter = 'all';
-  const topics = ['all', ...Array.from(new Set(questions.map(q=>q.topic)))];
-
-  function renderFilters(){
-    $('#quiz-filters').innerHTML = topics.map(t=>`<div class="filter-chip ${activeFilter===t?'active':''}" data-topic="${t}">${t==='all'?'All':t}</div>`).join('');
-    $$('#quiz-filters .filter-chip').forEach(chip=> chip.addEventListener('click', ()=>{ activeFilter = chip.dataset.topic; renderQuiz(); }));
-  }
-
-  function renderQuiz(){
-    renderFilters();
-    const visible = questions.map((q,i)=>({q,i})).filter(({q})=> activeFilter==='all' || q.topic===activeFilter);
-    const html = visible.map(({q,i})=>`
-      <div class="q-card" data-qi="${i}">
-        <span class="q-tag">${q.topic}</span>
-        <div class="q-prompt">${i+1}. ${q.q}</div>
-        <div class="q-options">
-          ${q.opts.map((opt,oi)=>`<div class="q-option" data-oi="${oi}"><span class="opt-letter">${String.fromCharCode(65+oi)}</span><span>${opt}</span></div>`).join('')}
-        </div>
-        <div class="q-explain" id="explain-${i}">${q.ex}</div>
-      </div>`).join('');
-    $('#quiz-list').innerHTML = html;
-    $$('.q-card').forEach(card=>{
-      const qi = Number(card.dataset.qi);
-      if(quizState[qi] !== undefined){
-        const opts = card.querySelectorAll('.q-option');
-        opts.forEach(el=> el.classList.add('disabled'));
-        opts[questions[qi].correct].classList.add('correct');
-        if(quizState[qi] !== questions[qi].correct) opts[quizState[qi]].classList.add('incorrect');
-        $('#explain-'+qi).classList.add('show');
-      }
-      card.querySelectorAll('.q-option').forEach(optEl=>{
-        optEl.addEventListener('click', ()=> answerQuestion(qi, Number(optEl.dataset.oi)));
-      });
-    });
-    updateScore();
-  }
-  function answerQuestion(qi, oi){
-    if(quizState[qi] !== undefined) return;
-    quizState[qi] = oi;
-    const card = document.querySelector('.q-card[data-qi="'+qi+'"]');
-    const opts = card.querySelectorAll('.q-option');
-    opts.forEach(el=> el.classList.add('disabled'));
-    opts[questions[qi].correct].classList.add('correct');
-    if(oi !== questions[qi].correct) opts[oi].classList.add('incorrect');
-    $('#explain-'+qi).classList.add('show');
-    updateScore();
-  }
-  function updateScore(){
-    const answered = Object.keys(quizState).length;
-    const correct = Object.entries(quizState).filter(([qi,oi])=> Number(oi)===questions[Number(qi)].correct).length;
-    $('#quiz-score').textContent = correct + ' / ' + questions.length;
-  }
-  $('#quiz-reset').addEventListener('click', ()=>{ quizState = {}; renderQuiz(); });
-  $('#nav-quiz-count').textContent = questions.length;
-  renderQuiz();
-
-  const glossary = [
-    {chap:'Q1', term:'Expansion / Peak / Contraction / Trough / Recovery', def:'The five business-cycle phases used in this revision guide, equivalent to Recovery/Boom/Slump/Recession in the textbook.'},
-    {chap:'Q1', term:'Leading indicator', def:'Changes before overall economic activity changes — used to predict future trends (e.g. JSE All Share Index).'},
-    {chap:'Q1', term:'Coincident indicator', def:'Moves at roughly the same time as overall activity — a real-time read (e.g. Real GDP growth).'},
-    {chap:'Q1', term:'Lagging indicator', def:'Responds after economic activity has already changed — confirms long-term trends.'},
-    {chap:'Q1', term:'Yield curve', def:'A plot of bond yields against maturity; a positively sloped curve means yield rises with maturity.'},
-    {chap:'Q2', term:'Money multiplier', def:'Maximum potential money creation = 1 ÷ reserve ratio, assuming no excess reserves.'},
-    {chap:'Q2', term:'Contractionary policy', def:'Selling government securities or raising the repo rate — reduces liquidity and slows the economy.'},
-    {chap:'Q2', term:'Expansionary policy', def:'Buying government securities or lowering the repo rate/reserve requirement — increases liquidity.'},
-    {chap:'Q2', term:'Quantitative easing (QE)', def:'Central-bank purchases of financial assets to increase liquidity and support financial conditions.'},
-    {chap:'Q2', term:'Liquidity shortage', def:'When banks/financial institutions face insufficient short-term liquid funds.'},
-    {chap:'Q2', term:'Seigniorage', def:'The difference between the face value of money and the cost of producing it.'},
-    {chap:'Q2', term:'Prime rate', def:"Lending rate generally given to a bank's most creditworthy customers."},
-    {chap:'Q2', term:'Inflation target', def:'The inflation range used by the central bank as its primary policy target.'},
-    {chap:'Q2', term:'Gold standard', def:'A monetary system where currency is directly linked/convertible to a fixed quantity of gold.'},
-    {chap:'Q2', term:'Fiat money', def:"Money whose value rests on government authority and public confidence, not a physical commodity."},
-    {chap:'Q2', term:'Medium of exchange / Unit of account / Store of value', def:"The three functions of money — 'money is what money does'."},
-    {chap:'Trade', term:'Comparative advantage', def:'The ability to produce a good at the lowest opportunity cost — the basis for gains from trade.'},
-    {chap:'Trade', term:'Opportunity cost', def:'The quantity of one product given up to produce more of another.'},
-    {chap:'Trade', term:'Import quota', def:'A maximum quantity of a good allowed to be imported.'},
-    {chap:'Trade', term:'Tariff', def:'A tax imposed on imports.'},
-    {chap:'Trade', term:'Infant-industry argument', def:'Justifies temporary protection for new industries while they build competitiveness.'},
-    {chap:'Trade', term:'SACU', def:'Southern African Customs Union — Botswana, Eswatini, Lesotho, Namibia, South Africa.'},
-    {chap:'Trade', term:'Customs union', def:'Common external trade arrangements established among member nations.'},
-    {chap:'Q3', term:'Efficiency', def:'Resources allocated/used with minimum unnecessary cost or waste. Keyword: resource allocation/cost.'},
-    {chap:'Q3', term:'Effectiveness', def:'Whether the intervention actually achieves its intended objective. Keyword: achieves objective.'},
-    {chap:'Q3', term:'Equity', def:'Whether benefits and costs are distributed fairly among groups. Keyword: fair distribution.'},
-    {chap:'Q3', term:'Sustainability', def:"Whether a policy can be maintained without compromising future economic needs. Keyword: future generations."},
-    {chap:'Q3', term:'Tax relief', def:'Reduces the overall tax burden to encourage economic activity and investment.'},
-    {chap:'Q3', term:'Indirect tax', def:'Tax on goods/services/transactions, often used to discourage demerit goods.'},
-    {chap:'Q3', term:'Subsidy', def:'Financial support encouraging production/consumption of goods with positive externalities.'},
-    {chap:'Q3', term:'Welfare payment', def:'Financial transfers (e.g. social grants) supporting and stabilising household income.'},
-    {chap:'Q3', term:'Negative / Positive externality', def:'A cost (negative) or benefit (positive) imposed on third parties outside a transaction.'},
-    {chap:'Q3', term:'Public good', def:'A good characterised by non-rivalry and non-excludability.'},
-    {chap:'Q3', term:'Exclusion principle', def:"The idea that a good, once provided to one, is effectively provided to all — hard to exclude non-payers."},
-    {chap:'Q3', term:'Developmental state', def:'An active government role guiding, supporting, and driving economic development through planning.'},
-    {chap:'Bonus', term:'Progressive / Proportional / Regressive tax', def:'Tax classifications by how the burden changes with income (rising / constant / falling as income rises).'},
-    {chap:'Bonus', term:'Laffer curve', def:'Shows the relationship between tax rate and tax revenue, peaking at a revenue-maximising rate T*.'},
-  ];
-  function renderGlossary(filter){
-    filter = (filter||'').toLowerCase();
-    const items = glossary.filter(g=> !filter || g.term.toLowerCase().includes(filter) || g.def.toLowerCase().includes(filter));
-    $('#gloss-list').innerHTML = items.length ? items.map(g=>`
-      <div class="gloss-item">
-        <div class="gloss-term">${g.term}<span class="gloss-chap">${g.chap}</span></div>
-        <div class="gloss-def">${g.def}</div>
-      </div>`).join('') : '<p style="color:var(--fg-faint)">No terms match.</p>';
-  }
-  $('#gloss-search').addEventListener('input', e=> renderGlossary(e.target.value));
-  renderGlossary('');
-
-  window.go = go;
-})();
+function go(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function acc(h){
+  const b=h.nextElementSibling;
+  const was=h.classList.contains('open');
+  h.closest('.wrap').querySelectorAll('.acc-h.open').forEach(x=>{x.classList.remove('open');x.nextElementSibling.classList.remove('open');});
+  if(!was){h.classList.add('open');b.classList.add('open');}
+}
 </script>
 </body>
 </html>
